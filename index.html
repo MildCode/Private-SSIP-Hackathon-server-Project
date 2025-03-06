@@ -27,7 +27,7 @@
             overflow: hidden;
             visibility: hidden; /* Initially hidden */
             pointer-events: none; /* Disable interaction initially */
-            background-image: url(/department-dashboard/assets/images/background.gif);
+            background-image: url('department-dashboard/assets/images/background.gif'); /* Use the GIF as background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -127,19 +127,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* .loader {
-            width: 50px;
-            aspect-ratio: 1;
-            display: grid;
-            margin: 0 auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-        } */
-
-        /* HTML: <div class="loader"></div> */
         .loader {
             width: 64px;
             aspect-ratio: 1;
@@ -265,11 +252,6 @@
 <body>
     <div class="loader" id="loader"></div>
     <div class="main-container" id="main-container">
-        <!-- Dark and Robotic Background Video -->
-        <video autoplay loop muted class="background-video">
-            <source src="department-dashboard/assets/images/background.gif" type="gif/gif">
-        </video>
-
         <!-- Login Form -->
         <div class="login-container">
             <h1>Login</h1>
@@ -309,7 +291,7 @@
                 // Show main container and enable it
                 document.getElementById("main-container").style.visibility = "visible";
                 document.getElementById("main-container").style.pointerEvents = "auto";
-            }, 5000);  // 2 seconds timeout
+            }, 5000);  // 5 seconds timeout
         });
 
         document.getElementById('login-form').addEventListener('submit', function (event) {
