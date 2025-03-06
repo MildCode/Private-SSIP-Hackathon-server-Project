@@ -35,7 +35,6 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -52,7 +51,7 @@
             margin-bottom: 20px;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
             padding-left: 40px;
@@ -62,7 +61,7 @@
             color: #ffffff;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             background: #3e3e3e;
         }
@@ -97,25 +96,37 @@
 <body>
     <div class="login-container">
         <h2>Government Portal Login</h2>
-        <form>
+        <form id="loginForm">
             <div class="form-group">
                 <i class="fa fa-user"></i>
-                <input type="text" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required>
             </div>
             <div class="form-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-building"></i>
+                <select id="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="health">Health Department</option>
+                    <option value="education">Education Department</option>
+                    <option value="transport">Transport Department</option>
+                    <option value="finance">Finance Department</option>
+                    <option value="agriculture">Agriculture Department</option>
+                </select>
             </div>
             <button type="submit" class="btn-login">Login</button>
         </form>
     </div>
+    
     <script>
         document.getElementById('loginForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const department = document.getElementById('department').value; // Assuming user selects department
+            const department = document.getElementById('department').value;
 
             const response = await fetch('/auth/login', {
                 method: 'POST',
@@ -126,13 +137,12 @@
             const result = await response.json();
 
             if (result.success) {
-                window.location.href = result.redirect; // Redirect to department page
+                window.location.href = result.redirect;
             } else {
                 alert(result.message);
             }
         });
     </script>
-
 </body>
 
 </html>
