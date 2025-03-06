@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
             box-sizing: border-box;
         }
 
-        body, html {
+        body,
+        html {
             height: 100%;
             font-family: Arial, sans-serif;
         }
@@ -70,7 +72,8 @@
             font-size: 1.2em;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 10px;
             margin-top: 8px;
@@ -82,7 +85,8 @@
             transition: transform 0.3s ease;
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             background: rgba(255, 255, 255, 0.4);
             transform: scale(1.05);
             outline: none;
@@ -123,7 +127,7 @@
             transition: transform 0.3s ease;
         }
 
-        .loader {
+        /* .loader {
             width: 50px;
             aspect-ratio: 1;
             display: grid;
@@ -133,23 +137,86 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 9999;
+        } */
+
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            width: 64px;
+            aspect-ratio: 1;
+            display: grid;
+            margin: 0 auto;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background:
+                radial-gradient(farthest-side at bottom right, #F10C49 90%, #0000),
+                radial-gradient(farthest-side at bottom left, #F10C49 90%, #0000),
+                radial-gradient(farthest-side at top right, #F10C49 90%, #0000),
+                radial-gradient(farthest-side at top left, #F10C49 90%, #0000),
+                radial-gradient(farthest-side at bottom right, #f4dd51 90%, #0000),
+                radial-gradient(farthest-side at bottom left, #f4dd51 90%, #0000),
+                radial-gradient(farthest-side at top right, #f4dd51 90%, #0000),
+                radial-gradient(farthest-side at top left, #f4dd51 90%, #0000),
+                radial-gradient(farthest-side at bottom right, #e3aad6 90%, #0000),
+                radial-gradient(farthest-side at bottom left, #e3aad6 90%, #0000),
+                radial-gradient(farthest-side at top right, #e3aad6 90%, #0000),
+                radial-gradient(farthest-side at top left, #e3aad6 90%, #0000);
+            background-size: 25% 25%;
+            background-repeat: no-repeat;
+            animation: l16 2s infinite;
         }
 
-        .loader::before,
-        .loader::after {
-            content: "";
-            grid-area: 1/1;
-            --c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
-            background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%, var(--c) 0 50%;
-            background-size: 12px 12px;
-            animation: l12 1s infinite;
-        }
+        @keyframes l16 {
+            0% {
+                background-position:
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+            }
 
-        .loader::before {
-            margin: 4px;
-            filter: hue-rotate(45deg);
-            background-size: 8px 8px;
-            animation-timing-function: linear;
+            16.67% {
+                background-position:
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+            }
+
+            33.33% {
+                background-position:
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+            }
+
+            50% {
+                background-position:
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+            }
+
+            66.67% {
+                background-position:
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+            }
+
+            83.33% {
+                background-position:
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+            }
+
+            100% {
+                background-position:
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+            }
         }
 
         @keyframes l12 {
@@ -182,6 +249,7 @@
         }
 
         @keyframes bounce {
+
             0%,
             100% {
                 transform: scale(1);
@@ -193,6 +261,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="loader" id="loader"></div>
     <div class="main-container" id="main-container">
@@ -200,7 +269,7 @@
         <!-- <video autoplay loop muted class="background-video">
             <source src="https://64.media.tumblr.com/6f4e96cdd933de5f38ef14faf90de053/tumblr_ni73pwSdTB1s60oo7o1_400.gif" type="gif/gif">
         </video> -->
-        
+
         <!-- Login Form -->
         <div class="login-container">
             <h1>Login</h1>
@@ -209,12 +278,12 @@
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="role">Select Role</label>
                     <select id="role" name="role">
@@ -224,7 +293,7 @@
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                
+
                 <button type="submit">Login</button>
             </form>
         </div>
@@ -262,4 +331,5 @@
         });
     </script>
 </body>
+
 </html>
