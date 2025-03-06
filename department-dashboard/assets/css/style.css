@@ -1,0 +1,200 @@
+/* Dark Theme Styling */
+body {
+    background: #121212;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+#navbar {
+    background: #1e1e1e;
+    padding: 15px;
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    color: #4db8ff;
+    margin-top: 20px;
+}
+
+/* Department Cards - 5×5 Grid */
+.department-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 20px;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Department Cards */
+.card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card i {
+    font-size: 50px;
+    color: #4db8ff;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.card p {
+    color: #bdbdbd;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #4db8ff;
+    color: #121212;
+}
+
+.btn-primary:hover {
+    background: #e5ff00;
+    color: #ffffff;
+}
+
+/* Access Button */
+.access-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text */
+    width: 140px;
+    padding: 12px;
+    background: #4db8ff;
+    color: #121212;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(229, 255, 0, 0.5);
+}
+
+.access-btn i {
+    font-size: 20px;
+    color: #121212;
+}
+
+/* Button Hover Effect */
+.access-btn:hover {
+    background: #0088cc;
+    color: #ffffff;
+}
+
+/* Button Click Animation */
+.access-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 8px rgba(0, 136, 204, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .department-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .department-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .department-container {
+        grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
+    }
+}
+
+/* Login Box */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #1e90ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #007acc;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
