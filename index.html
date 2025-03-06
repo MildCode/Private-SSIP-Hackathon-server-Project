@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Login Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-image: url(/images/background.gif) ;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .main-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark and Robotic Background Video */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            animation: slideIn 1.5s ease-out;
+            width: 400px;
+        }
+
+        .login-container h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5em;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        label {
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            animation: bounce 1s infinite;
+        }
+        select{
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+        select:focus {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            outline: none;
+        }
+        select option{
+            background: rgba(255, 255, 255, 0.2);
+            color: #000000;
+            transition: transform 0.3s ease;
+        }
+        /* Animation Effects */
+        @keyframes slideIn {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Dark and Robotic Background Video -->
+        <!-- <video autoplay loop muted class="background-video">
+            <source src="https://64.media.tumblr.com/6f4e96cdd933de5f38ef14faf90de053/tumblr_ni73pwSdTB1s60oo7o1_400.gif" type="gif/gif">
+        </video> -->
+        
+        <!-- Login Form -->
+        <div class="login-container">
+            <h1>Login</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Select Role</label>
+                    <select id="role" name="role">
+                        <option value="labour">Labour</option>
+                        <option value="employee">Employee</option>
+                        <option value="hod">HOD</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Simple form submission handling (you can expand this with actual login functionality)
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            if (username && password && role) {
+                alert('Form submitted successfully!');
+                // Here, you would send the form data to your server or handle the login logic.
+            } else {
+                alert('Please fill all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
