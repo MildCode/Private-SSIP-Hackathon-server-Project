@@ -14,10 +14,6 @@
         body, html {
             height: 100%;
             font-family: Arial, sans-serif;
-            background-image: url(/images/background.gif) ;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
 
         .main-container {
@@ -27,6 +23,12 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            visibility: hidden; /* Initially hidden */
+            pointer-events: none; /* Disable interaction initially */
+            background-image: url(/images/background.gif);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         /* Dark and Robotic Background Video */
@@ -102,69 +104,98 @@
             transform: scale(1.1);
             animation: bounce 1s infinite;
         }
-        select{
+
+        select {
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             transition: transform 0.3s ease;
         }
+
         select:focus {
             background: rgba(255, 255, 255, 0.4);
             transform: scale(1.05);
             outline: none;
         }
-        select option{
+
+        select option {
             background: rgba(255, 255, 255, 0.2);
             color: #000000;
             transition: transform 0.3s ease;
         }
+
         .loader {
-      width: 50px;
-      aspect-ratio: 1;
-      display: grid;
-    }
-    .loader::before,
-    .loader::after {    
-      content:"";
-      grid-area: 1/1;
-      --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
-      background: 
-        var(--c) 50%  0, 
-        var(--c) 50%  100%, 
-        var(--c) 100% 50%, 
-        var(--c) 0    50%;
-      background-size: 12px 12px;
-      animation: l12 1s infinite;
-    }
-    .loader::before {
-      margin: 4px;
-      filter: hue-rotate(45deg);
-      background-size: 8px 8px;
-      animation-timing-function: linear
-    }
-    
-    @keyframes l12 { 
-      100%{transform: rotate(.5turn)}
-    }
+            width: 50px;
+            aspect-ratio: 1;
+            display: grid;
+            margin: 0 auto;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        .loader::before,
+        .loader::after {
+            content: "";
+            grid-area: 1/1;
+            --c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+            background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%, var(--c) 0 50%;
+            background-size: 12px 12px;
+            animation: l12 1s infinite;
+        }
+
+        .loader::before {
+            margin: 4px;
+            filter: hue-rotate(45deg);
+            background-size: 8px 8px;
+            animation-timing-function: linear;
+        }
+
+        @keyframes l12 {
+            100% {
+                transform: rotate(.5turn);
+            }
+        }
+
         /* Animation Effects */
         @keyframes slideIn {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
         }
-    </style> 
+    </style>
 </head>
 <body>
-    <div class="loader"></div>
-    <div class="main-container">
+    <div class="loader" id="loader"></div>
+    <div class="main-container" id="main-container">
         <!-- Dark and Robotic Background Video -->
         <!-- <video autoplay loop muted class="background-video">
             <source src="https://64.media.tumblr.com/6f4e96cdd933de5f38ef14faf90de053/tumblr_ni73pwSdTB1s60oo7o1_400.gif" type="gif/gif">
@@ -200,24 +231,35 @@
     </div>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Simple form submission handling (you can expand this with actual login functionality)
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show loader for 2 seconds
+            setTimeout(function () {
+                // Hide loader after 2 seconds
+                document.querySelector(".loader").style.display = "none";
 
-            if (username && password && role) {
-                alert('Form submitted successfully!');
-                // Here, you would send the form data to your server or handle the login logic.
-            } else {
-                alert('Please fill all fields.');
-            }
+                // Show main container and enable it
+                document.getElementById("main-container").style.visibility = "visible";
+                document.getElementById("main-container").style.pointerEvents = "auto";
+            }, 2000);  // 2 seconds timeout
         });
-        document.addEventListener("DOMContentLoaded", function() {  
-    document.querySelector(".loader").style.display = "none";
-});
+
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Simulate form submission and hide loader after 2 seconds
+            setTimeout(function () {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const role = document.getElementById('role').value;
+
+                if (username && password && role) {
+                    alert('Form submitted successfully!');
+                    // Here, you would send the form data to your server or handle the login logic.
+                } else {
+                    alert('Please fill all fields.');
+                }
+            }, 2000);
+        });
     </script>
 </body>
 </html>
