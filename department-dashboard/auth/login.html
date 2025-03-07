@@ -90,7 +90,7 @@
             </div>
             <div class="form-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password">
             </div>
             <div class="form-group">
                 <i class="fa fa-building"></i>
@@ -103,30 +103,61 @@
                     <option value="agriculture">Agriculture Department</option>
                 </select>
             </div>
+            <div class="form-group">
+                <i class="fa fa-user-tag"></i>
+                <select id="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="hod">HOD</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
             <button type="submit" class="btn-login">Login</button>
         </form>
     </div>
 
     <script>
-        // Dummy credentials (WARNING: NOT SECURE)
-        const users = {
-            "admin": { password: "h1234", department: "health" },
-            "user1": { password: "u1234", department: "education" }
-        };
-
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
             event.preventDefault();
 
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
             let department = document.getElementById("department").value;
+            let role = document.getElementById("role").value;
 
-            if (users[username] && users[username].password === password) {
-                localStorage.setItem("loggedInUser", username);
-                localStorage.setItem("department", department);
-                window.location.href = `../${department}/department.html`;
-            } else {
-                alert("Invalid Username or Password!");
+            try {
+                let response = await fetch('https://hod-api-2.vercel.app/api/hods');
+                let data = await response.json();
+
+                let isValidUser = false;
+
+                if (role === "hod") {
+                    if (data[username] && data[username].password === password && data[username].department === department) {
+                        isValidUser = true;
+                    }
+                } else if (role === "employee") {
+                    for (let hod in data) {
+                        let employees = data[hod].employees;
+                        for (let employee of employees) {
+                            if (employee.username === username && employee.password === password && employee.department === department) {
+                                isValidUser = true;
+                                break;
+                            }
+                        }
+                        if (isValidUser) break;
+                    }
+                }
+
+                if (isValidUser) {
+                    localStorage.setItem("loggedInUser", username);
+                    localStorage.setItem("department", department);
+                    localStorage.setItem("role", role);
+                    window.location.href = `../${department}/department.html`;
+                } else {
+                    alert("Invalid Username, Password, or Role!");
+                }
+            } catch (error) {
+                console.error("Error fetching data from API:", error);
+                alert("An error occurred while logging in. Please try again later.");
             }
         });
     </script>
