@@ -123,7 +123,7 @@
             </div>
             <div class="form-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password">
             </div>
             <div class="form-group">
                 <i class="fa fa-building"></i>
@@ -136,12 +136,21 @@
                     <option value="agriculture">Agriculture Department</option>
                 </select>
             </div>
+            <div class="form-group">
+                <i class="fa fa-user-tag"></i>
+                <select id="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="hod">HOD</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
             <button type="submit" class="btn-login">Login</button>
         </form>
         <p class="footer-text">© 2025 Samridhh Gov | One Nation, One Portal, One Vision</p>
     </div>
 
     <script>
+        // Dummy credentials (WARNING: NOT SECURE)
         const users = {
             "admin": { password: "h1234", department: "health" },
             "user1": { password: "u1234", department: "education" }
@@ -157,7 +166,7 @@
             if (users[username] && users[username].password === password) {
                 localStorage.setItem("loggedInUser", username);
                 localStorage.setItem("department", department);
-                window.location.href = `../${department}/health-hod.html`;
+                window.location.href = `../${department}/department.html`;
             } else {
                 alert("Invalid Username or Password!");
             }
