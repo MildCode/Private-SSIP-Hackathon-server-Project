@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Employee Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background-color: #1f1f2e;
+            padding: 20px;
+            position: fixed;
+        }
+        .sidebar a {
+            color: #b0b0b0;
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #3a3b4f;
+            color: #ffcc00;
+        }
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 85%;
+            background-color: #ff4444;
+        }
+        .content {
+            margin-left: 280px;
+            padding: 20px;
+        }
+        .card {
+            background-color: #2b2b3a;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .task-table th, .task-table td {
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3 class="text-light">Finance Employee</h3>
+        <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-tasks"></i> Assigned Tasks</a>
+        <a href="#"><i class="fas fa-wallet"></i> Expense Manager</a>
+        <a href="#" class="logout btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="content">
+        <h2><i class="fas fa-tasks"></i> Assigned Tasks</h2>
+        <table class="table table-dark task-table" id="taskTable">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Assigned By</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="taskBody"></tbody>
+        </table>
+        
+        <h2><i class="fas fa-wallet"></i> Expense Manager</h2>
+        <table class="table table-dark" id="expenseTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="expenseBody"></tbody>
+        </table>
+        <input type="date" id="expenseDate" class="form-control mb-2">
+        <input type="number" id="expenseAmount" placeholder="Amount" class="form-control mb-2">
+        <input type="text" id="expenseDesc" placeholder="Description" class="form-control mb-2">
+        <button class="btn btn-primary" onclick="addExpense()"><i class="fas fa-plus"></i> Add Expense</button>
+
+        <h2><i class="fas fa-file-download"></i> Download Reports</h2>
+        <button class="btn btn-secondary" onclick="downloadExcel()"><i class="fas fa-file-excel"></i> Download Excel</button>
+        <button class="btn btn-danger" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> Download PDF</button>
+    </div>
+
+    <script>
+        let tasks = [
+            { name: "Budget Analysis", assignedBy: "HOD", status: "In Progress", details: "Analyze monthly expenses" },
+            { name: "Financial Report", assignedBy: "HOD", status: "Pending", details: "Prepare Q2 report" }
+        ];
+
+        function loadTasks() {
+            let taskBody = document.getElementById("taskBody");
+            taskBody.innerHTML = "";
+            tasks.forEach((task, index) => {
+                taskBody.innerHTML += `
+                    <tr>
+                        <td>${task.name}</td>
+                        <td>${task.assignedBy}</td>
+                        <td><span class="badge bg-${task.status === 'Pending' ? 'danger' : 'warning'}">${task.status}</span></td>
+                        <td>${task.details}</td>
+                        <td><button class="btn btn-success" onclick="updateTask(${index})"><i class="fas fa-edit"></i> Update</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateTask(index) {
+            let newStatus = prompt("Update status (Pending/In Progress/Completed):", tasks[index].status);
+            if (newStatus) {
+                tasks[index].status = newStatus;
+                loadTasks();
+            }
+        }
+
+        let expenses = [];
+        function addExpense() {
+            let date = document.getElementById("expenseDate").value;
+            let amount = document.getElementById("expenseAmount").value;
+            let desc = document.getElementById("expenseDesc").value;
+            expenses.push({ date, amount, desc });
+            document.getElementById("expenseBody").innerHTML += `<tr><td>${date}</td><td>${amount}</td><td>${desc}</td></tr>`;
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            let doc = new jsPDF();
+            doc.text("Finance Reports", 20, 10);
+            let img = new Image();
+            img.src = 'department_logo.png';
+            doc.addImage(img, 'PNG', 150, 10, 40, 20);
+            doc.autoTable({ head: [["Date", "Amount", "Description"]], body: expenses.map(e => [e.date, e.amount, e.desc]) });
+            doc.save("Finance_Report.pdf");
+        }
+
+        loadTasks();
+    </script>
+</body>
+</html>
