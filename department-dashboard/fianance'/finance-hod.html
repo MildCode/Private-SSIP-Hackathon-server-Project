@@ -6,22 +6,21 @@
     <title>Finance HOD Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background-color: #0d1117;
+            background-color: #1e1e2e;
             color: #fff;
             font-family: 'Poppins', sans-serif;
         }
         .sidebar {
             width: 260px;
             height: 100vh;
-            background-color: #161b22;
+            background-color: #282a36;
             padding: 20px;
             position: fixed;
         }
         .sidebar a {
-            color: #bbb;
+            color: #dcdcdc;
             display: block;
             padding: 12px;
             text-decoration: none;
@@ -30,34 +29,28 @@
             border-radius: 5px;
         }
         .sidebar a:hover {
-            background-color: #21262d;
-            color: #58a6ff;
+            background-color: #44475a;
+            color: #50fa7b;
         }
         .logout {
             position: absolute;
             bottom: 20px;
             width: 85%;
-            background-color: #dc3545;
+            background-color: #ff5555;
         }
         .content {
             margin-left: 280px;
             padding: 20px;
         }
         .card {
-            background-color: #161b22;
+            background-color: #44475a;
             color: #fff;
             border: none;
-            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(80, 250, 123, 0.2);
             transition: 0.3s;
         }
         .card:hover {
             transform: scale(1.05);
-        }
-        .chart-container {
-            background-color: #161b22;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
         }
         .table {
             color: #fff;
@@ -71,52 +64,48 @@
         <a href="#"><i class="fas fa-building"></i> Departments</a>
         <a href="#"><i class="fas fa-users"></i> Employees</a>
         <a href="#"><i class="fas fa-tasks"></i> Tasks</a>
-        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
         <a href="#" class="logout btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
     <div class="content">
         <h2>Finance Department Overview</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card p-3 text-center">
-                    <h5>Total Departments</h5>
-                    <h2 id="totalDepartments">0</h2>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3 text-center">
-                    <h5>Total Employees</h5>
-                    <h2 id="totalEmployees">0</h2>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3 text-center">
-                    <h5>Ongoing Tasks</h5>
-                    <h2 id="ongoingTasks">0</h2>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card p-3 text-center">
-                    <h5>Pending Approvals</h5>
-                    <h2 id="pendingApprovals">0</h2>
-                </div>
-            </div>
-        </div>
 
-        <h3 class="mt-4">Assign Task</h3>
-        <div class="mb-3">
-            <input type="text" id="taskName" class="form-control" placeholder="Enter Task Name">
-            <input type="text" id="assignedTo" class="form-control mt-2" placeholder="Assign To (Employee Name)">
-            <button class="btn btn-success mt-2" onclick="assignTask()">Assign Task</button>
-        </div>
-        
+        <h3 class="mt-4">Assign New Task</h3>
+        <form id="assignTaskForm" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" id="taskName" class="form-control" placeholder="Task Name" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="employeeName" class="form-control" placeholder="Employee Name" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="taskDescription" class="form-control" placeholder="Task Description" required>
+                </div>
+                <div class="col-md-2">
+                    <select id="taskStatus" class="form-control">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-success">Assign</button>
+                </div>
+            </div>
+        </form>
+
         <h3 class="mt-4">Assigned Tasks</h3>
         <table class="table table-dark">
             <thead>
                 <tr>
+                    <th>Task ID</th>
                     <th>Task Name</th>
-                    <th>Assigned To</th>
+                    <th>Employee</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
                 </tr>
             </thead>
             <tbody id="taskTable"></tbody>
@@ -124,46 +113,58 @@
     </div>
 
     <script>
-        const fetchData = () => {
-            return {
-                totalDepartments: 5,
-                totalEmployees: 45,
-                ongoingTasks: 12,
-                pendingApprovals: 3
+        let taskList = [];
+        let taskIdCounter = 1;
+
+        document.getElementById("assignTaskForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let taskName = document.getElementById("taskName").value;
+            let employeeName = document.getElementById("employeeName").value;
+            let taskDescription = document.getElementById("taskDescription").value;
+            let taskStatus = document.getElementById("taskStatus").value;
+
+            let newTask = {
+                id: taskIdCounter++,
+                name: taskName,
+                employee: employeeName,
+                description: taskDescription,
+                status: taskStatus
             };
-        };
-
-        const updateDashboard = () => {
-            const data = fetchData();
-            document.getElementById('totalDepartments').innerText = data.totalDepartments;
-            document.getElementById('totalEmployees').innerText = data.totalEmployees;
-            document.getElementById('ongoingTasks').innerText = data.ongoingTasks;
-            document.getElementById('pendingApprovals').innerText = data.pendingApprovals;
-        };
-
-        const assignTask = () => {
-            const taskName = document.getElementById("taskName").value;
-            const assignedTo = document.getElementById("assignedTo").value;
-            if (taskName && assignedTo) {
-                const tableBody = document.getElementById("taskTable");
-                const row = `<tr>
-                    <td>${taskName}</td>
-                    <td>${assignedTo}</td>
-                </tr>`;
-                tableBody.innerHTML += row;
-                document.getElementById("taskName").value = "";
-                document.getElementById("assignedTo").value = "";
-            } else {
-                alert("Please fill in both fields");
-            }
-        };
-
-        document.querySelector(".logout").addEventListener("click", function() {
-            alert("Logging out...");
-            window.location.href = "login.html";
+            taskList.push(newTask);
+            updateDashboard();
+            document.getElementById("assignTaskForm").reset();
         });
 
-        updateDashboard();
+        function updateDashboard() {
+            const taskTable = document.getElementById('taskTable');
+            taskTable.innerHTML = "";
+            taskList.forEach(task => {
+                const row = `<tr>
+                    <td>${task.id}</td>
+                    <td>${task.name}</td>
+                    <td>${task.employee}</td>
+                    <td>${task.description}</td>
+                    <td>${task.status}</td>
+                    <td>
+                        <select onchange="updateTaskStatus(${task.id}, this.value)">
+                            <option value="Not Started" ${task.status === "Not Started" ? "selected" : ""}>Not Started</option>
+                            <option value="In Progress" ${task.status === "In Progress" ? "selected" : ""}>In Progress</option>
+                            <option value="Pending" ${task.status === "Pending" ? "selected" : ""}>Pending</option>
+                            <option value="Completed" ${task.status === "Completed" ? "selected" : ""}>Completed</option>
+                        </select>
+                    </td>
+                </tr>`;
+                taskTable.innerHTML += row;
+            });
+        }
+
+        function updateTaskStatus(taskId, status) {
+            let task = taskList.find(t => t.id === taskId);
+            if (task) {
+                task.status = status;
+                updateDashboard();
+            }
+        }
     </script>
 </body>
 </html>
