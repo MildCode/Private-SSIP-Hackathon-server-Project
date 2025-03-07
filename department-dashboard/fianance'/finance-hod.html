@@ -5,215 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance HOD Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
     <style>
         body {
+            background-color: #0d1117;
+            color: #fff;
             font-family: 'Poppins', sans-serif;
-            background: #121212;
-            color: #ffffff;
         }
         .sidebar {
-            height: 100vh;
             width: 260px;
-            position: fixed;
-            background: #1e1e2e;
+            height: 100vh;
+            background-color: #161b22;
             padding: 20px;
-            box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-        .sidebar h4 {
-            color: #00c8ff;
-            text-align: center;
-            font-weight: bold;
+            position: fixed;
         }
         .sidebar a {
-            display: flex;
-            align-items: center;
-            color: #ddd;
-            text-decoration: none;
+            color: #bbb;
+            display: block;
             padding: 12px;
-            margin-top: 10px;
-            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
             transition: 0.3s;
+            border-radius: 5px;
         }
-        .sidebar a:hover, .sidebar a.active {
-            background: #00c8ff;
-            color: #000;
-            font-weight: bold;
+        .sidebar a:hover {
+            background-color: #21262d;
+            color: #58a6ff;
         }
-        .sidebar a i {
-            margin-right: 10px;
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: 85%;
+            background-color: #dc3545;
         }
         .content {
             margin-left: 280px;
             padding: 20px;
         }
         .card {
-            background: #252531;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .stat-box {
-            background: #252531;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            color: white;
+            background-color: #161b22;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(88, 166, 255, 0.2);
             transition: 0.3s;
         }
-        .stat-box:hover {
-            background: #00c8ff;
-            color: black;
+        .card:hover {
+            transform: scale(1.05);
         }
-        .stat-box i {
-            font-size: 35px;
-            color: #00c8ff;
-            margin-bottom: 10px;
+        .chart-container {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
         }
-        .form-control, .btn {
-            background: #2b2b3a;
-            color: white;
-            border: none;
-        }
-        .form-control::placeholder {
-            color: #bbb;
-        }
-        .btn:hover {
-            background: #00c8ff;
-            color: black;
+        .table {
+            color: #fff;
         }
     </style>
 </head>
 <body>
-
-    <!-- Sidebar Navigation -->
     <div class="sidebar">
-        <h4><i class="fa fa-user-tie"></i> Finance HOD</h4>
-        <a href="#" class="active"><i class="fa fa-home"></i> Dashboard</a>
-        <a href="#"><i class="fa fa-users"></i> Employees</a>
-        <a href="#"><i class="fa fa-tasks"></i> Tasks</a>
-        <a href="#"><i class="fa fa-chart-line"></i> Reports</a>
-        <a href="#" onclick="logout()"><i class="fa fa-sign-out-alt"></i> Logout</a>
+        <h3 class="text-light">Finance HOD</h3>
+        <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-building"></i> Departments</a>
+        <a href="#"><i class="fas fa-users"></i> Employees</a>
+        <a href="#"><i class="fas fa-tasks"></i> Tasks</a>
+        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="#" class="logout btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
-    <!-- Main Content -->
     <div class="content">
-        <h2>Finance Department Dashboard</h2>
-
-        <!-- Stats Section -->
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <i class="fa fa-users"></i>
-                    <h4>Total Employees</h4>
-                    <p id="employeeCount">Loading...</p>
+        <h2>Finance Department Overview</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Total Departments</h5>
+                    <h2 id="totalDepartments">0</h2>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <i class="fa fa-project-diagram"></i>
-                    <h4>Active Projects</h4>
-                    <p id="projectCount">Loading...</p>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Total Employees</h5>
+                    <h2 id="totalEmployees">0</h2>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-box">
-                    <i class="fa fa-dollar-sign"></i>
-                    <h4>Budget Utilization</h4>
-                    <p>₹ <span id="budget">Loading...</span></p>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Ongoing Tasks</h5>
+                    <h2 id="ongoingTasks">0</h2>
                 </div>
             </div>
-        </div>
-
-        <!-- Charts -->
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Employee Performance</h5>
-                    <canvas id="performanceChart"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Budget Allocation</h5>
-                    <canvas id="budgetChart"></canvas>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Pending Approvals</h5>
+                    <h2 id="pendingApprovals">0</h2>
                 </div>
             </div>
         </div>
 
-        <!-- Task Assignment -->
-        <div class="card mt-4 p-3">
-            <h5>Assign Task</h5>
-            <form id="taskForm">
-                <select id="employee" class="form-control mt-2" required>
-                    <option value="" disabled selected>Select Employee</option>
-                </select>
-                <input type="text" id="taskTitle" class="form-control mt-2" placeholder="Task Title" required>
-                <textarea id="taskDetails" class="form-control mt-2" placeholder="Task Details" rows="3" required></textarea>
-                <button type="submit" class="btn btn-primary mt-2">Assign Task</button>
-            </form>
+        <h3 class="mt-4">Assign Task</h3>
+        <div class="mb-3">
+            <input type="text" id="taskName" class="form-control" placeholder="Enter Task Name">
+            <input type="text" id="assignedTo" class="form-control mt-2" placeholder="Assign To (Employee Name)">
+            <button class="btn btn-success mt-2" onclick="assignTask()">Assign Task</button>
         </div>
+        
+        <h3 class="mt-4">Assigned Tasks</h3>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Assigned To</th>
+                </tr>
+            </thead>
+            <tbody id="taskTable"></tbody>
+        </table>
     </div>
 
     <script>
-        function logout() {
-            alert("Logging out...");
-            window.location.href = "login.html";
-        }
-
-        // Dummy Data Fetch Simulation
-        const data = {
-            employees: [
-                { name: "Amit Sharma", role: "Senior Accountant" },
-                { name: "Priya Verma", role: "Financial Analyst" },
-                { name: "Rajesh Gupta", role: "Budget Officer" }
-            ],
-            projects: 12,
-            budget: 10000000,
-            performance: [60, 75, 90],
-            budgetAllocation: [40, 35, 25]
+        const fetchData = () => {
+            return {
+                totalDepartments: 5,
+                totalEmployees: 45,
+                ongoingTasks: 12,
+                pendingApprovals: 3
+            };
         };
 
-        // Load Data
-        document.getElementById("employeeCount").textContent = data.employees.length;
-        document.getElementById("projectCount").textContent = data.projects;
-        document.getElementById("budget").textContent = data.budget.toLocaleString();
+        const updateDashboard = () => {
+            const data = fetchData();
+            document.getElementById('totalDepartments').innerText = data.totalDepartments;
+            document.getElementById('totalEmployees').innerText = data.totalEmployees;
+            document.getElementById('ongoingTasks').innerText = data.ongoingTasks;
+            document.getElementById('pendingApprovals').innerText = data.pendingApprovals;
+        };
 
-        // Populate Employee Dropdown
-        const employeeSelect = document.getElementById("employee");
-        data.employees.forEach(emp => {
-            let option = document.createElement("option");
-            option.value = emp.name;
-            option.textContent = emp.name;
-            employeeSelect.appendChild(option);
-        });
-
-        // Charts
-        new Chart(document.getElementById("performanceChart"), {
-            type: "bar",
-            data: {
-                labels: ["Amit", "Priya", "Rajesh"],
-                datasets: [{
-                    label: "Performance (%)",
-                    data: data.performance,
-                    backgroundColor: ["#007bff", "#ffcc00", "#28a745"]
-                }]
+        const assignTask = () => {
+            const taskName = document.getElementById("taskName").value;
+            const assignedTo = document.getElementById("assignedTo").value;
+            if (taskName && assignedTo) {
+                const tableBody = document.getElementById("taskTable");
+                const row = `<tr>
+                    <td>${taskName}</td>
+                    <td>${assignedTo}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+                document.getElementById("taskName").value = "";
+                document.getElementById("assignedTo").value = "";
+            } else {
+                alert("Please fill in both fields");
             }
+        };
+
+        document.querySelector(".logout").addEventListener("click", function() {
+            alert("Logging out...");
+            window.location.href = "login.html";
         });
 
-        new Chart(document.getElementById("budgetChart"), {
-            type: "doughnut",
-            data: {
-                labels: ["Salaries", "Operations", "Investments"],
-                datasets: [{
-                    data: data.budgetAllocation,
-                    backgroundColor: ["#ff5733", "#4db8ff", "#28a745"]
-                }]
-            }
-        });
-
+        updateDashboard();
     </script>
+</body>
 </html>
