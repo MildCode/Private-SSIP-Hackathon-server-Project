@@ -4,88 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/department-dashboard/assets/css/style.css">
-    
-    <script src="/department-dashboard/assets/js/auth.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #121212;
+            color: #ffffff;
+            display: flex;
+        }
+
+        #sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #1e1e1e;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: 0.3s;
+        }
+
+        #sidebar h2 {
+            color: #4db8ff;
+            text-align: center;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .sidebar-links li {
+            padding: 15px 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-links a:hover {
+            color: #4db8ff;
+        }
+
+        #main-content {
+            margin-left: 280px;
+            padding: 20px;
+            width: calc(100% - 280px);
+        }
+
+        .page-title {
+            text-align: center;
+            color: #4db8ff;
+            margin-bottom: 20px;
+        }
+
+        .settings-section {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.3);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    
-    <!-- Navbar -->
-    <div id="navbar"></div>
 
-    <div class="container mt-5">
-        <h2 class="page-title"><i class="fas fa-cogs"></i> Settings</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="list-group">
-                    <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="tab"><i class="fas fa-user"></i> Profile</a>
-                    <a href="#theme" class="list-group-item list-group-item-action" data-bs-toggle="tab"><i class="fas fa-palette"></i> Theme</a>
-                    <a href="#security" class="list-group-item list-group-item-action" data-bs-toggle="tab"><i class="fas fa-lock"></i> Security</a>
-                    <a href="#notifications" class="list-group-item list-group-item-action" data-bs-toggle="tab"><i class="fas fa-bell"></i> Notifications</a>
-                    <a href="#language" class="list-group-item list-group-item-action" data-bs-toggle="tab"><i class="fas fa-language"></i> Language</a>
-                </div>
+    <nav id="sidebar">
+        <h2>Settings</h2>
+        <ul class="sidebar-links">
+            <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#theme"><i class="fas fa-palette"></i> Theme</a></li>
+            <li><a href="#security"><i class="fas fa-lock"></i> Security</a></li>
+            <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+            <li><a href="#account"><i class="fas fa-id-card"></i> Account</a></li>
+        </ul>
+    </nav>
+
+    <div id="main-content">
+        <h1 class="page-title">User Settings</h1>
+        
+        <div class="settings-section" id="profile">
+            <h4>Profile Settings</h4>
+            <input type="file" class="form-control mb-3">
+            <input type="text" class="form-control mb-3" placeholder="Enter your name">
+            <button class="btn btn-primary">Save</button>
+        </div>
+        
+        <div class="settings-section" id="theme">
+            <h4>Theme Settings</h4>
+            <button class="btn btn-dark">Dark Mode</button>
+            <button class="btn btn-light">Light Mode</button>
+        </div>
+
+        <div class="settings-section" id="security">
+            <h4>Security Settings</h4>
+            <button class="btn btn-danger">Change Password</button>
+        </div>
+
+        <div class="settings-section" id="notifications">
+            <h4>Notification Preferences</h4>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+                <label class="form-check-label" for="emailNotif">Email Notifications</label>
             </div>
-            <div class="col-md-9">
-                <div class="tab-content p-3 bg-light rounded shadow-sm">
-                    <div class="tab-pane fade show active" id="profile">
-                        <h4>Profile Settings</h4>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control" placeholder="Enter your name">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Enter your email">
-                            </div>
-                            <button class="btn btn-primary">Save Changes</button>
-                        </form>
-                    </div>
-                    <div class="tab-pane fade" id="theme">
-                        <h4>Theme Settings</h4>
-                        <button class="btn btn-dark">Dark Mode</button>
-                        <button class="btn btn-light">Light Mode</button>
-                    </div>
-                    <div class="tab-pane fade" id="security">
-                        <h4>Security Settings</h4>
-                        <button class="btn btn-danger">Change Password</button>
-                    </div>
-                    <div class="tab-pane fade" id="notifications">
-                        <h4>Notification Preferences</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="emailNotif" checked>
-                            <label class="form-check-label" for="emailNotif">Email Notifications</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="smsNotif">
-                            <label class="form-check-label" for="smsNotif">SMS Notifications</label>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="language">
-                        <h4>Language Settings</h4>
-                        <select class="form-select">
-                            <option selected>English</option>
-                            <option>Spanish</option>
-                            <option>French</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="smsNotif">
+                <label class="form-check-label" for="smsNotif">SMS Notifications</label>
             </div>
+        </div>
+
+        <div class="settings-section" id="account">
+            <h4>Account Management</h4>
+            <button class="btn btn-warning">Link Aadhar</button>
+            <button class="btn btn-warning">Link PAN</button>
+            <button class="btn btn-warning">Link Ration Card</button>
         </div>
     </div>
 
     <script>
-        // Load Navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('navbar').innerHTML = data);
+        document.querySelector('.btn-dark').addEventListener('click', function() {
+            document.body.style.background = '#121212';
+            document.body.style.color = '#ffffff';
+        });
+
+        document.querySelector('.btn-light').addEventListener('click', function() {
+            document.body.style.background = '#ffffff';
+            document.body.style.color = '#000000';
+        });
     </script>
-    
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
