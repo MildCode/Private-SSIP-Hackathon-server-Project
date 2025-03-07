@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,18 +26,6 @@
             text-align: center;
             width: 100%;
             max-width: 400px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .login-container h2 {
@@ -119,30 +106,29 @@
             <button type="submit" class="btn-login">Login</button>
         </form>
     </div>
-    
+
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+        // Dummy credentials (WARNING: NOT SECURE)
+        const users = {
+            "admin": { password: "password", department: "health" },
+            "user1": { password: "12345", department: "education" }
+        };
+
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault();
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const department = document.getElementById('department').value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let department = document.getElementById("department").value;
 
-            const response = await fetch('/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password, department })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                window.location.href = result.redirect;
+            if (users[username] && users[username].password === password) {
+                localStorage.setItem("loggedInUser", username);
+                localStorage.setItem("department", department);
+                window.location.href = `../${department}/department.html`;
             } else {
-                alert(result.message);
+                alert("Invalid Username or Password!");
             }
         });
     </script>
 </body>
-
 </html>
