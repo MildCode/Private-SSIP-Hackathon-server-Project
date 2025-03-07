@@ -6,21 +6,22 @@
     <title>Finance HOD Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background-color: #1e1e2e;
+            background-color: #121212;
             color: #fff;
             font-family: 'Poppins', sans-serif;
         }
         .sidebar {
             width: 260px;
             height: 100vh;
-            background-color: #282a36;
+            background-color: #1f1f2e;
             padding: 20px;
             position: fixed;
         }
         .sidebar a {
-            color: #dcdcdc;
+            color: #b0b0b0;
             display: block;
             padding: 12px;
             text-decoration: none;
@@ -29,31 +30,45 @@
             border-radius: 5px;
         }
         .sidebar a:hover {
-            background-color: #44475a;
-            color: #50fa7b;
+            background-color: #3a3b4f;
+            color: #ffcc00;
         }
         .logout {
             position: absolute;
             bottom: 20px;
             width: 85%;
-            background-color: #ff5555;
+            background-color: #ff4444;
         }
         .content {
             margin-left: 280px;
             padding: 20px;
         }
         .card {
-            background-color: #44475a;
+            background-color: #2b2b3a;
             color: #fff;
             border: none;
-            box-shadow: 0 4px 10px rgba(80, 250, 123, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
             transition: 0.3s;
         }
         .card:hover {
             transform: scale(1.05);
         }
-        .table {
-            color: #fff;
+        .chart-container {
+            background: #2b2b3a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .quick-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .info-box {
+            background: #2b2b3a;
+            padding: 15px;
+            border-radius: 10px;
+            flex: 1;
+            text-align: center;
         }
     </style>
 </head>
@@ -69,6 +84,33 @@
 
     <div class="content">
         <h2>Finance Department Overview</h2>
+        <div class="quick-info">
+            <div class="info-box">
+                <h4>Total Revenue</h4>
+                <p>$120,000</p>
+            </div>
+            <div class="info-box">
+                <h4>Expenses</h4>
+                <p>$45,000</p>
+            </div>
+            <div class="info-box">
+                <h4>Profit</h4>
+                <p>$75,000</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="taskStatusChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
 
         <h3 class="mt-4">Assign New Task</h3>
         <form id="assignTaskForm" class="mb-4">
@@ -91,7 +133,7 @@
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <button type="submit" class="btn btn-success">Assign</button>
+                    <button type="submit" class="btn btn-warning">Assign</button>
                 </div>
             </div>
         </form>
@@ -111,25 +153,57 @@
             <tbody id="taskTable"></tbody>
         </table>
     </div>
+    
 
     <script>
+        const revenueChartCtx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(revenueChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [12000, 15000, 18000, 22000, 25000, 30000],
+                    backgroundColor: 'rgba(255, 204, 0, 0.7)',
+                    borderColor: 'rgba(255, 204, 0, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 1000
+                }
+            }
+        });
+
+        const taskStatusChartCtx = document.getElementById('taskStatusChart').getContext('2d');
+        const taskStatusChart = new Chart(taskStatusChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Not Started', 'In Progress', 'Pending', 'Completed'],
+                datasets: [{
+                    label: 'Task Status',
+                    data: [5, 10, 7, 15],
+                    backgroundColor: ['#ff4444', '#ffcc00', '#0099ff', '#00cc44']
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 1000
+                }
+            }
+        });
         let taskList = [];
         let taskIdCounter = 1;
-
         document.getElementById("assignTaskForm").addEventListener("submit", function(event) {
             event.preventDefault();
             let taskName = document.getElementById("taskName").value;
             let employeeName = document.getElementById("employeeName").value;
             let taskDescription = document.getElementById("taskDescription").value;
             let taskStatus = document.getElementById("taskStatus").value;
-
-            let newTask = {
-                id: taskIdCounter++,
-                name: taskName,
-                employee: employeeName,
-                description: taskDescription,
-                status: taskStatus
-            };
+            let newTask = { id: taskIdCounter++, name: taskName, employee: employeeName, description: taskDescription, status: taskStatus };
             taskList.push(newTask);
             updateDashboard();
             document.getElementById("assignTaskForm").reset();
@@ -145,25 +219,15 @@
                     <td>${task.employee}</td>
                     <td>${task.description}</td>
                     <td>${task.status}</td>
-                    <td>
-                        <select onchange="updateTaskStatus(${task.id}, this.value)">
-                            <option value="Not Started" ${task.status === "Not Started" ? "selected" : ""}>Not Started</option>
-                            <option value="In Progress" ${task.status === "In Progress" ? "selected" : ""}>In Progress</option>
-                            <option value="Pending" ${task.status === "Pending" ? "selected" : ""}>Pending</option>
-                            <option value="Completed" ${task.status === "Completed" ? "selected" : ""}>Completed</option>
-                        </select>
-                    </td>
+                    <td><select onchange="updateTaskStatus(${task.id}, this.value)" class="form-control">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                    </select></td>
                 </tr>`;
                 taskTable.innerHTML += row;
             });
-        }
-
-        function updateTaskStatus(taskId, status) {
-            let task = taskList.find(t => t.id === taskId);
-            if (task) {
-                task.status = status;
-                updateDashboard();
-            }
         }
     </script>
 </body>
