@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samriddh Government portal </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <style>
+        body {
+            background-color: #00274d;
+            color: white;
+        }
+
+        .card {
+            background-color: #003366;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .card-title,
+        .card-text {
+            color: white;
+        }
+
+        .help-icon {
+            position: fixed;
+            z-index: 9999;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .help-icon:hover {
+            transform: scale(1.1);
+        }
+
+
+        .btn-custom {
+            background-color: #ffcc00;
+            color: black;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            background-color: #00274d;
+        }
+
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #001f3f;
+            color: white;
+        }
+
+        /* Animation styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .count-animation {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards, countUp 2s ease-in-out;
+        }
+
+        @keyframes countUp {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fade-in">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-home"></i> Samriddh Government Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/department-dashboard/pages/department.html"><i
+                                class="fas fa-users"></i> Heads of Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/department-dashboard/pages/labour.html"><i
+                                class="fas fa-briefcase"></i> Labour Department</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="/department-dashboard/pages/skill-development.html"><i
+                                class="fas fa-chalkboard-teacher"></i> Skill Development</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/department-dashboard/pages/employment.html"><i
+                                class="fas fa-handshake"></i> Employment Department</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/contact.html"><i class="fas fa-phone-alt"></i>
+                            Contact</a></li>
+                    <li class="nav-item" id="login_sign-up_list"><a class="nav-link"
+                            href="/pages/login_setup/index.html"><i class="fas fa-user-plus"></i> Signup/login</a></li>
+                    <li class="nav-item" id="logout_list" style="display: none;"><a class="nav-link"
+                            onclick="Remove_local()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    <li class="nav-item" id="settings_list" style="display: none;"><a class="nav-link"
+                            href="/pages/settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Help Icon -->
+    <div class="help-icon" data-bs-toggle="tooltip" data-bs-placement="left" title="Help"
+        onclick="window.location.href='pages/help.html'">
+        <i class="fas fa-question"></i>
+    </div>
+
+
+    <div class="container mt-5 fade-in">
+        <div class="text-center mb-4">
+            <h4><i class="fas fa-user-circle"></i> Welcome, <span id="Guest_span">Guest</span></h4>
+            <p><i class="fas fa-map-signs"></i> Track your departmental updates and explore available welfare schemes.
+            </p>
+        </div>
+    </div>
+
+
+    <h5 class="text-center mt-5"><i class="fas fa-chart-line"></i> Application and Welfare Statistics</h5>
+
+    <div class="row text-center mt-4">
+        <!-- Total Applications -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="51">0</h5>
+                <p class="card-text">Total Applications</p>
+                <p class="card-text">80% of Applications Completed</p>
+            </div>
+        </div>
+
+        <!-- Pending Applications -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="12">0</h5>
+                <p class="card-text">Pending Applications</p>
+                <p class="card-text">33% Pending for Review</p>
+            </div>
+        </div>
+
+        <!-- Approved Applications -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="24">0</h5>
+                <p class="card-text">Applications Approved</p>
+                <p class="card-text">67% of Applications Approved</p>
+            </div>
+        </div>
+
+        <!-- Documents Submitted -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="15">0</h5>
+                <p class="card-text">Documents Submitted</p>
+                <p class="card-text">90% of Required Documents Submitted</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Department-Specific Stats -->
+    <h5 class="text-center mt-5"><i class="fas fa-users"></i> Department-Specific Statistics</h5>
+
+    <div class="row text-center mt-4">
+        <!-- Labour Department -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="30">0</h5>
+                <p class="card-text">Labour Applications</p>
+                <p class="card-text">70% Applications Processed</p>
+            </div>
+        </div>
+
+        <!-- Skill Development Department -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="18">0</h5>
+                <p class="card-text">Skill Development Applications</p>
+                <p class="card-text">85% Applications Processed</p>
+            </div>
+        </div>
+
+        <!-- Employment Department -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="24">0</h5>
+                <p class="card-text">Employment Applications</p>
+                <p class="card-text">50% Applications Approved</p>
+            </div>
+        </div>
+
+        <!-- General Applications -->
+        <div class="col-md-3 mb-3 fade-in">
+            <div class="card p-3">
+                <h5 class="card-title count count-animation" data-target="51">0</h5>
+                <p class="card-text">General Applications</p>
+                <p class="card-text">65% of Applications Reviewed</p>
+            </div>
+        </div>
+    </div>
+
+
+    <h5 class="text-center mt-5"><i class="fas fa-briefcase"></i> Available Welfare Schemes</h5>
+
+    <div class="row text-center mt-4 fade-in">
+        <!-- Labour Department -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-briefcase"></i> Labour Department</h6>
+                <p class="card-text">Manage Labour-related activities and policies</p>
+                <a href="/department-dashboard/pages/labour.html" class="btn btn-custom"><i class="fas fa-link"></i> Access</a>
+            </div>
+        </div>
+    
+        <!-- Skill Development Department -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Skill Development</h6>
+                <p class="card-text">Enhance employability through training programs</p>
+                <a href="/department-dashboard/pages/skill-development.html" class="btn btn-custom"><i class="fas fa-link"></i> Access</a>
+            </div>
+        </div>
+    
+        <!-- Employment Department -->
+        <div class="col-md-4 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-handshake"></i> Employment Department</h6>
+                <p class="card-text">Promote job opportunities and placement services</p>
+                <a href="/department-dashboard/pages/employment.html" class="btn btn-custom"><i class="fas fa-link"></i> Access</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Manage Your Account Section (Only visible when logged in) -->
+    <div id="settings_section" style="display: none;">
+        <h5 class="text-center mt-5"><i class="fas fa-cog"></i> Manage Your Account</h5>
+        <div class="row text-center mt-4 fade-in">
+            <!-- Profile Settings -->
+            <div class="col-md-6 mb-3">
+                <div class="card p-3">
+                    <h6 class="card-title"><i class="fas fa-user-edit"></i> Profile Settings</h6>
+                    <p class="card-text">Update your account information and preferences.</p>
+                    <a href="/pages/settings.html" class="btn btn-custom"><i class="fas fa-cog"></i> Go to Settings</a>
+                </div>
+            </div>
+
+            <!-- Language Preferences -->
+            <div class="col-md-6 mb-3">
+                <div class="card p-3">
+                    <h6 class="card-title"><i class="fas fa-language"></i> Language Preferences</h6>
+                    <p class="card-text">Set your preferred language for the portal.</p>
+                    <a href="/pages/language.html" class="btn btn-custom"><i class="fas fa-globe"></i> Change
+                        Language</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h5 class="text-center mt-5"><i class="fas fa-file-signature"></i> Public Welfare</h5>
+
+    <div class="row text-center mt-4 fade-in">
+        <!-- Emergency Services -->
+        <div class="col-md-6 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-ambulance"></i> Emergency Services</h6>
+                <p class="card-text">24/7 ambulance and disaster response services ensuring timely support to citizens
+                    in emergencies.</p>
+            </div>
+        </div>
+
+        <!-- Urban Green Spaces -->
+        <div class="col-md-6 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-tree"></i> Urban Green Spaces</h6>
+                <p class="card-text">Development of public parks, tree plantations, and eco-friendly zones for better
+                    urban living.</p>
+            </div>
+        </div>
+
+        <!-- Skill Development Programs -->
+        <div class="col-md-6 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-school"></i> Skill Development Programs</h6>
+                <p class="card-text">Free workshops and training initiatives for youth and women to enhance
+                    employability.</p>
+            </div>
+        </div>
+
+        <!-- Water Supply Projects -->
+        <div class="col-md-6 mb-3">
+            <div class="card p-3">
+                <h6 class="card-title"><i class="fas fa-tint"></i> Water Supply Projects</h6>
+                <p class="card-text">Ensuring clean and uninterrupted water supply for all urban and rural areas of
+                    Ahmedabad.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-white py-4" style="background-color: #003366;">
+        <div class="container">
+            <div class="row align-items-center text-center text-md-start">
+                <!-- PM Section -->
+                <div class="col-md-3 mb-3 mb-md-0 text-center">
+                    <img src="/images/India PM.png" alt="PM of India" class="img-fluid rounded-circle shadow">
+                    <p class="mt-2"><strong>Hon'ble PM of India</strong></p>
+                </div>
+
+                <!-- Footer Details Section -->
+                <div class="col-md-6 text-center">
+                    <h6 class="mb-2"><strong>Government of Gujarat</strong></h6>
+                    <p>Promoting welfare and development for the citizens of Gujarat and India. Committed to providing
+                        opportunities, improving infrastructure, and fostering inclusivity for a brighter future.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p class="mt-3">© 2025 All Rights Reserved | Designed & Developed by UpliftEngineers</p>
+                </div>
+
+                <!-- CM Section -->
+                <div class="col-md-3 text-center">
+                    <img src="/images/Gujarat CM (4).png" alt="CM of Gujarat" class="img-fluid rounded-circle shadow">
+                    <p class="mt-2"><strong>Hon'ble CM of Gujarat</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Store schemes data in local storage
+        // const schemes = [
+        //     {
+        //         name: "PM Kisan Samman Nidhi",
+        //         description: "Financial support for farmers with ₹6,000 annually.",
+        //         status: "Active",
+        //         icon: "fas fa-tractor",
+        //         link: "/schemesdetail/pm-kisan-details.html"
+        //     },
+        //     {
+        //         name: "PM Awas Yojana",
+        //         description: "Affordable housing for the urban poor.",
+        //         status: "Pending",
+        //         icon: "fas fa-home",
+        //         link: "/schemesdetail/pm-awas-yojana.html"
+        //     },
+        //     {
+        //         name: "Ayushman Bharat",
+        //         description: "Health insurance coverage up to ₹5 lakhs per family per year",
+        //         status: "Active",
+        //         icon: "fas fa-heartbeat fa-3x",
+        //         link: "/schemesdetail/ayusman-bharat.html"
+        //     },
+
+        // ];
+        // if(document)
+        const schemes = [
+            {
+                name: "PM Kisan Samman Nidhi",
+                description: "Financial assistance of ₹6,000 per year to farmer families.",
+                status: "Active",
+                icon: "fas fa-tractor",
+                link: "/schemedetails/pm-kisan-details.html"
+            },
+            {
+                name: "PM Awas Yojana",
+                description: "Housing for All - Urban and Rural housing scheme.",
+                status: "Active",
+                icon: "fas fa-home",
+                link: "/schemedetails/pm-awas-yojana.html"
+            },
+            {
+                name: "Ayushman Bharat",
+                description: "Health insurance coverage up to ₹5 lakhs per family per year.",
+                status: "Active",
+                icon: "fas fa-heartbeat",
+                link: "/schemesdetail/ayusman-bharat.html"
+            },
+            {
+                name: "MUDRA Yojana",
+                description: "Microfinance for small entrepreneurs and businesses.",
+                status: "Active",
+                icon: "fas fa-briefcase",
+                link: "/schemesdetail/pm-mudra.html"
+            },
+            {
+                name: "PM Ujjwala Yojana",
+                description: "Free LPG connections to BPL families.",
+                status: "Active",
+                icon: "fas fa-fire",
+                link: "/schemesdetail/pm-ujjwala.html"
+            },
+            {
+                name: "Sukanya Samriddhi Yojana",
+                description: "Financial support for the girl child to secure her future.",
+                status: "Active",
+                icon: "fas fa-girl",
+                link: "/schemesdetail/sukanya-samridhhi.html"
+            }
+        ];
+
+        localStorage.setItem('schemes', JSON.stringify(schemes));
+        if (localStorage.getItem('schemes_one')) {
+            console.log('Schemes data stored in local storage');
+            schemes.push(localStorage.getItem('schemes_one'));
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.count');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    const increment = Math.ceil(target / 1000);
+
+                    if (current < target) {
+                        counter.innerText = Math.min(current + increment, target);
+                        setTimeout(updateCount, 25);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+
+            // Retrieve the email from localStorage
+            const UserName = localStorage.getItem("Name");
+            if (userEmail) {
+                console.log("User Email: " + UserName);
+                // You can use the email as needed, for example, display it on the page
+                document.getElementById('Guest_span').innerText = UserName;
+                // alert("Welcome back, " + userEmail);
+                document.getElementById('login_sign-up_list').style.display = "none";
+                document.getElementById('logout_list').style.display = "block";
+                document.getElementById('settings_list').style.display = "block";
+                document.getElementById('settings_section').style.display = "block";
+            }
+        });
+        function Remove_local() {
+            localStorage.removeItem("email");
+            // alert("Logged out successfully");
+            document.getElementById('login_sign-up_list').style.display = "block";
+            document.getElementById('logout_list').style.display = "none";
+            localStorage.clear();
+            document.getElementById('Guest_span').innerText = "Guest";
+            window.location.reload();
+        }
+    </script>
+    <script>// Initialize Tooltip
+        var tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+    <script src="pages/login_setup/script.js"></script>
+    <script>
+        const userEmail = localStorage.getItem("Name");
+        document.getElementById('Guest_span').innerText = "Guest";
+    </script>
+</body>
+
+</html>
