@@ -1,5 +1,5 @@
 document.getElementById('btn-submit').addEventListener('click', function(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const department = document.getElementById('department').value;
@@ -14,26 +14,26 @@ document.getElementById('btn-submit').addEventListener('click', function(e) {
                 if (hod) {
                     // console.log(hod);
                     if(department === 'Ministry_of_Home_and_Affriars') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_Home_and_Affriars_HOD.html');
-                    } else if(department === 'Ministry_of_health') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_Health_HOD.html');
-                    } else if(department === 'Ministry_of_education') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_Education_HOD.html');
-                    } else if(department === 'Ministry_of_defence') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_Defence_HOD.html');
-                    } else if(department === 'Ministry_of_finance') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_Finance_HOD.html');
-                    } else if(department === 'Ministry_of_labour') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_labour_HOD.html');
-                    } else if(department === 'Ministry_of_it_&_electronics') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_it_&_electronics_HOD.html');
-                    } else if(department === 'Ministry_of_transport') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_transport_HOD.html');
-                    } else if(department === 'Ministry_of_rural_development') {
-                        window.location.replace('/department-dashboard/ALL_HODS/Ministry_of_rural_development_HOD.html');
-                    } else if(department === 'Ministry_of_agriculture') {
-                        window.location.replace('/project/department-dashboard/ALL_HODS/Ministry_of_agriculture_HOD.html');
-                    } else {
+                        document.location.assign('department-dashboard/ALL_HODS//Ministry_of_Home_and_Affriars_HOD.html');
+                    }else if(department === 'Ministry_of_health') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_Health_HOD.html');
+                    }else if(department === 'Ministry_of_education') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_Education_HOD.html');
+                    }else if(department === 'Ministry_of_defence') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_Defence_HOD.html');
+                    }else if(department === 'Ministry_of_finance') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_Finance_HOD.html');
+                    }else if(department ==='Ministry_of_labour') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_labour_HOD.html');
+                    }else if(department ==='Ministry_of_it_&_electronics') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_it_&_electronics_HOD.html');
+                    }else if(department ==='Ministry_of_transport') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_transport_HOD.html');
+                    }else if(department ==='Ministry_of_rural_development') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_rural_development_HOD.html');
+                    }else if(department ==='Ministry_of_agriculture') {
+                        document.location.assign('/department-dashboard/ALL_HODS//Ministry_of_agriculture_HOD.html');
+                    }else{
                         alert('HOD Department not found');
                     }
                 } else {
@@ -42,6 +42,6 @@ document.getElementById('btn-submit').addEventListener('click', function(e) {
             })
             .catch(error => console.error('Error:', error));
     } else if (username === 'admin' && password === 'admin' && department === 'admin' && role === 'admin') {
-        window.location.replace('/dashboard.html');
+        document.location.assign('/dashboard.html');
     }
 });
