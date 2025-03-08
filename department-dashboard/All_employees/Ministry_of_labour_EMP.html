@@ -1,11 +1,424 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Ministry of Labour Dashboard
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
-<body>
-   <h1> welcome to Ministry of Labour employees</h1>
+
+<body class="bg-gray-100 text-gray-800">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white p-4">
+            <div class="flex items-center mb-8">
+                <img alt="Ministry of Labour logo" class="h-10 w-10" height="40"
+                    src="https://storage.googleapis.com/a1aa/image/zDkWfh0JV6hijxz3spVvgwp8ntL7Ux_Dr5c4dM7At0w.jpg"
+                    width="40" />
+                <span class="ml-2 text-xl font-semibold">
+                    Ministry of Labour
+                </span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-home mr-2">
+                            </i>
+                            Overview
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-800 font-semibold" href="#">
+                            <i class="fas fa-users mr-2">
+                            </i>
+                            Employees
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-chart-line mr-2">
+                            </i>
+                            Analytics
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-building mr-2">
+                            </i>
+                            Property
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-8">
+                <ul>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-cog mr-2">
+                            </i>
+                            Settings
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-question-circle mr-2">
+                            </i>
+                            Help Center
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-gray-600 hover:text-gray-800" href="#">
+                            <i class="fas fa-flag mr-2">
+                            </i>
+                            Report
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold">
+                    Dashboard
+                </h1>
+                <div class="flex items-center">
+                    <input class="border rounded-lg px-4 py-2 mr-4" placeholder="Search anything..." type="text" />
+                    <div class="flex items-center">
+                        <img alt="User avatar" class="h-10 w-10 rounded-full mr-2" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/pC9ZfVFsECwlvYh9_Ry7ms19EnqMxndaBbn_FCEBs-Q.jpg"
+                            width="40" />
+                        <span>
+                            Ryan Gosers
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-6 mb-6">
+                <!-- Employee Contact -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">
+                            Employee Contact
+                        </h2>
+                        <button class="text-blue-500">
+                            See All
+                        </button>
+                    </div>
+                    <ul>
+                        <li class="flex items-center mb-4">
+                            <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                width="40" />
+                            <div>
+                                <p class="font-semibold">
+                                    Bang Chan
+                                </p>
+                                <p class="text-gray-500">
+                                    General Manager
+                                </p>
+                            </div>
+                            <button class="ml-auto text-blue-500">
+                                Contact
+                            </button>
+                        </li>
+                        <li class="flex items-center mb-4">
+                            <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                width="40" />
+                            <div>
+                                <p class="font-semibold">
+                                    Pham Harris
+                                </p>
+                                <p class="text-gray-500">
+                                    Social Specialist
+                                </p>
+                            </div>
+                            <button class="ml-auto text-blue-500">
+                                Contact
+                            </button>
+                        </li>
+                        <li class="flex items-center mb-4">
+                            <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                width="40" />
+                            <div>
+                                <p class="font-semibold">
+                                    Han Dino
+                                </p>
+                                <p class="text-gray-500">
+                                    Estate Marketing
+                                </p>
+                            </div>
+                            <button class="ml-auto text-blue-500">
+                                Contact
+                            </button>
+                        </li>
+                        <li class="flex items-center">
+                            <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                width="40" />
+                            <div>
+                                <p class="font-semibold">
+                                    Robert Gilbert
+                                </p>
+                                <p class="text-gray-500">
+                                    Property Checker
+                                </p>
+                            </div>
+                            <button class="ml-auto text-blue-500">
+                                Contact
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Employee Activity -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">
+                            Employee Activity
+                        </h2>
+                        <button class="text-blue-500">
+                            See All
+                        </button>
+                    </div>
+                    <ul>
+                        <li class="mb-4">
+                            <p class="font-semibold">
+                                John Doe
+                            </p>
+                            <p class="text-gray-500">
+                                Completed the invoice to send@example.com for your attention.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">
+                                Kimberly Hanna
+                            </p>
+                            <p class="text-gray-500">
+                                Updated the project status to "In Progress".
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Employee List -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">
+                            Employee List
+                        </h2>
+                        <button class="text-blue-500">
+                            See All
+                        </button>
+                    </div>
+                    <ul>
+                        <li class="mb-4">
+                            <p class="font-semibold">
+                                Bang Chan
+                            </p>
+                            <p class="text-gray-500">
+                                Product Manager
+                            </p>
+                        </li>
+                        <li class="mb-4">
+                            <p class="font-semibold">
+                                Pham Harris
+                            </p>
+                            <p class="text-gray-500">
+                                Social Specialist
+                            </p>
+                        </li>
+                        <li class="mb-4">
+                            <p class="font-semibold">
+                                Han Dino
+                            </p>
+                            <p class="text-gray-500">
+                                Estate Marketing
+                            </p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">
+                                Robert Gilbert
+                            </p>
+                            <p class="text-gray-500">
+                                Property Checker
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Schedule Management -->
+            <div class="bg-white p-4 rounded-lg shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">
+                        Schedule Management
+                    </h2>
+                    <button class="text-blue-500">
+                        See All Schedule
+                    </button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr>
+                            <th class="py-2">
+                                No
+                            </th>
+                            <th class="py-2">
+                                Employee
+                            </th>
+                            <th class="py-2">
+                                Department
+                            </th>
+                            <th class="py-2">
+                                Work By
+                            </th>
+                            <th class="py-2">
+                                Work Status
+                            </th>
+                            <th class="py-2">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t">
+                            <td class="py-2">
+                                1
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                    width="40" />
+                                Bang Chan
+                            </td>
+                            <td class="py-2">
+                                General Manager
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2">
+                                <span class="bg-blue-100 text-blue-500 px-2 py-1 rounded-full">
+                                    Manage
+                                </span>
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <button class="text-blue-500 mr-2">
+                                    <i class="fas fa-edit">
+                                    </i>
+                                </button>
+                                <button class="text-red-500">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-2">
+                                2
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                    width="40" />
+                                Pham Harris
+                            </td>
+                            <td class="py-2">
+                                Social Specialist
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2">
+                                <span class="bg-yellow-100 text-yellow-500 px-2 py-1 rounded-full">
+                                    Ongoing
+                                </span>
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <button class="text-blue-500 mr-2">
+                                    <i class="fas fa-edit">
+                                    </i>
+                                </button>
+                                <button class="text-red-500">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-2">
+                                3
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                    width="40" />
+                                Han Dino
+                            </td>
+                            <td class="py-2">
+                                Estate Marketing
+                            </td>
+                            <td class="py-2">
+                                On Site
+                            </td>
+                            <td class="py-2">
+                                <span class="bg-green-100 text-green-500 px-2 py-1 rounded-full">
+                                    Finished
+                                </span>
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <button class="text-blue-500 mr-2">
+                                    <i class="fas fa-edit">
+                                    </i>
+                                </button>
+                                <button class="text-red-500">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="py-2">
+                                4
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Employee photo" class="h-10 w-10 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/IXG7pEkVhy1Mp43oNdEz6SYYyJC5tYraLHIQV8Mepvo.jpg"
+                                    width="40" />
+                                Robert Gilbert
+                            </td>
+                            <td class="py-2">
+                                Property Checker
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2">
+                                <span class="bg-red-100 text-red-500 px-2 py-1 rounded-full">
+                                    No Project
+                                </span>
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <button class="text-blue-500 mr-2">
+                                    <i class="fas fa-edit">
+                                    </i>
+                                </button>
+                                <button class="text-red-500">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
