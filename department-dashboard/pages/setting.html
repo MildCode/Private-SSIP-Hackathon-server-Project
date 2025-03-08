@@ -21,7 +21,6 @@
             position: fixed;
             left: 0;
             top: 0;
-            transition: 0.3s;
         }
 
         #sidebar h2 {
@@ -47,10 +46,16 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
 
         .sidebar-links a:hover {
             color: #4db8ff;
+        }
+
+        .logout-btn {
+            width: 100%;
+            margin-top: 20px;
         }
 
         #main-content {
@@ -84,24 +89,31 @@
             border: 2px solid #4db8ff;
         }
 
-        .user-name {
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 10px;
+        #fileName {
+            color: #4db8ff;
+        }
+
+        #ads, #adReporting {
+            margin-top: 20px;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 0, 0.3);
         }
     </style>
 </head>
 <body>
-
     <nav id="sidebar">
         <h2>Settings</h2>
         <ul class="sidebar-links">
             <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
             <li><a href="#theme"><i class="fas fa-palette"></i> Theme</a></li>
-            <li><a href="#security"><i class="fas fa-lock"></i> Security</a></li>
+            <li><a onclick="scrollToSection('security')"><i class="fas fa-lock"></i> Security</a></li>
             <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
             <li><a href="#account"><i class="fas fa-id-card"></i> Account</a></li>
+            <li><a href="#ads"><i class="fas fa-ad"></i> Ad Preferences</a></li>
         </ul>
+        <button class="btn btn-danger logout-btn">Logout</button>
     </nav>
 
     <div id="main-content">
@@ -110,17 +122,22 @@
         <div class="settings-section" id="profile">
             <h4>Profile Settings</h4>
             <img src="default-avatar.png" id="userPhoto" class="profile-img" alt="User Photo">
-            <input type="file" class="form-control mb-3" id="photoInput">
+            <label class="btn btn-info btn-sm">
+                <i class="fas fa-upload"></i> Choose Photo
+                <input type="file" id="photoInput" class="d-none">
+            </label>
+            <span id="fileName" class="text-muted ms-2">No file chosen</span>
             <p class="user-name" id="displayUserName">User Name</p>
             <input type="text" class="form-control mb-3" id="userName" placeholder="Enter your name">
+            <input type="email" class="form-control mb-3" id="userEmail" placeholder="Enter your email">
             <input type="text" class="form-control mb-3" id="userPhone" placeholder="Enter your phone number">
             <button class="btn btn-primary" onclick="saveProfile()">Save</button>
         </div>
         
         <div class="settings-section" id="theme">
             <h4>Theme Settings</h4>
-            <button class="btn btn-dark">Dark Mode</button>
-            <button class="btn btn-light">Light Mode</button>
+            <button class="btn btn-dark" onclick="setDarkMode()">Dark Mode</button>
+            <button class="btn btn-light" onclick="setLightMode()">Light Mode</button>
         </div>
 
         <div class="settings-section" id="security">
@@ -145,42 +162,53 @@
             <button class="btn btn-warning">Link Aadhar</button>
             <button class="btn btn-warning">Link PAN</button>
             <button class="btn btn-warning">Link Ration Card</button>
+            <button class="btn btn-danger mt-3">Delete Account</button>
+        </div>
+
+        <div class="settings-section" id="ads">
+            <h4>Ad Preferences</h4>
+            <p>Customize your ad experience:</p>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="personalizedAds" checked>
+                <label class="form-check-label" for="personalizedAds">Enable Personalized Ads</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="adOptOut">
+                <label class="form-check-label" for="adOptOut">Opt-Out of All Ads</label>
+            </div>
+            <p>Learn more about how we use your data in our <a href="#privacyPolicy" class="text-info">Privacy Policy</a>.</p>
+        </div>
+
+        <div class="settings-section" id="adReporting">
+            <h4>Ad Reporting</h4>
+            <p>If you encounter any inappropriate ads, please report them below:</p>
+            <textarea class="form-control mb-3" id="adFeedback" placeholder="Describe the issue..."></textarea>
+            <button class="btn btn-secondary" onclick="submitAdFeedback()">Submit Report</button>
         </div>
     </div>
 
     <script>
-        document.querySelector('.btn-dark').addEventListener('click', function() {
+        function setDarkMode() {
             document.body.style.background = '#121212';
             document.body.style.color = '#ffffff';
-        });
-
-        document.querySelector('.btn-light').addEventListener('click', function() {
-            document.body.style.background = '#ffffff';
-            document.body.style.color = '#000000';
-        });
-
-        function saveProfile() {
-            let name = document.getElementById("userName").value;
-            let phone = document.getElementById("userPhone").value;
-            localStorage.setItem("userName", name);
-            localStorage.setItem("userPhone", phone);
-            document.getElementById("displayUserName").textContent = name;
-            alert("Profile updated successfully!");
         }
 
-        document.getElementById("photoInput").addEventListener("change", function(event) {
-            let reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById("userPhoto").src = reader.result;
-                localStorage.setItem("userPhoto", reader.result);
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        });
+        function setLightMode() {
+            document.body.style.background = '#ffffff';
+            document.body.style.color = '#000000';
+        }
 
-        window.onload = function() {
-            document.getElementById("userName").value = localStorage.getItem("userName") || "";
-            document.getElementById("displayUserName").textContent = localStorage.getItem("userName") || "User Name";
-            document.getElementById("userPhoto").src = localStorage.getItem("userPhoto") || "default-avatar.png";
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function submitAdFeedback() {
+            const feedback = document.getElementById('adFeedback').value;
+            if (feedback) {
+                alert('Thank you for your feedback!');
+            } else {
+                alert('Please describe the issue before submitting.');
+            }
         }
     </script>
 </body>
