@@ -50,7 +50,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                 .then(data => {
                     const employee = data.employees.find(emp => emp.name === username && emp.password === password);
                     if (employee) {
-                        document.location.assign('/department-dashboard/All_employees//ministry_of_home_and_affairs_EMP.html');
+                        document.location.assign('/department-dashboard/All_employees/ministry_of_home_and_affairs_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
                     }
