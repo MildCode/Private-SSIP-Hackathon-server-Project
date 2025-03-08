@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* Basic Styles */
+    /* Base Styles */
     body {
       background: #121212;
       color: #fff;
@@ -15,11 +15,9 @@
       margin: 0;
       padding: 0;
     }
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
     
-    /* Sidebar for Desktop */
+    /* Desktop Sidebar */
     #sidebar {
       width: 260px;
       height: 100vh;
@@ -63,7 +61,7 @@
       margin-top: 20px;
     }
     
-    /* Mobile Navigation */
+    /* Mobile Navigation (Hamburger Menu) */
     #mobile-nav {
       display: none;
       width: 100%;
@@ -83,13 +81,14 @@
     #mobile-nav .top-bar h5 {
       margin: 0;
       color: #ffffff;
+      font-size: 18px;
     }
     #mobile-nav .hamburger {
       font-size: 24px;
       cursor: pointer;
       color: #ffffff;
     }
-    /* Hidden mobile menu */
+    /* Hidden mobile menu (dropdown) */
     #mobile-menu {
       display: none;
       background: #1e1e1e;
@@ -109,6 +108,7 @@
       text-decoration: none;
       color: #fff;
       font-size: 16px;
+      display: block;
     }
     
     /* Main Content */
@@ -126,7 +126,7 @@
       background: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
       margin-bottom: 20px;
       text-align: center;
     }
@@ -143,40 +143,34 @@
       object-fit: cover;
       border: 2px solid #4db8ff;
     }
-    #fileName {
-      color: #4db8ff;
-    }
+    #fileName { color: #4db8ff; }
     
-    /* Responsive Styles */
+    /* Input Groups: Add some consistent spacing */
+    .input-group { margin-bottom: 15px; }
+    
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
       /* Hide sidebar on small screens */
-      #sidebar {
-        display: none;
-      }
+      #sidebar { display: none; }
       /* Show mobile navigation bar */
-      #mobile-nav {
-        display: block;
-      }
+      #mobile-nav { display: block; }
       /* Adjust main content */
       #main-content {
         margin: 0;
         padding: 80px 20px 20px; /* extra top padding for mobile nav */
         width: 100%;
       }
-      .profile-img {
-        width: 80px;
-        height: 80px;
-      }
+      .profile-img { width: 80px; height: 80px; }
+      /* Make all buttons full width for easier tap targets */
+      .btn { width: 100% !important; margin-bottom: 10px; }
     }
     @media (max-width: 480px) {
-      .profile-img {
-        width: 60px;
-        height: 60px;
-      }
+      .profile-img { width: 60px; height: 60px; }
     }
   </style>
 </head>
 <body>
+
   <!-- Mobile Navigation -->
   <nav id="mobile-nav">
     <div class="top-bar d-flex justify-content-between align-items-center">
@@ -193,7 +187,7 @@
       </ul>
     </div>
   </nav>
-  
+
   <!-- Desktop Sidebar Navigation -->
   <nav id="sidebar">
     <h2><i class="fas fa-cog"></i> Settings</h2>
@@ -204,9 +198,11 @@
       <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
       <li><a href="#account"><i class="fas fa-address-card"></i> Account</a></li>
     </ul>
-    <button class="btn btn-danger logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <button class="btn btn-danger logout-btn">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
   </nav>
-  
+
   <!-- Main Content -->
   <div id="main-content">
     <h1 class="page-title"><i class="fas fa-user-cog"></i> User Settings</h1>
@@ -220,33 +216,43 @@
         <input type="file" id="photoInput" class="d-none" accept="image/*" onchange="previewImage()" />
       </label>
       <span id="fileName" class="text-muted ms-2">No file chosen</span>
-      <p class="user-name" id="displayUserName"><i class="fas fa-user"></i> User Name</p>
-      <div class="input-group mb-3">
+      <p class="user-name" id="displayUserName">
+        <i class="fas fa-user"></i> User Name
+      </p>
+      <div class="input-group">
         <span class="input-group-text"><i class="fas fa-user"></i></span>
         <input type="text" class="form-control" id="userName" placeholder="Enter your name" />
       </div>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
         <input type="email" class="form-control" id="userEmail" placeholder="Enter your email" />
       </div>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <span class="input-group-text"><i class="fas fa-phone"></i></span>
         <input type="text" class="form-control" id="userPhone" placeholder="Enter your phone number" />
       </div>
-      <button class="btn btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i> Save</button>
+      <button class="btn btn-primary" onclick="saveProfile()">
+        <i class="fas fa-save"></i> Save
+      </button>
     </div>
     
     <!-- Theme Section -->
     <div class="settings-section" id="theme">
       <h4><i class="fas fa-adjust"></i> Theme Settings</h4>
-      <button class="btn btn-dark" onclick="setDarkMode()"><i class="fas fa-moon"></i> Dark Mode</button>
-      <button class="btn btn-light" onclick="setLightMode()"><i class="fas fa-sun"></i> Light Mode</button>
+      <button class="btn btn-dark" onclick="setDarkMode()">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
+      <button class="btn btn-light" onclick="setLightMode()">
+        <i class="fas fa-sun"></i> Light Mode
+      </button>
     </div>
     
     <!-- Security Section -->
     <div class="settings-section" id="security">
       <h4><i class="fas fa-lock"></i> Security Settings</h4>
-      <button class="btn btn-danger"><i class="fas fa-key"></i> Change Password</button>
+      <button class="btn btn-danger">
+        <i class="fas fa-key"></i> Change Password
+      </button>
     </div>
     
     <!-- Notifications Section -->
@@ -254,60 +260,61 @@
       <h4><i class="fas fa-bell"></i> Notification Preferences</h4>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="emailNotif" checked />
-        <label class="form-check-label" for="emailNotif"><i class="fas fa-envelope"></i> Email Notifications</label>
+        <label class="form-check-label" for="emailNotif">
+          <i class="fas fa-envelope"></i> Email Notifications
+        </label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="smsNotif" />
-        <label class="form-check-label" for="smsNotif"><i class="fas fa-sms"></i> SMS Notifications</label>
+        <label class="form-check-label" for="smsNotif">
+          <i class="fas fa-mobile-alt"></i> SMS Notifications
+        </label>
       </div>
     </div>
     
     <!-- Account Management Section -->
     <div class="settings-section" id="account">
       <h4><i class="fas fa-address-card"></i> Account Management</h4>
-      <button class="btn btn-warning"><i class="fas fa-id-card"></i> Link Aadhar</button>
-      <button class="btn btn-warning"><i class="fas fa-id-card-alt"></i> Link PAN</button>
-      <button class="btn btn-warning"><i class="fas fa-receipt"></i> Link Ration Card</button>
-      <button class="btn btn-danger mt-3"><i class="fas fa-trash"></i> Delete Account</button>
+      <button class="btn btn-warning">
+        <i class="fas fa-id-card"></i> Link Aadhar
+      </button>
+      <button class="btn btn-warning">
+        <i class="fas fa-id-badge"></i> Link PAN
+      </button>
+      <button class="btn btn-warning">
+        <i class="fas fa-receipt"></i> Link Ration Card
+      </button>
+      <button class="btn btn-danger mt-3">
+        <i class="fas fa-trash"></i> Delete Account
+      </button>
     </div>
     
   </div>
-  
+
   <script>
     // Toggle mobile menu when hamburger icon is clicked
     document.getElementById("menu-toggle").addEventListener("click", function() {
       let mobileMenu = document.getElementById("mobile-menu");
-      if (mobileMenu.style.display === "block") {
-        mobileMenu.style.display = "none";
-      } else {
-        mobileMenu.style.display = "block";
-      }
+      mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
     });
-    
     function toggleMobileMenu(){
-      let mobileMenu = document.getElementById("mobile-menu");
-      mobileMenu.style.display = "none";
+      document.getElementById("mobile-menu").style.display = "none";
     }
-    
     function setDarkMode() {
       document.body.style.background = '#121212';
       document.body.style.color = '#ffffff';
     }
-    
     function setLightMode() {
       document.body.style.background = '#ffffff';
       document.body.style.color = '#000000';
     }
-    
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
-    
     function saveProfile() {
-      // Placeholder functionality to save settings.
+      // Placeholder: Implement saving settings to your backend
       alert("Profile settings saved!");
     }
-    
     function previewImage() {
       const fileInput = document.getElementById('photoInput');
       const userPhoto = document.getElementById('userPhoto');
