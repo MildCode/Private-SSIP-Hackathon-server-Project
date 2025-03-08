@@ -1,11 +1,342 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>welcome to Ministry of Education employees</h1>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Dashboard
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <div class="flex h-screen">
+   <!-- Sidebar -->
+   <div class="bg-purple-700 text-white w-64 p-4 flex flex-col">
+    <div class="flex items-center mb-8">
+     <img alt="Logo" class="w-10 h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/IfLpGQpiZPFE78qZns0zWWEgolNVpWMsSlDWfsM7Kes.jpg" width="40"/>
+     <span class="text-2xl font-bold">
+      Zeo
+     </span>
+    </div>
+    <nav class="flex-1">
+     <ul>
+      <li class="mb-4">
+       <a class="flex items-center p-2 bg-purple-800 rounded-lg" href="#">
+        <i class="fas fa-tachometer-alt mr-3">
+        </i>
+        Dashboard
+       </a>
+      </li>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-tasks mr-3">
+        </i>
+        Task
+       </a>
+      </li>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-file-alt mr-3">
+        </i>
+        Report
+       </a>
+      </li>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-calendar-alt mr-3">
+        </i>
+        Team Calendar
+       </a>
+      </li>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-envelope mr-3">
+        </i>
+        Messages
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <div>
+     <ul>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-cog mr-3">
+        </i>
+        Setting
+       </a>
+      </li>
+      <li class="mb-4">
+       <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
+        <i class="fas fa-sign-out-alt mr-3">
+        </i>
+        Logout
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="mt-8">
+     <div class="bg-purple-800 p-4 rounded-lg text-center">
+      <p class="text-sm">
+       Ready for next vacation?
+      </p>
+      <div class="flex justify-center mt-2">
+       <div class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+        8
+       </div>
+       <div class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+        8
+       </div>
+       <div class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
+        8
+       </div>
+       <div class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center">
+        8
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- Main Content -->
+   <div class="flex-1 p-6 overflow-auto">
+    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+     <div class="mb-4 md:mb-0">
+      <h1 class="text-2xl font-bold">
+       Hello Taruk!
+      </h1>
+      <p class="text-gray-600">
+       Welcome back, Have a Good day.
+      </p>
+     </div>
+     <div class="flex items-center">
+      <input class="p-2 rounded-lg border border-gray-300 mr-4" placeholder="Search" type="text"/>
+      <i class="fas fa-bell text-gray-600 mr-4">
+      </i>
+      <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/IvR3NBoqNG_Rk-TWHAajj8zaMcg2LAwJnvPUFaWrXBA.jpg" width="40"/>
+     </div>
+    </header>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+     <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
+      <p>
+       Total Employee
+      </p>
+      <h2 class="text-2xl font-bold">
+       400
+      </h2>
+     </div>
+     <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
+      <p>
+       New Joined Employees
+      </p>
+      <h2 class="text-2xl font-bold">
+       150
+      </h2>
+     </div>
+     <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
+      <p>
+       Resigned Employees
+      </p>
+      <h2 class="text-2xl font-bold">
+       30
+      </h2>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+     <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-lg font-bold mb-4">
+       Job Applied
+      </h2>
+      <img alt="Bar chart showing job applications over months" class="w-full" height="200" src="https://storage.googleapis.com/a1aa/image/nc-41o6_xngCn47Jlj48DreqDJxPYerXbsCyCJFm1dA.jpg" width="300"/>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-lg col-span-2">
+      <h2 class="text-lg font-bold mb-4">
+       Project Overview
+      </h2>
+      <div class="flex justify-between items-center mb-4">
+       <div>
+        <p>
+         Signed
+        </p>
+        <p class="text-2xl font-bold">
+         14
+        </p>
+       </div>
+       <div>
+        <p>
+         Manager Review
+        </p>
+        <p class="text-2xl font-bold">
+         20
+        </p>
+       </div>
+       <div>
+        <p>
+         Client Review
+        </p>
+        <p class="text-2xl font-bold">
+         18
+        </p>
+       </div>
+      </div>
+      <img alt="Bar chart showing project overview" class="w-full" height="200" src="https://storage.googleapis.com/a1aa/image/RM-oUdWSGs9OKqUZxskZxCtkLECgp5fzAApgedNmnpE.jpg" width="600"/>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+     <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-lg font-bold mb-4">
+       Performance Listed
+      </h2>
+      <div class="overflow-x-auto">
+       <table class="min-w-full">
+        <thead>
+         <tr>
+          <th class="px-4 py-2">
+           Employee Name
+          </th>
+          <th class="px-4 py-2">
+           Department
+          </th>
+          <th class="px-4 py-2">
+           Project
+          </th>
+          <th class="px-4 py-2">
+           Salary
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr>
+          <td class="border px-4 py-2">
+           Peter
+          </td>
+          <td class="border px-4 py-2">
+           Marketing Department
+          </td>
+          <td class="border px-4 py-2">
+           28
+          </td>
+          <td class="border px-4 py-2">
+           $1,500,000
+          </td>
+         </tr>
+         <tr>
+          <td class="border px-4 py-2">
+           Anderson
+          </td>
+          <td class="border px-4 py-2">
+           Finance Department
+          </td>
+          <td class="border px-4 py-2">
+           20
+          </td>
+          <td class="border px-4 py-2">
+           $1,200,000
+          </td>
+         </tr>
+         <tr>
+          <td class="border px-4 py-2">
+           Usiya
+          </td>
+          <td class="border px-4 py-2">
+           Sales Department
+          </td>
+          <td class="border px-4 py-2">
+           28
+          </td>
+          <td class="border px-4 py-2">
+           $1,700,000
+          </td>
+         </tr>
+         <tr>
+          <td class="border px-4 py-2">
+           John
+          </td>
+          <td class="border px-4 py-2">
+           Finance Department
+          </td>
+          <td class="border px-4 py-2">
+           28
+          </td>
+          <td class="border px-4 py-2">
+           $1,700,000
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-lg font-bold mb-4">
+       Employees
+      </h2>
+      <img alt="Pie chart showing employee distribution" class="w-full" height="200" src="https://storage.googleapis.com/a1aa/image/iPi2EDLhOoAywfCXqXxfOZPTzN_aA-IcGs9sPis3q18.jpg" width="300"/>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-lg font-bold mb-4">
+       Employees on Leave
+      </h2>
+      <div class="flex items-center mb-4">
+       <img alt="Employee 1" class="w-10 h-10 rounded-full mr-4" height="40" src="https://storage.googleapis.com/a1aa/image/Lovss7Ks_y0_BHn3DiZhItlhoCC0IVEn00ZxiyJHPZ8.jpg" width="40"/>
+       <div>
+        <p class="font-bold">
+         Ahmed
+        </p>
+        <p class="text-sm text-gray-600">
+         Only today
+        </p>
+       </div>
+      </div>
+      <div class="flex items-center mb-4">
+       <img alt="Employee 2" class="w-10 h-10 rounded-full mr-4" height="40" src="https://storage.googleapis.com/a1aa/image/M5w3VhVNWl3AojE_flecjW_V4D8j0AYSkQB2YGQXeUU.jpg" width="40"/>
+       <div>
+        <p class="font-bold">
+         Jasmin
+        </p>
+        <p class="text-sm text-gray-600">
+         2 days
+        </p>
+       </div>
+      </div>
+      <div class="flex items-center mb-4">
+       <img alt="Employee 3" class="w-10 h-10 rounded-full mr-4" height="40" src="https://storage.googleapis.com/a1aa/image/MVzE7CoN5Xv3OmECnnQZPEFSa9pxPPpmY3M-u7QNyyA.jpg" width="40"/>
+       <div>
+        <p class="font-bold">
+         John
+        </p>
+        <p class="text-sm text-gray-600">
+         5 days
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-lg mt-6">
+     <h2 class="text-lg font-bold mb-4">
+      Today Events
+     </h2>
+     <div class="flex items-center mb-4">
+      <img alt="Event 1" class="w-10 h-10 rounded-full mr-4" height="40" src="https://storage.googleapis.com/a1aa/image/aNWGNm7FPDAB4eUAvZGSUlbu4n4Qbu9KBhhh4MxZg54.jpg" width="40"/>
+      <div>
+       <p class="font-bold">
+        Anna's Birthday
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-lg mt-6">
+     <h2 class="text-lg font-bold mb-4">
+      Performance
+     </h2>
+     <img alt="Line chart showing performance over time" class="w-full" height="200" src="https://storage.googleapis.com/a1aa/image/RSLdgdPGhIMOGDOSUpbu2ei9wcrBNxclwc7PSq_5CTk.jpg" width="600"/>
+    </div>
+   </div>
+  </div>
+ </body>
 </html>
