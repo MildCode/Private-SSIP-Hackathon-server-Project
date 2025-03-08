@@ -1,11 +1,377 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Ministry of Home and Current Affairs Dashboard
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
-<body>
-   <H1>welcome to Ministry of Home and Affriars employees</h1>
+
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="bg-gray-900 text-white w-64 p-4 flex flex-col">
+            <div class="flex items-center mb-8">
+                <img alt="Ministry of Home and Current Affairs Logo" class="w-10 h-10 rounded-full mr-2" height="40"
+                    src="https://storage.googleapis.com/a1aa/image/25es9eS4RGQMA_mWhi0oz09sNYQi7V76KiGsqsarbvw.jpg"
+                    width="40" />
+                <span class="text-xl font-bold">
+                    Ministry of Home and Current Affairs
+                </span>
+            </div>
+            <nav class="flex-1">
+                <ul>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 bg-gray-800 rounded" href="#">
+                            <i class="fas fa-tachometer-alt mr-2">
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-calendar-alt mr-2">
+                            </i>
+                            Calendar
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-inbox mr-2">
+                            </i>
+                            Inbox
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-users mr-2">
+                            </i>
+                            Teams
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-chart-line mr-2">
+                            </i>
+                            Activity
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-file-alt mr-2">
+                            </i>
+                            Report
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-cog mr-2">
+                            </i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-auto">
+                <div class="flex items-center mb-4">
+                    <img alt="User Avatar" class="w-10 h-10 rounded-full mr-2" height="40"
+                        src="https://storage.googleapis.com/a1aa/image/Yxf7u9aZMrUhfrGQ-QGiidtLw3eFmPUT49cF3P4vjpA.jpg"
+                        width="40" />
+                    <div>
+                        <p class="font-bold">
+                            Austin Martin
+                        </p>
+                        <p class="text-sm text-gray-400">
+                            Austin@ministry.com
+                        </p>
+                    </div>
+                </div>
+                <ul>
+                    <li class="mb-4">
+                        <a class="flex items-center p-2 hover:bg-gray-800 rounded" href="#">
+                            <i class="fas fa-question-circle mr-2">
+                            </i>
+                            Help &amp; Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">
+                    Dashboard
+                </h1>
+                <div class="flex items-center space-x-4">
+                    <button class="bg-gray-200 p-2 rounded">
+                        <i class="fas fa-bell">
+                        </i>
+                    </button>
+                    <button class="bg-gray-200 p-2 rounded">
+                        <i class="fas fa-cog">
+                        </i>
+                    </button>
+                    <button class="bg-gray-200 p-2 rounded">
+                        <i class="fas fa-moon">
+                        </i>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">
+                            Total Employees
+                        </h2>
+                        <i class="fas fa-users text-blue-500">
+                        </i>
+                    </div>
+                    <p class="text-2xl font-bold">
+                        4,289
+                    </p>
+                    <p class="text-green-500">
+                        2.1% From last quarter
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">
+                            Total Applicants
+                        </h2>
+                        <i class="fas fa-file-alt text-green-500">
+                        </i>
+                    </div>
+                    <p class="text-2xl font-bold">
+                        4,874
+                    </p>
+                    <p class="text-green-500">
+                        12.3% From last quarter
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">
+                            New Hires
+                        </h2>
+                        <i class="fas fa-user-plus text-purple-500">
+                        </i>
+                    </div>
+                    <p class="text-2xl font-bold">
+                        1,289
+                    </p>
+                    <p class="text-green-500">
+                        2.6% From last quarter
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold">
+                            Satisfaction Rate
+                        </h2>
+                        <i class="fas fa-smile text-yellow-500">
+                        </i>
+                    </div>
+                    <p class="text-2xl font-bold">
+                        89.9%
+                    </p>
+                    <p class="text-green-500">
+                        2.1% From last quarter
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold">
+                            Employee Performance
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 p-2 rounded">
+                                2023
+                            </button>
+                            <button class="bg-gray-200 p-2 rounded">
+                                2024
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="text-xl font-bold">
+                            6,393
+                        </p>
+                        <p class="text-xl font-bold">
+                            4,863
+                        </p>
+                        <p class="text-xl font-bold">
+                            2,848
+                        </p>
+                    </div>
+                    <img alt="Bar chart showing employee performance over months" height="200"
+                        src="https://storage.googleapis.com/a1aa/image/do26abIwGazKmFgrInwKJH35Z-8wZJ7FVj3dwtzeARo.jpg"
+                        width="400" />
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold">
+                            Geography
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 p-2 rounded">
+                                Sort by
+                            </button>
+                            <button class="bg-gray-200 p-2 rounded">
+                                Monthly
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="text-xl font-bold">
+                            Gujarat
+                        </p>
+                        <p class="text-xl font-bold">
+                            3,492
+                        </p>
+                    </div>
+                    <img alt="Map showing employee distribution in Gujarat" height="200"
+                        src="https://storage.googleapis.com/a1aa/image/qCUGrXgmyD9difC5C35pBG5P6sa0Jjihg8wmzybBz_8.jpg"
+                        width="400" />
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold">
+                        Employees
+                    </h2>
+                    <button class="bg-gray-200 p-2 rounded">
+                        All Employees
+                    </button>
+                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr>
+                            <th class="py-2">
+                                Employee ID
+                            </th>
+                            <th class="py-2">
+                                Employee Name
+                            </th>
+                            <th class="py-2">
+                                Role
+                            </th>
+                            <th class="py-2">
+                                Contract
+                            </th>
+                            <th class="py-2">
+                                Team
+                            </th>
+                            <th class="py-2">
+                                Workspace
+                            </th>
+                            <th class="py-2">
+                                Status
+                            </th>
+                            <th class="py-2">
+                                Attendance Rate
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2">
+                                #EMP001
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="John Smith" class="w-8 h-8 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/NjU4cdl6kFkhXP8NCtCcgwVFB7jsUwoX19R9bjkmZpo.jpg"
+                                    width="40" />
+                                John Smith
+                            </td>
+                            <td class="py-2">
+                                Graphic Designer
+                            </td>
+                            <td class="py-2">
+                                Full-time
+                            </td>
+                            <td class="py-2">
+                                Front End Dev
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2 text-green-500">
+                                Active
+                            </td>
+                            <td class="py-2">
+                                89%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">
+                                #EMP002
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Jane Doe" class="w-8 h-8 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/QHXIBJ5fGDVHoUtbJ9Z6hpgln0ULm4FdA73n3JBHTho.jpg"
+                                    width="40" />
+                                Jane Doe
+                            </td>
+                            <td class="py-2">
+                                Developer
+                            </td>
+                            <td class="py-2">
+                                Full-time
+                            </td>
+                            <td class="py-2">
+                                Front End Dev
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2 text-green-500">
+                                Active
+                            </td>
+                            <td class="py-2">
+                                92%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">
+                                #EMP003
+                            </td>
+                            <td class="py-2 flex items-center">
+                                <img alt="Michael Brown" class="w-8 h-8 rounded-full mr-2" height="40"
+                                    src="https://storage.googleapis.com/a1aa/image/XkcwUOfMjH300xQSNxU2C6vIxrYobo9dW4bfN9i06e4.jpg"
+                                    width="40" />
+                                Michael Brown
+                            </td>
+                            <td class="py-2">
+                                Designer
+                            </td>
+                            <td class="py-2">
+                                Part-time
+                            </td>
+                            <td class="py-2">
+                                UI/UX
+                            </td>
+                            <td class="py-2">
+                                Remote
+                            </td>
+                            <td class="py-2 text-green-500">
+                                Active
+                            </td>
+                            <td class="py-2">
+                                85%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
