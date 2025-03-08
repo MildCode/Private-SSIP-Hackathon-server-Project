@@ -1,11 +1,482 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Ministry of Rural Development Employees Dashboard
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
-   <h1> welcome to Ministry of rural development employees</h1>
+
+<body class="bg-purple-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-white h-screen p-4">
+            <div class="flex items-center mb-8">
+                <img alt="Ministry Logo" class="w-10 h-10 rounded-full" height="40"
+                    src="https://storage.googleapis.com/a1aa/image/6H2UyrGC1eSZxTKlTCm_CnqaQHgAeW22qEMgrRfGxqQ.jpg"
+                    width="40" />
+                <span class="ml-2 text-lg font-semibold">
+                    Ministry of Rural Development
+                </span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="mb-4">
+                        <a class="flex items-center text-purple-600" href="#">
+                            <i class="fas fa-tachometer-alt mr-2">
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-purple-600" href="#">
+                            <i class="fas fa-users mr-2">
+                            </i>
+                            Employee Management
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-purple-600" href="#">
+                            <i class="fas fa-wallet mr-2">
+                            </i>
+                            Wallets
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a class="flex items-center text-purple-600" href="#">
+                            <i class="fas fa-cog mr-2">
+                            </i>
+                            Account
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="w-4/5 p-6">
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-lg font-semibold">
+                    Ministry of Rural Development
+                </div>
+                <div class="flex items-center">
+                    <input class="border rounded-lg p-2 mr-4" placeholder="Search here" type="text" />
+                    <div class="flex items-center">
+                        <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <span class="ml-2">
+                            Mrinmoy Krishna
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <i class="fas fa-users text-green-500 text-2xl mr-2">
+                        </i>
+                        <div>
+                            <div class="text-lg font-semibold">
+                                Total Employees
+                            </div>
+                            <div class="text-2xl font-bold">
+                                6,680
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <i class="fas fa-male text-blue-500 text-2xl mr-2">
+                        </i>
+                        <div>
+                            <div class="text-lg font-semibold">
+                                Total Male Employees
+                            </div>
+                            <div class="text-2xl font-bold">
+                                3,640
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <i class="fas fa-female text-orange-500 text-2xl mr-2">
+                        </i>
+                        <div>
+                            <div class="text-lg font-semibold">
+                                Total Female Employees
+                            </div>
+                            <div class="text-2xl font-bold">
+                                3,040
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <i class="fas fa-user-plus text-purple-500 text-2xl mr-2">
+                        </i>
+                        <div>
+                            <div class="text-lg font-semibold">
+                                Total New Employees
+                            </div>
+                            <div class="text-2xl font-bold">
+                                244
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-4">
+                            <div class="text-lg font-semibold">
+                                Mrinmoy Krishna
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                UI/UX Designer
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Team Leader
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-lg font-bold">
+                                12 / 31
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Attendance
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">
+                                5 / 55
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Leaves
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold">
+                                0
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Awards
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-pie text-yellow-500 text-2xl mr-2">
+                        </i>
+                        <div>
+                            <div class="text-lg font-semibold">
+                                70% of the employees are working from home today.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-1/2">
+                            <div class="text-sm text-gray-500">
+                                User research
+                            </div>
+                            <div class="text-lg font-bold">
+                                20
+                            </div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="text-sm text-gray-500">
+                                Marketing
+                            </div>
+                            <div class="text-lg font-bold">
+                                12
+                            </div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="text-sm text-gray-500">
+                                Product design
+                            </div>
+                            <div class="text-lg font-bold">
+                                8
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="text-lg font-semibold mb-4">
+                        MY Activity
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <img alt="User Avatar" class="w-8 h-8 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-2">
+                            <div class="text-sm font-semibold">
+                                Dianne Russell
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                1 min ago
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Completed task Campalibos dolor at ace
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <img alt="User Avatar" class="w-8 h-8 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-2">
+                            <div class="text-sm font-semibold">
+                                Dianne Russell
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                1 min ago
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Invited Ashok To Revamp Design System
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <img alt="User Avatar" class="w-8 h-8 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-2">
+                            <div class="text-sm font-semibold">
+                                Dianne Russell
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                1 min ago
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Completed task Campalibos dolor at ace
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <div class="text-lg font-semibold mb-4">
+                        Members
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-4">
+                            <div class="text-lg font-semibold">
+                                Mrinmoy Krishna
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                UI/UX Designer
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Senior
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-4">
+                            <div class="text-lg font-semibold">
+                                Eleanor Pena
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Web Designer
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Junior
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
+                            src="https://storage.googleapis.com/a1aa/image/of7m3sU0DkWCppMQLu6Jl-OkU6ErEV9slbzov2okz3s.jpg"
+                            width="40" />
+                        <div class="ml-4">
+                            <div class="text-lg font-semibold">
+                                Eleanor Pena
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Marketing Coordinator
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Intern
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg font-semibold">
+                            Project Summary
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            View All
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 text-center">
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                CLIENT NAME
+                            </div>
+                            <div class="text-lg font-bold">
+                                Ralph Edwards
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                TEAM
+                            </div>
+                            <div class="text-lg font-bold">
+                                2+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                PROJECT
+                            </div>
+                            <div class="text-lg font-bold">
+                                Wordpress Design
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                STATUS
+                            </div>
+                            <div class="text-lg font-bold text-green-500">
+                                Submit
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 text-center mt-4">
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                CLIENT NAME
+                            </div>
+                            <div class="text-lg font-bold">
+                                Dianne Russell
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                TEAM
+                            </div>
+                            <div class="text-lg font-bold">
+                                4+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                PROJECT
+                            </div>
+                            <div class="text-lg font-bold">
+                                User Interface Design
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                STATUS
+                            </div>
+                            <div class="text-lg font-bold text-red-500">
+                                Delivered
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 text-center mt-4">
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                CLIENT NAME
+                            </div>
+                            <div class="text-lg font-bold">
+                                Ralph Edwards
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                TEAM
+                            </div>
+                            <div class="text-lg font-bold">
+                                3+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                PROJECT
+                            </div>
+                            <div class="text-lg font-bold">
+                                Angular Admin
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                STATUS
+                            </div>
+                            <div class="text-lg font-bold text-green-500">
+                                Submit
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 text-center mt-4">
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                CLIENT NAME
+                            </div>
+                            <div class="text-lg font-bold">
+                                Dianne Russell
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                TEAM
+                            </div>
+                            <div class="text-lg font-bold">
+                                5+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                PROJECT
+                            </div>
+                            <div class="text-lg font-bold">
+                                Dhaka Break
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">
+                                STATUS
+                            </div>
+                            <div class="text-lg font-bold text-red-500">
+                                Delivered
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
