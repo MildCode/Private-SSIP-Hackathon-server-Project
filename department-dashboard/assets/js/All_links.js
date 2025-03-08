@@ -55,7 +55,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         } else if (department === 'Ministry_of_finance') {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_B')
                 .then(response => response.json())
@@ -67,7 +67,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         } else if (department === 'Ministry_of_education') {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_C')
                 .then(response => response.json())
@@ -79,7 +79,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         }else if(department ==='Ministry_of_labour'){
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_D')
                 .then(response => response.json())
@@ -91,7 +91,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
     }else if (department ==='Ministry_of_it_&_electronics'){
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_E')
                 .then(response => response.json())
@@ -103,7 +103,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         }else  if (department === 'Ministry_of_transport') {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_F')
                 .then(response => response.json())
@@ -127,7 +127,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         } else if (department === 'Ministry_of_defence') {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_H')
                 .then(response => response.json())
@@ -139,7 +139,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error =>( error));
         }else if(department ==='Ministry_of_health'){
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_I')
                 .then(response => response.json())
@@ -151,7 +151,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
     }else if (department ==='Ministry_of_agriculture'){
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_J')
                 .then(response => response.json())
@@ -163,6 +163,6 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         // alert('Employee not found or credentials do not match');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => alert(error));
         }
 }});
