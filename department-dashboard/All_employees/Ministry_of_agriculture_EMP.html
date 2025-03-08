@@ -97,7 +97,7 @@
                 </div>
             </div>
             <!-- Breadcrumb -->
-            <div class="mb-8">
+            <!-- <div class="mb-8">
                 <nav class="text-gray-500">
                     <a class="hover:text-green-600" href="#">
                         Home
@@ -107,7 +107,7 @@
                         Dashboard
                     </a>
                 </nav>
-            </div>
+            </div> -->
             <!-- Notification -->
             <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-8 shadow-md">
                 Welcome to the Gujarat Agriculture Department Employee Dashboard!
@@ -349,6 +349,38 @@
                     </button>
                 </form>
             </div>
+          <!-- Task Progress Section -->
+<!-- Task Management Section -->
+<div class="bg-white p-6 rounded-lg shadow-lg mt-8">
+    <h2 class="text-gray-700 font-bold mb-6">Task Management</h2>
+    <div class="grid grid-cols-1 gap-6 mb-6">
+        <!-- Example Task Item -->
+        <div class="border p-4 rounded-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-700">Task Name</h3>
+                <button class="bg-red-500 text-white px-4 py-2 rounded-lg">Remove Task</button>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2" for="assignedEmployee">Assigned Employee</label>
+                <input class="w-full p-3 border rounded-lg" id="assignedEmployee" name="assignedEmployee" type="text" value="Employee Name" readonly />
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2" for="taskProgress">Task Progress</label>
+                <input class="w-full p-3 border rounded-lg" id="taskProgress" name="taskProgress" type="number" min="0" max="100" value="50" />
+                <div class="bg-gray-200 h-2 rounded-full mt-2">
+                    <div id="progressBar" class="bg-blue-500 h-2 rounded-full" style="width: 50%;"></div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2" for="taskNotes">Notes</label>
+                <textarea class="w-full p-3 border rounded-lg" id="taskNotes" name="taskNotes" rows="3">Task notes here...</textarea>
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg" id="updateTaskBtn">Update Task</button>
+        </div>
+        <!-- Repeat Task Item for each task -->
+    </div>
+</div>
+</div>
         </div>
     </div>
     <script>
