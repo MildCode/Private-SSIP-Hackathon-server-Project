@@ -6,8 +6,7 @@
     <title>
         Gujarat Agriculture Department Employee Dashboard
     </title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -21,52 +20,48 @@
 <body class="bg-gray-100">
     <div class="flex">
         <!-- Sidebar -->
-        <div class="w-64 bg-white h-screen shadow-lg">
+        <div id="sidebar" class="w-64 bg-white h-screen shadow-lg fixed lg:relative lg:block hidden">
             <div class="p-6">
+                <button id="sidebarClose" class="text-gray-500 hover:text-gray-700 lg:hidden absolute top-4 right-4">
+                    <i class="fas fa-times"></i>
+                </button>
                 <img alt="Gujarat Agriculture Department Logo" class="mb-6" height="40"
-                    src="/department-dashboard/assets/images/logo.png"
-                    width="100" />
+                    src="/department-dashboard/assets/images/logo.png" width="100" />
                 <nav>
                     <ul>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-tachometer-alt mr-3">
-                                </i>
+                                <i class="fas fa-tachometer-alt mr-3"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-seedling mr-3">
-                                </i>
+                                <i class="fas fa-seedling mr-3"></i>
                                 Crop Management
                             </a>
                         </li>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-tractor mr-3">
-                                </i>
+                                <i class="fas fa-tractor mr-3"></i>
                                 Equipment Management
                             </a>
                         </li>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-water mr-3">
-                                </i>
+                                <i class="fas fa-water mr-3"></i>
                                 Irrigation Management
                             </a>
                         </li>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-chart-line mr-3">
-                                </i>
+                                <i class="fas fa-chart-line mr-3"></i>
                                 Reports
                             </a>
                         </li>
                         <li class="mb-4">
                             <a class="flex items-center text-gray-700 hover:text-green-600 font-medium" href="#">
-                                <i class="fas fa-user mr-3">
-                                </i>
+                                <i class="fas fa-user mr-3"></i>
                                 Profile
                             </a>
                         </li>
@@ -75,30 +70,26 @@
             </div>
         </div>
         <!-- Main Content -->
-        <div class="flex-1 p-8">
+        <div class="flex-1 p-8 lg:ml-64">
             <!-- Header -->
             <div class="flex justify-between items-center mb-8">
                 <div class="flex items-center">
-                    <button class="text-gray-500 hover:text-gray-700 mr-6">
-                        <i class="fas fa-bars">
-                        </i>
+                    <button id="sidebarToggle" class="text-gray-500 hover:text-gray-700 lg:hidden">
+                        <i class="fas fa-bars"></i>
                     </button>
-                    <h1 class="text-3xl font-bold text-gray-800">
+                    <h1 class="text-3xl font-bold text-gray-800 ml-4 lg:ml-0">
                         Employee Dashboard
                     </h1>
                 </div>
                 <div class="flex items-center">
                     <button class="text-gray-500 hover:text-gray-700 mr-6">
-                        <i class="fas fa-search">
-                        </i>
+                        <i class="fas fa-search"></i>
                     </button>
                     <button class="text-gray-500 hover:text-gray-700 mr-6">
-                        <i class="fas fa-cog">
-                        </i>
+                        <i class="fas fa-cog"></i>
                     </button>
                     <button class="text-gray-500 hover:text-gray-700 mr-6">
-                        <i class="fas fa-bell">
-                        </i>
+                        <i class="fas fa-bell"></i>
                     </button>
                     <img alt="User Avatar" class="rounded-full" height="40"
                         src="https://storage.googleapis.com/a1aa/image/pQLLXmywQ8k7ZTAtuJ3IMgwcu4rvS6JV8U0IV2-AmnI.jpg"
@@ -195,15 +186,13 @@
                             Actions
                         </button>
                     </div>
-                    <canvas id="cropYieldChart" height="300" width="600">
-                    </canvas>
+                    <canvas id="cropYieldChart" height="300" width="600"></canvas>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h2 class="text-gray-700 font-bold mb-6">
                         Irrigation Efficiency
                     </h2>
-                    <canvas id="irrigationEfficiencyChart" height="300" width="300">
-                    </canvas>
+                    <canvas id="irrigationEfficiencyChart" height="300" width="300"></canvas>
                 </div>
             </div>
             <!-- Financial Stats -->
@@ -242,10 +231,15 @@
                     </p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-gray-500 font-medium">
-                        Totals
-                    </h2>
-                    <p class="text-3xl font-bold text-gray-700">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-gray-500 font-medium">
+                            Totals
+                        </h2>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg">
+                            View Details
+                        </button>
+                    </div>
+                    <p class="text-blue-600 text-3xl font-bold">
                         ₹31,564
                     </p>
                     <p class="text-yellow-600">
@@ -263,8 +257,7 @@
                         71%
                     </p>
                     <div class="bg-red-100 h-2 rounded-full mt-4">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: 71%;">
-                        </div>
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 71%;"></div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -275,8 +268,7 @@
                         54%
                     </p>
                     <div class="bg-green-100 h-2 rounded-full mt-4">
-                        <div class="bg-green-600 h-2 rounded-full" style="width: 54%;">
-                        </div>
+                        <div class="bg-green-600 h-2 rounded-full" style="width: 54%;"></div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -287,8 +279,7 @@
                         32%
                     </p>
                     <div class="bg-yellow-100 h-2 rounded-full mt-4">
-                        <div class="bg-yellow-600 h-2 rounded-full" style="width: 32%;">
-                        </div>
+                        <div class="bg-yellow-600 h-2 rounded-full" style="width: 32%;"></div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -304,8 +295,7 @@
                         89%
                     </p>
                     <div class="bg-blue-100 h-2 rounded-full mt-4">
-                        <div class="bg-blue-600 h-2 rounded-full" style="width: 89%;">
-                        </div>
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 89%;"></div>
                     </div>
                 </div>
             </div>
@@ -423,6 +413,17 @@
 
                 // Reset the form
                 addDataForm.reset();
+            });
+
+            // Sidebar toggle for mobile view
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarClose = document.getElementById('sidebarClose');
+            const sidebar = document.getElementById('sidebar');
+            sidebarToggle.addEventListener('click', function () {
+                sidebar.classList.toggle('hidden');
+            });
+            sidebarClose.addEventListener('click', function () {
+                sidebar.classList.add('hidden');
             });
         });
     </script>
