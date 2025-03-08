@@ -1,11 +1,232 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Transport Ministry Dashboard
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
-<body>
-   <h1> welcome to Ministry of Transport employees</h1>
+
+<body class="bg-gray-100 font-sans">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white h-screen shadow-md">
+            <div class="p-4">
+                <div class="flex items-center space-x-2">
+                    <img alt="Transport Ministry Logo" class="w-8 h-8" height="30"
+                        src="https://storage.googleapis.com/a1aa/image/iqIaZAPJAyLMIJIxnQeJFzVfzgdh1avPpEOjajvHFb0.jpg"
+                        width="30" />
+                    <span class="text-xl font-bold text-blue-600">
+                        Transport Ministry
+                    </span>
+                </div>
+            </div>
+            <nav class="mt-10">
+                <ul>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-tachometer-alt w-6">
+                        </i>
+                        <span class="ml-2">
+                            Dashboard
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-bell w-6">
+                        </i>
+                        <span class="ml-2">
+                            Late Notice
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-calendar-alt w-6">
+                        </i>
+                        <span class="ml-2">
+                            Attendance Data
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-user-friends w-6">
+                        </i>
+                        <span class="ml-2">
+                            Visitor
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-users w-6">
+                        </i>
+                        <span class="ml-2">
+                            Employee
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-envelope w-6">
+                        </i>
+                        <span class="ml-2">
+                            Internal
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-door-open w-6">
+                        </i>
+                        <span class="ml-2">
+                            Gate
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-id-card w-6">
+                        </i>
+                        <span class="ml-2">
+                            Card
+                        </span>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-sign-out-alt w-6">
+                        </i>
+                        <span class="ml-2">
+                            Logout
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center space-x-4">
+                    <img alt="Transport Ministry Logo" class="w-8 h-8" height="30"
+                        src="https://storage.googleapis.com/a1aa/image/iqIaZAPJAyLMIJIxnQeJFzVfzgdh1avPpEOjajvHFb0.jpg"
+                        width="30" />
+                    <span class="text-xl font-bold">
+                        Transport Ministry
+                    </span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <input class="px-4 py-2 border rounded-lg" placeholder="Search something" type="text" />
+                    <img alt="User Avatar" class="w-8 h-8 rounded-full" height="30"
+                        src="https://storage.googleapis.com/a1aa/image/NEjX_NWRYbzhm5z6wnoDNQJck4wUw_mp79jK77GHc5w.jpg"
+                        width="30" />
+                    <span class="font-semibold">
+                        Admin
+                    </span>
+                </div>
+            </div>
+            <!-- Navigation Tabs -->
+            <div class="flex space-x-4 mb-6">
+                <a class="text-blue-600 border-b-2 border-blue-600 pb-2" href="#">
+                    Development
+                </a>
+                <a class="text-gray-600 pb-2" href="#">
+                    Production
+                </a>
+                <a class="text-gray-600 pb-2" href="#">
+                    Quality Control
+                </a>
+            </div>
+            <!-- Overview Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">
+                        Overview
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold">
+                                    Vehicle Inspections
+                                </h3>
+                                <p class="text-2xl font-bold">
+                                    120
+                                </p>
+                            </div>
+                            <i class="fas fa-car text-3xl text-gray-400">
+                            </i>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold">
+                                    Internal Meetings
+                                </h3>
+                                <p class="text-2xl font-bold">
+                                    15
+                                </p>
+                            </div>
+                            <i class="fas fa-users text-3xl text-gray-400">
+                            </i>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg col-span-2">
+                            <h3 class="text-lg font-semibold">
+                                Employee of The Month
+                            </h3>
+                            <div class="flex items-center mt-4">
+                                <img alt="Employee of the Month" class="w-12 h-12 rounded-full" height="50"
+                                    src="https://storage.googleapis.com/a1aa/image/bNNQX2N1g0FZHHRoVhcyk50JtQvA0BeIUAHMtspFmBs.jpg"
+                                    width="50" />
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold">
+                                        Hirazuki Kana
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        Performance: +31% | Attendance: +44% | Project: +5%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">
+                        Schedule
+                    </h2>
+                    <div class="text-gray-600 mb-4">
+                        <p>
+                            20 July 2022
+                        </p>
+                        <div class="mt-4">
+                            <p class="font-semibold">
+                                9:00
+                            </p>
+                            <p>
+                                Meeting with Vendor
+                            </p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-semibold">
+                                11:00
+                            </p>
+                            <p>
+                                System Testing
+                            </p>
+                        </div>
+                    </div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                        View all schedule
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">
+                        Employee Roles
+                    </h2>
+                    <img alt="Employee Roles Chart" class="w-full" height="200"
+                        src="https://storage.googleapis.com/a1aa/image/0B7bKXLgAPSIxImqeKkT1SHSxmOi0Oi4iQnP52Kd0FQ.jpg"
+                        width="200" />
+                </div>
+            </div>
+            <!-- Work Report Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+                <h2 class="text-xl font-bold mb-4">
+                    Work Report
+                </h2>
+                <img alt="Work Report Graph" class="w-full" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/zMAhhf1bT1Un_tmP90ODpCBYPGtjtA8fz6LCdKGiSbE.jpg"
+                    width="600" />
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
