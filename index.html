@@ -4,6 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="/department-dashboard/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="/department-dashboard/assets/images/favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="/department-dashboard/assets/images/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/department-dashboard/assets/images/favicons/site.webmanifest">
+
     <title>Samagra Gujarat</title>
     <style>
         * {
@@ -25,9 +34,12 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            visibility: hidden; /* Initially hidden */
-            pointer-events: none; /* Disable interaction initially */
-            background-image: url('department-dashboard/assets/images/pokemon-umbreon-moewalls-com\ \(1\).gif'); /* Use the GIF as background */
+            visibility: hidden;
+            /* Initially hidden */
+            pointer-events: none;
+            /* Disable interaction initially */
+            background-image: url('department-dashboard/assets/images/pokemon-umbreon-moewalls-com\ \(1\).gif');
+            /* Use the GIF as background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -274,23 +286,23 @@
                         <option value="hod">HOD</option>
                         <option value="admin">Admin</option>
                     </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Select Department</label>
-                        <select id="department" name="department">
-                            <option value="Ministry_of_Home_and_Affriars">Ministry of Home and Affriars</option>
-                            <option value="Ministry_of_finance">Ministry of finance</option>
-                            <option value="Ministry_of_education">ministry of education</option>
-                            <option value="Ministry_of_labour">ministry of labour</option>
-                            <option value="Ministry_of_it_&_electronics">ministry of it & electronics</option> 
-                            <option value="Ministry_of_transport">ministry of transport</option>
-                            <option value="Ministry_of_rural_development">ministry of rural development</option>
-                            <option value="Ministry_of_defence">ministry OF defence </option>
-                            <option value="Ministry_of_health">ministry of health</option>
-                            <option value="Ministry_of_agriculture">ministry of agriculture</option>
-                            <option value="admin">admin</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="department">Select Department</label>
+                    <select id="department" name="department">
+                        <option value="Ministry_of_Home_and_Affriars">Ministry of Home and Affriars</option>
+                        <option value="Ministry_of_finance">Ministry of finance</option>
+                        <option value="Ministry_of_education">ministry of education</option>
+                        <option value="Ministry_of_labour">ministry of labour</option>
+                        <option value="Ministry_of_it_&_electronics">ministry of it & electronics</option>
+                        <option value="Ministry_of_transport">ministry of transport</option>
+                        <option value="Ministry_of_rural_development">ministry of rural development</option>
+                        <option value="Ministry_of_defence">ministry OF defence </option>
+                        <option value="Ministry_of_health">ministry of health</option>
+                        <option value="Ministry_of_agriculture">ministry of agriculture</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </div>
                 <!-- </div> -->
 
                 <button type="button" id="btn-submit">Login</button>
@@ -304,19 +316,19 @@
             setTimeout(function () {
                 // Hide loader after 2 seconds
                 document.querySelector(".loader").style.display = "none";
-    
+
                 // Show main container and enable it
                 document.getElementById("main-container").style.visibility = "visible";
                 document.getElementById("main-container").style.pointerEvents = "auto";
             }, 5000);  // 5 seconds timeout
         });
-    
+
         document.getElementById('btn-submit').addEventListener('click', function (e) {
             e.preventDefault();
             const button = this;
             button.disabled = true;
             alert('You have clicked the button once. Please wait 5 seconds.');
-    
+
             setTimeout(function () {
                 button.disabled = false;
             }, 5000);
@@ -353,7 +365,7 @@
             }, 2000);
         });
     </script>
-    
+
 </body>
 
 </html>
