@@ -72,12 +72,17 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_C')
                 .then(response => response.json())
                 .then(data => {
-                    const employee = data.employees.find(emp => emp.name === username && emp.password === password);
-                    if (employee) {
-                        document.location.assign('/department-dashboard/All_employees/Ministry_of_Education_EMP.html');
-
-                        // alert('Employee not found or credentials do not match');
-                    }
+                    // console.log(data);
+                    // if (data) {
+                    //     const employee = data.employees.find(emp => emp.name === username && emp.password === password);
+                    //     if (employee) {
+                    //         document.location.assign('/department-dashboard/All_employees/Ministry_of_Education_EMP.html');
+                    //     } else {
+                    //         alert('Employee not found or credentials do not match');
+                    //     }
+                    // } else {
+                    //     alert('No employees found for this department');
+                    // }
                 })
                 .catch(error => alert(error));
         }else if(department ==='Ministry_of_labour'){
