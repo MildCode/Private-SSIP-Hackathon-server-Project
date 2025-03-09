@@ -1,498 +1,783 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        Dashboard
-    </title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
+    <title data-translate="ministry">Ministry of Finance, Government of Gujarat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'finance-blue': '#000080',
+                        'finance-green': '#138808',
+                        'finance-orange': '#FF9933'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans antialiased">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="bg-white w-64 p-4 border-r border-gray-200">
-            <div class="flex items-center mb-6">
-                <img alt="Logo" class="w-10 h-10 mr-2" height="40"
-                    src="https://storage.googleapis.com/a1aa/image/OPHo7LdVORTZgG0m47G4rdn-UcW6yXJ_L6AWLG-E2PQ.jpg"
-                    width="40" />
-                <span class="text-xl font-bold">
-                    Shpere
-                </span>
-            </div>
-            <div class="mb-6">
-                <div class="flex items-center mb-4">
-                    <img alt="User Avatar" class="w-10 h-10 rounded-full mr-2" height="40"
-                        src="https://storage.googleapis.com/a1aa/image/jEvikWihYBbGwBTwftRVoFE5r9WJ8uUEojpPPXkb-qo.jpg"
-                        width="40" />
-                    <span class="text-lg font-semibold">
-                        Nerro.io
-                    </span>
-                </div>
-                <nav>
-                    <ul>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-blue-600 bg-blue-100 rounded-lg" href="#">
-                                <i class="fas fa-tachometer-alt mr-2">
-                                </i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                                <i class="fas fa-user mr-2">
-                                </i>
-                                Employee
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                                <i class="fas fa-file-invoice-dollar mr-2">
-                                </i>
-                                Payroll
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                                <i class="fas fa-chart-line mr-2">
-                                </i>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                                <i class="fas fa-tasks mr-2">
-                                </i>
-                                Tasks
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                                <i class="fas fa-calendar-alt mr-2">
-                                </i>
-                                Calendar
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="mt-auto">
-                <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg mb-2" href="#">
-                    <i class="fas fa-cog mr-2">
-                    </i>
-                    Settings
-                </a>
-                <a class="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-lg" href="#">
-                    <i class="fas fa-question-circle mr-2">
-                    </i>
-                    Help
-                </a>
-            </div>
-        </div>
-        <!-- Main Content -->
-        <div class="flex-1 p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">
-                    Dashboard
-                </h1>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+    <!-- Government Header -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <button class="p-2 rounded-full hover:bg-gray-200">
-                        <i class="fas fa-bell">
-                        </i>
+                    <img src="/assets/images/emblem.png" alt="Gujarat Emblem" class="h-12 mr-3" />
+                    <div>
+                        <h1 class="text-sm font-bold text-finance-blue dark:text-white" data-translate="govt">ગુજરાત
+                            સરકાર / Government of Gujarat</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">વિત્ત મંત્રાલય /
+                            Ministry of Finance</h2>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
                     </button>
-                    <button class="p-2 rounded-full hover:bg-gray-200 ml-4">
-                        <i class="fas fa-cog">
-                        </i>
-                    </button>
-                    <div class="relative ml-4">
-                        <input
-                            class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Search" type="text" />
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400">
-                        </i>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600">
-                            Total Employee
-                        </span>
-                        <i class="fas fa-users text-blue-500">
-                        </i>
-                    </div>
-                    <div class="text-2xl font-bold">
-                        569
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        From last month
-                        <span class="text-green-500">
-                            +12.3%
-                        </span>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600">
-                            Gross Salary
-                        </span>
-                        <i class="fas fa-dollar-sign text-blue-500">
-                        </i>
-                    </div>
-                    <div class="text-2xl font-bold">
-                        $99,908.00
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        From last month
-                        <span class="text-red-500">
-                            -3.2%
-                        </span>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600">
-                            Net Pay
-                        </span>
-                        <i class="fas fa-wallet text-blue-500">
-                        </i>
-                    </div>
-                    <div class="text-2xl font-bold">
-                        5467
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        From last month
-                        <span class="text-red-500">
-                            -1.5%
-                        </span>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600">
-                            Job Applied
-                        </span>
-                        <i class="fas fa-briefcase text-blue-500">
-                        </i>
-                    </div>
-                    <div class="text-2xl font-bold">
-                        2754
-                    </div>
-                    <div class="text-sm text-gray-500">
-                        From last month
-                        <span class="text-green-500">
-                            +8.4%
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                <div class="bg-white p-4 rounded-lg shadow col-span-2">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold">
-                            Job Applied
-                        </h2>
-                        <div class="flex items-center">
-                            <span class="text-gray-500 mr-2">
-                                Last Year
-                            </span>
-                            <i class="fas fa-calendar-alt text-gray-500">
-                            </i>
-                        </div>
-                    </div>
-                    <div class="w-full h-48">
-                        <canvas id="jobAppliedChart">
-                        </canvas>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold">
-                            Project Overview
-                        </h2>
-                        <a class="text-blue-500" href="#">
-                            See Detail
-                        </a>
-                    </div>
-                    <div class="text-2xl font-bold mb-2">
-                        56
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-1/3 text-center">
-                            <div class="text-lg font-bold">
-                                15
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Signed
-                            </div>
-                        </div>
-                        <div class="w-1/3 text-center">
-                            <div class="text-lg font-bold">
-                                19
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                PM Review
-                            </div>
-                        </div>
-                        <div class="w-1/3 text-center">
-                            <div class="text-lg font-bold">
-                                22
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Client Review
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold">
-                            Project List
-                        </h2>
-                        <a class="text-blue-500" href="#">
-                            See All
-                        </a>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead>
-                                <tr>
-                                    <th class="py-2">
-                                        Project Name
-                                    </th>
-                                    <th class="py-2">
-                                        Service
-                                    </th>
-                                    <th class="py-2">
-                                        Handle By
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="py-2">
-                                        Adcirclew
-                                    </td>
-                                    <td class="py-2">
-                                        Ux Writer
-                                    </td>
-                                    <td class="py-2">
-                                        <img alt="User Avatar" class="w-5 h-5 rounded-full" height="20"
-                                            src="https://storage.googleapis.com/a1aa/image/jEvikWihYBbGwBTwftRVoFE5r9WJ8uUEojpPPXkb-qo.jpg"
-                                            width="20" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        Prime Apps
-                                    </td>
-                                    <td class="py-2">
-                                        Development
-                                    </td>
-                                    <td class="py-2">
-                                        <img alt="User Avatar" class="w-5 h-5 rounded-full" height="20"
-                                            src="https://storage.googleapis.com/a1aa/image/jEvikWihYBbGwBTwftRVoFE5r9WJ8uUEojpPPXkb-qo.jpg"
-                                            width="20" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        Design App
-                                    </td>
-                                    <td class="py-2">
-                                        Web Designer
-                                    </td>
-                                    <td class="py-2">
-                                        <img alt="User Avatar" class="w-5 h-5 rounded-full" height="20"
-                                            src="https://storage.googleapis.com/a1aa/image/jEvikWihYBbGwBTwftRVoFE5r9WJ8uUEojpPPXkb-qo.jpg"
-                                            width="20" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2">
-                                        Maxim Apps
-                                    </td>
-                                    <td class="py-2">
-                                        UI/UX Designer
-                                    </td>
-                                    <td class="py-2">
-                                        <img alt="User Avatar" class="w-5 h-5 rounded-full" height="20"
-                                            src="https://storage.googleapis.com/a1aa/image/jEvikWihYBbGwBTwftRVoFE5r9WJ8uUEojpPPXkb-qo.jpg"
-                                            width="20" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold">
-                        Employees
-                    </h2>
-                    <a class="text-blue-500" href="#">
-                        See All
-                    </a>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="py-2 px-4">
-                                    Name
-                                </th>
-                                <th class="py-2 px-4">
-                                    Job Title
-                                </th>
-                                <th class="py-2 px-4">
-                                    Net Salary
-                                </th>
-                                <th class="py-2 px-4">
-                                    Status
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Devon Lane
-                                </td>
-                                <td class="py-2 px-4">
-                                    Ux Writer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $425.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-yellow-100 text-yellow-600 py-1 px-2 rounded-full text-xs">
-                                        PENDING
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Theresa Webb
-                                </td>
-                                <td class="py-2 px-4">
-                                    Back End Developer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $954.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-red-100 text-red-600 py-1 px-2 rounded-full text-xs">
-                                        UNPAID
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Simmons Cel
-                                </td>
-                                <td class="py-2 px-4">
-                                    Web Designer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $532.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-green-100 text-green-600 py-1 px-2 rounded-full text-xs">
-                                        PAID
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Jane Cooper
-                                </td>
-                                <td class="py-2 px-4">
-                                    UI/UX Designer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $423.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-yellow-100 text-yellow-600 py-1 px-2 rounded-full text-xs">
-                                        PENDING
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Jenny Wilson
-                                </td>
-                                <td class="py-2 px-4">
-                                    UI/UX Designer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $523.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-green-100 text-green-600 py-1 px-2 rounded-full text-xs">
-                                        PAID
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Kathryn Murphy
-                                </td>
-                                <td class="py-2 px-4">
-                                    Illustrator
-                                </td>
-                                <td class="py-2 px-4">
-                                    $532.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-yellow-100 text-yellow-600 py-1 px-2 rounded-full text-xs">
-                                        PENDING
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-4">
-                                    Esther Howard
-                                </td>
-                                <td class="py-2 px-4">
-                                    Back End Developer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $954.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-red-100 text-red-600 py-1 px-2 rounded-full text-xs">
-                                        UNPAID
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4">
-                                    Wade Warren
-                                </td>
-                                <td class="py-2 px-4">
-                                    Front End Developer
-                                </td>
-                                <td class="py-2 px-4">
-                                    $423.00
-                                </td>
-                                <td class="py-2 px-4">
-                                    <span class="bg-green-100 text-green-600 py-1 px-2 rounded-full text-xs">
-                                        PAID
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <select id="language-selector"
+                        class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js">
-    </script>
+
+    <!-- Main Navigation -->
+    <nav class="bg-finance-blue text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="showTab('dashboard')"
+                        class="tab-btn px-4 py-3 hover:bg-finance-green flex items-center text-sm" data-tab="dashboard">
+                        <i class="fas fa-chart-bar mr-2"></i><span data-translate="dashboard">Dashboard</span>
+                    </button>
+                    <button onclick="showTab('budget')"
+                        class="tab-btn px-4 py-3 hover:bg-finance-green flex items-center text-sm" data-tab="budget">
+                        <i class="fas fa-coins mr-2"></i><span data-translate="budget">Budget</span>
+                    </button>
+                    <button onclick="showTab('taxation')"
+                        class="tab-btn px-4 py-3 hover:bg-finance-green flex items-center text-sm" data-tab="taxation">
+                        <i class="fas fa-file-invoice-dollar mr-2"></i><span data-translate="taxation">Taxation</span>
+                    </button>
+                    <button onclick="showTab('announcements')"
+                        class="tab-btn px-4 py-3 hover:bg-finance-green flex items-center text-sm"
+                        data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i><span data-translate="announcements">Announcements</span>
+                    </button>
+                </div>
+
+                <!-- Right Side Items -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notifications-btn" class="p-2 rounded-lg hover:bg-finance-green">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge"
+                                class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div id="notifications-dropdown"
+                            class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-2">Notifications</h3>
+                                <div id="notifications-list" class="space-y-2">
+                                    <!-- Notifications will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-finance-green">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto p-6">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Task Assignment Section -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                <h2 class="text-xl font-bold mb-4" data-translate="tasks">Tasks Assigned by HOD</h2>
+                <div class="space-y-4">
+                    <!-- Task 1 -->
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks text-2xl text-finance-green mr-4"></i>
+                            <div>
+                                <h3 class="font-semibold">Review Annual Budget Report</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Assigned by: HOD Finance</p>
+                            </div>
+                        </div>
+                        <button onclick="markTaskComplete(this)"
+                            class="text-sm bg-finance-green text-white px-4 py-2 rounded-lg hover:bg-finance-blue">
+                            Mark as Complete
+                        </button>
+                    </div>
+                    <!-- Task 2 -->
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks text-2xl text-finance-orange mr-4"></i>
+                            <div>
+                                <h3 class="font-semibold">Prepare GST Revenue Analysis</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Assigned by: HOD Finance</p>
+                            </div>
+                        </div>
+                        <button onclick="markTaskComplete(this)"
+                            class="text-sm bg-finance-green text-white px-4 py-2 rounded-lg hover:bg-finance-blue">
+                            Mark as Complete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-finance-green">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="revenue">Total Revenue</h3>
+                    <p class="text-3xl font-bold text-finance-green">₹1.2T</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="annual">Annual</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-finance-orange">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="gstCollection">GST Collection</h3>
+                    <p class="text-3xl font-bold text-finance-orange">₹450B</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="currentFY">Current FY</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-finance-blue">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="expenditure">Total Expenditure</h3>
+                    <p class="text-3xl font-bold text-finance-blue">₹950B</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="currentFY">Current FY</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-purple-600">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="fiscalDeficit">Fiscal Deficit</h3>
+                    <p class="text-3xl font-bold text-purple-600">3.5%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="ofGDP">of GDP</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="revenueTrends">Revenue Trends</h3>
+                    <canvas id="revenueChart" height="150"></canvas> <!-- Smaller graph size -->
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="expenditureAllocation">Expenditure Allocation
+                    </h3>
+                    <canvas id="expenditureChart" height="150"></canvas> <!-- Smaller graph size -->
+                </div>
+            </div>
+
+            <!-- Recent Updates -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-semibold mb-4" data-translate="recentUpdates">Recent Updates</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-finance-green bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-coins text-finance-green"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">New Tax Rebate Announced</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Tax rebate of up to ₹50,000 for small
+                                businesses</p>
+                            <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-finance-orange bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-file-invoice-dollar text-finance-orange"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">GST Collection Surpasses Target</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">GST collection for March 2024 exceeds
+                                expectations</p>
+                            <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="budget">Budget</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Annual Budget -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-green bg-opacity-20 p-4">
+                        <img src="/assets/images/annual-budget.jpg" alt="Annual Budget"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="annualBudget">Annual Budget</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="annualBudgetDesc">
+                            Overview of the state's annual budget and allocations
+                        </p>
+                        <button onclick="showBudgetDetails('annualBudgetDetails')"
+                            class="text-finance-green hover:text-finance-green font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Capital Expenditure -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-orange bg-opacity-20 p-4">
+                        <img src="/assets/images/capital-expenditure.jpg" alt="Capital Expenditure"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="capitalExpenditure">Capital Expenditure</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="capitalExpenditureDesc">
+                            Details of capital expenditure and infrastructure projects
+                        </p>
+                        <button onclick="showBudgetDetails('capitalExpenditureDetails')"
+                            class="text-finance-orange hover:text-finance-orange font-medium"
+                            data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Revenue Expenditure -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-blue bg-opacity-20 p-4">
+                        <img src="/assets/images/revenue-expenditure.jpg" alt="Revenue Expenditure"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="revenueExpenditure">Revenue Expenditure</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="revenueExpenditureDesc">
+                            Breakdown of revenue expenditure and operational costs
+                        </p>
+                        <button onclick="showBudgetDetails('revenueExpenditureDetails')"
+                            class="text-finance-blue hover:text-finance-blue font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budget Details Tabs -->
+        <div id="budgetDetails" class="tab-content">
+            <button onclick="showTab('budget')"
+                class="text-sm bg-finance-green text-white px-4 py-2 rounded-lg hover:bg-finance-blue mb-6">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Budget
+            </button>
+            <div class="space-y-6">
+                <!-- Annual Budget Details -->
+                <div id="annualBudgetDetails" class="budget-detail-content">
+                    <h3 class="text-xl font-bold mb-4" data-translate="annualBudget">Annual Budget</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        The annual budget outlines the state's financial plan for the fiscal year, including revenue
+                        projections and expenditure allocations.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Highlights</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Total budget size: ₹1.2 trillion.</li>
+                        <li>Focus on infrastructure development and social welfare.</li>
+                        <li>Increased allocation for education and healthcare.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to Access</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The full budget document is available on the official Gujarat Finance Ministry website.
+                    </p>
+                </div>
+
+                <!-- Capital Expenditure Details -->
+                <div id="capitalExpenditureDetails" class="budget-detail-content hidden">
+                    <h3 class="text-xl font-bold mb-4" data-translate="capitalExpenditure">Capital Expenditure</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Capital expenditure focuses on long-term investments in infrastructure, such as roads, bridges,
+                        and public utilities.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Projects</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Construction of new highways and expressways.</li>
+                        <li>Development of smart cities and urban infrastructure.</li>
+                        <li>Upgradation of public transportation systems.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to Access</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Detailed project reports are available on the Gujarat Infrastructure Development Portal.
+                    </p>
+                </div>
+
+                <!-- Revenue Expenditure Details -->
+                <div id="revenueExpenditureDetails" class="budget-detail-content hidden">
+                    <h3 class="text-xl font-bold mb-4" data-translate="revenueExpenditure">Revenue Expenditure</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Revenue expenditure covers operational costs, including salaries, pensions, and maintenance of
+                        public services.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Areas</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Education and healthcare services.</li>
+                        <li>Public safety and law enforcement.</li>
+                        <li>Administrative and operational expenses.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to Access</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Detailed expenditure reports are available on the Gujarat Finance Ministry website.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Taxation Tab -->
+        <div id="taxation" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="taxation">Taxation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- GST -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-green bg-opacity-20 p-4">
+                        <img src="/assets/images/gst.jpg" alt="GST" class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="gst">GST</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="gstDesc">
+                            Goods and Services Tax (GST) is a comprehensive indirect tax on the supply of goods and
+                            services.
+                        </p>
+                        <button onclick="showTaxationDetails('gstDetails')"
+                            class="text-finance-green hover:text-finance-green font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Income Tax -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-orange bg-opacity-20 p-4">
+                        <img src="/assets/images/income-tax.jpg" alt="Income Tax"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="incomeTax">Income Tax</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="incomeTaxDesc">
+                            Income tax is a direct tax levied on the income of individuals and businesses.
+                        </p>
+                        <button onclick="showTaxationDetails('incomeTaxDetails')"
+                            class="text-finance-orange hover:text-finance-orange font-medium"
+                            data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Property Tax -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-finance-blue bg-opacity-20 p-4">
+                        <img src="/assets/images/property-tax.jpg" alt="Property Tax"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="propertyTax">Property Tax</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="propertyTaxDesc">
+                            Property tax is a levy on property ownership, used to fund local services.
+                        </p>
+                        <button onclick="showTaxationDetails('propertyTaxDetails')"
+                            class="text-finance-blue hover:text-finance-blue font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Taxation Details Tabs -->
+        <div id="taxationDetails" class="tab-content">
+            <button onclick="showTab('taxation')"
+                class="text-sm bg-finance-green text-white px-4 py-2 rounded-lg hover:bg-finance-blue mb-6">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Taxation
+            </button>
+            <div class="space-y-6">
+                <!-- GST Details -->
+                <div id="gstDetails" class="taxation-detail-content">
+                    <h3 class="text-xl font-bold mb-4" data-translate="gst">GST</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        The Goods and Services Tax (GST) is a unified tax system that replaces multiple indirect taxes.
+                        It is levied at every stage of the supply chain.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Features</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Single tax system for goods and services.</li>
+                        <li>Input tax credit mechanism to avoid double taxation.</li>
+                        <li>Four-tier tax structure: 5%, 12%, 18%, and 28%.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to File GST</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Businesses can file GST returns online through the GST portal.
+                    </p>
+                </div>
+
+                <!-- Income Tax Details -->
+                <div id="incomeTaxDetails" class="taxation-detail-content hidden">
+                    <h3 class="text-xl font-bold mb-4" data-translate="incomeTax">Income Tax</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Income tax is levied on the income of individuals, businesses, and other entities. It is a major
+                        source of revenue for the government.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Features</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Progressive tax rates based on income slabs.</li>
+                        <li>Deductions and exemptions available for taxpayers.</li>
+                        <li>E-filing of income tax returns is mandatory.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to File Income Tax</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Taxpayers can file their income tax returns online through the Income Tax e-Filing portal.
+                    </p>
+                </div>
+
+                <!-- Property Tax Details -->
+                <div id="propertyTaxDetails" class="taxation-detail-content hidden">
+                    <h3 class="text-xl font-bold mb-4" data-translate="propertyTax">Property Tax</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Property tax is a local tax levied on real estate properties. It is used to fund municipal
+                        services like roads, sanitation, and public utilities.
+                    </p>
+                    <h4 class="text-lg font-bold mb-2">Key Features</h4>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 mb-4">
+                        <li>Based on the assessed value of the property.</li>
+                        <li>Paid annually or semi-annually.</li>
+                        <li>Rebates available for timely payments.</li>
+                    </ul>
+                    <h4 class="text-lg font-bold mb-2">How to Pay Property Tax</h4>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Property tax can be paid online through the municipal corporation's website or at designated
+                        payment centers.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="announcements">Announcements</h2>
+            <div class="space-y-6">
+                <!-- Important Announcements -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h3 class="font-bold text-red-500">Important Notice</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Last date for income tax filing extended
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 8, 2024</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-bold text-purple-500">New Tax Rebate</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Tax rebate of up to ₹50,000 for small businesses
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 7, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Press Releases -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Press Releases</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-newspaper text-2xl text-gray-400"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">New Tax Policy Announced</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    Government introduces new tax incentives for startups
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">March 6, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('bg-finance-green');
+                } else {
+                    btn.classList.remove('bg-finance-green');
+                }
+            });
+        }
+
+        // Show Budget Details
+        function showBudgetDetails(budgetId) {
+            showTab('budgetDetails'); // Switch to the Budget Details tab
+            document.querySelectorAll('.budget-detail-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(budgetId).classList.remove('hidden');
+        }
+
+        // Show Taxation Details
+        function showTaxationDetails(taxationId) {
+            showTab('taxationDetails'); // Switch to the Taxation Details tab
+            document.querySelectorAll('.taxation-detail-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(taxationId).classList.remove('hidden');
+        }
+
+        // Mark Task as Complete
+        function markTaskComplete(button) {
+            const taskDiv = button.closest('div');
+            taskDiv.classList.add('opacity-50');
+            button.disabled = true;
+            button.textContent = 'Completed';
+            button.classList.remove('bg-finance-green');
+            button.classList.add('bg-gray-400');
+        }
+
+        // Initialize Charts
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar', // Changed to bar chart
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Revenue (in ₹ billion)',
+                    data: [900, 950, 1000, 1050, 1100],
+                    backgroundColor: '#138808',
+                    borderColor: '#138808',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const expenditureCtx = document.getElementById('expenditureChart').getContext('2d');
+        window.expenditureChart = new Chart(expenditureCtx, {
+            type: 'doughnut', // Changed to doughnut chart
+            data: {
+                labels: ['Infrastructure', 'Education', 'Healthcare', 'Other'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        '#138808',
+                        '#FF9933',
+                        '#000080',
+                        '#7C3AED'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' ||
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Language switching functionality
+        const languageSelector = document.getElementById('language-selector');
+
+        // Language content mapping
+        const translations = {
+            en: {
+                ministry: 'Ministry of Finance',
+                govt: 'Government of Gujarat',
+                dashboard: 'Dashboard',
+                budget: 'Budget',
+                taxation: 'Taxation',
+                announcements: 'Announcements',
+                tasks: 'Tasks Assigned by HOD',
+                revenue: 'Total Revenue',
+                annual: 'Annual',
+                gstCollection: 'GST Collection',
+                currentFY: 'Current FY',
+                expenditure: 'Total Expenditure',
+                fiscalDeficit: 'Fiscal Deficit',
+                ofGDP: 'of GDP',
+                revenueTrends: 'Revenue Trends',
+                expenditureAllocation: 'Expenditure Allocation',
+                recentUpdates: 'Recent Updates',
+                annualBudget: 'Annual Budget',
+                annualBudgetDesc: 'Overview of the state\'s annual budget and allocations',
+                capitalExpenditure: 'Capital Expenditure',
+                capitalExpenditureDesc: 'Details of capital expenditure and infrastructure projects',
+                revenueExpenditure: 'Revenue Expenditure',
+                revenueExpenditureDesc: 'Breakdown of revenue expenditure and operational costs',
+                gst: 'GST',
+                gstDesc: 'Goods and Services Tax (GST) is a comprehensive indirect tax on the supply of goods and services.',
+                incomeTax: 'Income Tax',
+                incomeTaxDesc: 'Income tax is a direct tax levied on the income of individuals and businesses.',
+                propertyTax: 'Property Tax',
+                propertyTaxDesc: 'Property tax is a levy on property ownership, used to fund local services.',
+                learnMore: 'Learn More'
+            },
+            hi: {
+                ministry: 'वित्त मंत्रालय',
+                govt: 'गुजरात सरकार',
+                dashboard: 'डैशबोर्ड',
+                budget: 'बजट',
+                taxation: 'कराधान',
+                announcements: 'घोषणाएं',
+                tasks: 'एचओडी द्वारा सौंपे गए कार्य',
+                revenue: 'कुल राजस्व',
+                annual: 'वार्षिक',
+                gstCollection: 'जीएसटी संग्रह',
+                currentFY: 'चालू वित्तीय वर्ष',
+                expenditure: 'कुल व्यय',
+                fiscalDeficit: 'राजकोषीय घाटा',
+                ofGDP: 'जीडीपी का',
+                revenueTrends: 'राजस्व प्रवृत्तियां',
+                expenditureAllocation: 'व्यय आवंटन',
+                recentUpdates: 'हाल के अपडेट',
+                annualBudget: 'वार्षिक बजट',
+                annualBudgetDesc: 'राज्य के वार्षिक बजट और आवंटन का अवलोकन',
+                capitalExpenditure: 'पूंजीगत व्यय',
+                capitalExpenditureDesc: 'पूंजीगत व्यय और बुनियादी ढांचा परियोजनाओं का विवरण',
+                revenueExpenditure: 'राजस्व व्यय',
+                revenueExpenditureDesc: 'राजस्व व्यय और परिचालन लागत का विवरण',
+                gst: 'जीएसटी',
+                gstDesc: 'माल और सेवा कर (जीएसटी) माल और सेवाओं की आपूर्ति पर एक व्यापक अप्रत्यक्ष कर है।',
+                incomeTax: 'आयकर',
+                incomeTaxDesc: 'आयकर व्यक्तियों और व्यवसायों की आय पर लगाया जाने वाला प्रत्यक्ष कर है।',
+                propertyTax: 'संपत्ति कर',
+                propertyTaxDesc: 'संपत्ति कर संपत्ति के स्वामित्व पर लगाया जाने वाला स्थानीय कर है, जिसका उपयोग स्थानीय सेवाओं के लिए किया जाता है।',
+                learnMore: 'और जानें'
+            },
+            gu: {
+                ministry: 'વિત્ત મંત્રાલય',
+                govt: 'ગુજરાત સરકાર',
+                dashboard: 'ડેશબોર્ડ',
+                budget: 'બજેટ',
+                taxation: 'કરવેરા',
+                announcements: 'જાહેરાતો',
+                tasks: 'HOD દ્વારા સોંપાયેલ કાર્યો',
+                revenue: 'કુલ આવક',
+                annual: 'વાર્ષિક',
+                gstCollection: 'જીએસટી સંગ્રહ',
+                currentFY: 'ચાલુ આર્થિક વર્ષ',
+                expenditure: 'કુલ ખર્ચ',
+                fiscalDeficit: 'રાજકોષીય ખાધ',
+                ofGDP: 'જીડીપી નો',
+                revenueTrends: 'રેવન્યુ ટ્રેન્ડ્સ',
+                expenditureAllocation: 'ખર્ચ આવંટન',
+                recentUpdates: 'તાજેતરના અપડેટ્સ',
+                annualBudget: 'વાર્ષિક બજેટ',
+                annualBudgetDesc: 'રાજ્યના વાર્ષિક બજેટ અને આવંટનનો અવલોકન',
+                capitalExpenditure: 'મૂડી ખર્ચ',
+                capitalExpenditureDesc: 'મૂડી ખર્ચ અને મૂળભૂત સુવિધાઓ પરના પ્રોજેક્ટ્સની વિગતો',
+                revenueExpenditure: 'રેવન્યુ ખર્ચ',
+                revenueExpenditureDesc: 'રેવન્યુ ખર્ચ અને ઓપરેશનલ ખર્ચની વિગતો',
+                gst: 'જીએસટી',
+                gstDesc: 'માલ અને સેવાઓ કર (જીએસટી) એ માલ અને સેવાઓની સપ્લાય પર લાદવામાં આવતો એક વ્યાપક અપ્રત્યક્ષ કર છે.',
+                incomeTax: 'આવકવેરો',
+                incomeTaxDesc: 'આવકવેરો એ વ્યક્તિઓ અને વ્યવસાયોની આવક પર લાદવામાં આવતો પ્રત્યક્ષ કર છે.',
+                propertyTax: 'પ્રોપર્ટી ટેક્સ',
+                propertyTaxDesc: 'પ્રોપર્ટી ટેક્સ એ મિલકતના માલિકી પર લાદવામાં આવતો સ્થાનિક કર છે, જેનો ઉપયોગ સ્થાનિક સેવાઓ માટે થાય છે.',
+                learnMore: 'વધુ જાણો'
+            }
+        };
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang][key]) {
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(' ' + translations[lang][key]));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            localStorage.setItem('selected-language', lang);
+            document.title = translations[lang].ministry;
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selected-language') || 'en';
+            languageSelector.value = savedLanguage;
+            updateLanguage(savedLanguage);
+        });
+
+        // Language selector event listener
+        languageSelector.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
     </script>
 </body>
 
