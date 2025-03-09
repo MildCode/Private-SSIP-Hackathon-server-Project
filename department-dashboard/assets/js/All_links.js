@@ -53,6 +53,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_agriculture_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -65,6 +67,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_Finance_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -72,17 +76,17 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_C')
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(data);
-                    // if (data) {
-                    //     const employee = data.employees.find(emp => emp.name === username && emp.password === password);
-                    //     if (employee) {
-                    //         document.location.assign('/department-dashboard/All_employees/Ministry_of_Education_EMP.html');
-                    //     } else {
-                    //         alert('Employee not found or credentials do not match');
-                    //     }
-                    // } else {
-                    //     alert('No employees found for this department');
-                    // }
+                    console.log(data);
+                    if (data) {
+                        const employee = data.employees.find(emp => emp.name === username && emp.password === password);
+                        if (employee) {
+                            document.location.assign('/department-dashboard/All_employees/Ministry_of_Education_EMP.html');
+                        } else {
+                            alert('Employee not found or credentials do not match');
+                        }
+                    } else {
+                        alert('No employees found for this department');
+                    }
                 })
                 .catch(error => alert(error));
         }else if(department ==='Ministry_of_labour'){
@@ -94,6 +98,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_labour_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -106,6 +112,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_it_&_electronics_EMP.html');    
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -118,6 +126,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_transport_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');    
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -130,6 +140,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_rural_development_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -142,6 +154,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_Defence_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error =>( error));
@@ -154,6 +168,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees/Ministry_of_Health_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
@@ -166,6 +182,8 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                         document.location.assign('/department-dashboard/All_employees//Ministry_of_agriculture_EMP.html');
 
                         // alert('Employee not found or credentials do not match');
+                    }else{
+                        alert('Employee not found or credentials do not match');
                     }
                 })
                 .catch(error => alert(error));
