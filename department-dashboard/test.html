@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Department of Agriculture, Government of Gujarat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'agri-green': '#1B5E20',
+                        'agri-brown': '#6D4C41',
+                        'agri-yellow': '#F9A825'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+    <!-- Government Header -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="/assets/images/emblem.png" alt="Gujarat Emblem" class="h-12 mr-3" />
+                    <div>
+                        <h1 class="text-sm font-bold text-agri-green dark:text-white">ગુજરાત સરકાર / Government of Gujarat</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400">કૃષિ વિભાગ / Department of Agriculture</h2>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
+                    </button>
+                    <select id="language-selector"
+                        class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="bg-agri-green text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="showTab('dashboard')"
+                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="dashboard">
+                        <i class="fas fa-chart-bar mr-2"></i><span>Dashboard</span>
+                    </button>
+                    <button onclick="showTab('schemes')"
+                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="schemes">
+                        <i class="fas fa-tractor mr-2"></i><span>Govt Schemes</span>
+                    </button>
+                    <button onclick="showTab('resources')"
+                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="resources">
+                        <i class="fas fa-seedling mr-2"></i><span>Farm Resources</span>
+                    </button>
+                    <button onclick="showTab('announcements')"
+                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm"
+                        data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i><span>Announcements</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Notification system remains similar -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto p-6">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Task Assignment Section -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                <h2 class="text-xl font-bold mb-4">Department Tasks</h2>
+                <div class="space-y-4" id="task-container">
+                    <!-- Dynamic tasks will be inserted here -->
+                </div>
+                <button onclick="openTaskModal()"
+                    class="mt-4 text-sm bg-agri-green text-white px-4 py-2 rounded-lg hover:bg-agri-brown">
+                    <i class="fas fa-plus mr-2"></i>Add New Task
+                </button>
+            </div>
+
+            <!-- Agriculture Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-agri-green">
+                    <h3 class="text-lg font-semibold mb-2">Total Production</h3>
+                    <p class="text-3xl font-bold text-agri-green" id="total-production">Loading...</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Current Season</p>
+                </div>
+                <!-- Add similar cards for other stats -->
+            </div>
+
+            <!-- Agriculture Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4">Crop Production Trends</h3>
+                    <canvas id="cropProductionChart" height="150"></canvas>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4">Land Usage Distribution</h3>
+                    <canvas id="landUsageChart" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schemes Tab -->
+        <div id="schemes" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Government Schemes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="schemes-container">
+                <!-- Dynamic schemes will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Farm Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="resources-container">
+                <!-- Dynamic resources will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Announcements</h2>
+            <div class="space-y-6" id="announcements-container">
+                <!-- Dynamic announcements will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Input Modals -->
+    <div id="task-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+        <div class="modal-content bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20">
+            <h3 class="text-xl font-bold mb-4">Create New Task</h3>
+            <form id="task-form" onsubmit="handleTaskSubmit(event)">
+                <input type="text" id="task-title" placeholder="Task title" required
+                    class="w-full mb-4 p-2 border rounded">
+                <textarea id="task-description" placeholder="Task description"
+                    class="w-full mb-4 p-2 border rounded"></textarea>
+                <button type="submit" class="bg-agri-green text-white px-4 py-2 rounded-lg">Create Task</button>
+                <button type="button" onclick="closeTaskModal()" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded-lg">
+                    Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Agriculture Data Configuration
+        const agricultureData = {
+            currentSeason: "Kharif 2024",
+            crops: ["Wheat", "Rice", "Cotton", "Vegetables"],
+            productionData: [120000, 95000, 75000, 60000], // in tons
+            landUsage: [40, 30, 20, 10], // percentages
+            schemes: [
+                {
+                    title: "PM Kisan Samman Nidhi",
+                    description: "Direct income support to farmers",
+                    image: "/assets/images/pm-kisan.jpg"
+                },
+                // Add more schemes
+            ],
+            resources: [
+                {
+                    title: "Seed Distribution",
+                    description: "Quality seeds for various crops",
+                    image: "/assets/images/seeds.jpg"
+                },
+                // Add more resources
+            ]
+        };
+
+        // Initialize Agriculture Charts
+        const cropCtx = document.getElementById('cropProductionChart').getContext('2d');
+        new Chart(cropCtx, {
+            type: 'bar',
+            data: {
+                labels: agricultureData.crops,
+                datasets: [{
+                    label: 'Production (tons)',
+                    data: agricultureData.productionData,
+                    backgroundColor: '#1B5E20'
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        const landCtx = document.getElementById('landUsageChart').getContext('2d');
+        new Chart(landCtx, {
+            type: 'doughnut',
+            data: {
+                labels: agricultureData.crops,
+                datasets: [{
+                    data: agricultureData.landUsage,
+                    backgroundColor: ['#1B5E20', '#6D4C41', '#F9A825', '#4CAF50']
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Task Management System
+        let tasks = [
+            {
+                title: "Review Monsoon Preparedness Plan",
+                description: "Verify contingency plans for drought regions",
+                completed: false
+            }
+        ];
+
+        function renderTasks() {
+            const container = document.getElementById('task-container');
+            container.innerHTML = tasks.map((task, index) => `
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-tractor text-2xl ${task.completed ? 'text-gray-400' : 'text-agri-green'} mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold">${task.title}</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">${task.description}</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleTask(${index})"
+                        class="text-sm ${task.completed ? 'bg-gray-400' : 'bg-agri-green'} text-white px-4 py-2 rounded-lg">
+                        ${task.completed ? 'Completed' : 'Mark Complete'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        function openTaskModal() {
+            document.getElementById('task-modal').classList.remove('hidden');
+        }
+
+        function closeTaskModal() {
+            document.getElementById('task-modal').classList.add('hidden');
+        }
+
+        function handleTaskSubmit(e) {
+            e.preventDefault();
+            const newTask = {
+                title: document.getElementById('task-title').value,
+                description: document.getElementById('task-description').value,
+                completed: false
+            };
+            tasks.push(newTask);
+            renderTasks();
+            closeTaskModal();
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTasks();
+            document.getElementById('total-production').textContent = 
+                `${agricultureData.productionData.reduce((a,b) => a+b).toLocaleString()} Tons`;
+        });
+
+        // Maintain existing theme and language functionality
+        // Add similar dynamic rendering for schemes and resources
+    </script>
+</body>
+</html>
