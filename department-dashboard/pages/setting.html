@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,8 +16,11 @@
       margin: 0;
       padding: 0;
     }
-    a { color: inherit; }
-    
+
+    a {
+      color: inherit;
+    }
+
     /* Desktop Sidebar */
     #sidebar {
       width: 260px;
@@ -29,20 +33,24 @@
       overflow-y: auto;
       display: block;
     }
+
     #sidebar h2 {
       color: #4db8ff;
       text-align: center;
       margin-bottom: 20px;
     }
+
     .sidebar-links {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     .sidebar-links li {
       padding: 15px 10px;
       border-bottom: 1px solid #333;
     }
+
     .sidebar-links a {
       text-decoration: none;
       color: #ffffff;
@@ -53,14 +61,16 @@
       cursor: pointer;
       transition: color 0.3s ease;
     }
+
     .sidebar-links a:hover {
       color: #4db8ff;
     }
+
     .logout-btn {
       width: 100%;
       margin-top: 20px;
     }
-    
+
     /* Mobile Navigation (Hamburger Menu) */
     #mobile-nav {
       display: none;
@@ -73,21 +83,25 @@
       z-index: 1000;
       border-bottom: 1px solid #333;
     }
+
     #mobile-nav .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     #mobile-nav .top-bar h5 {
       margin: 0;
       color: #ffffff;
       font-size: 18px;
     }
+
     #mobile-nav .hamburger {
       font-size: 24px;
       cursor: pointer;
       color: #ffffff;
     }
+
     /* Hidden mobile menu (dropdown) */
     #mobile-menu {
       display: none;
@@ -95,33 +109,38 @@
       padding: 10px 15px;
       border-top: 1px solid #333;
     }
+
     #mobile-menu ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     #mobile-menu li {
       padding: 10px 0;
       border-bottom: 1px solid #333;
     }
+
     #mobile-menu li a {
       text-decoration: none;
       color: #fff;
       font-size: 16px;
       display: block;
     }
-    
+
     /* Main Content */
     #main-content {
       margin-left: 280px;
       padding: 20px;
       width: calc(100% - 280px);
     }
+
     .page-title {
       text-align: center;
       color: #4db8ff;
       margin-bottom: 20px;
     }
+
     .settings-section {
       background: #1e1e1e;
       padding: 20px;
@@ -130,10 +149,12 @@
       margin-bottom: 20px;
       text-align: center;
     }
+
     .settings-section h4 {
       color: #4db8ff;
       margin-bottom: 15px;
     }
+
     .profile-img {
       display: block;
       margin: 0 auto 10px;
@@ -143,32 +164,58 @@
       object-fit: cover;
       border: 2px solid #4db8ff;
     }
-    #fileName { color: #4db8ff; }
-    
+
+    #fileName {
+      color: #4db8ff;
+    }
+
     /* Input Groups: Add some consistent spacing */
-    .input-group { margin-bottom: 15px; }
-    
+    .input-group {
+      margin-bottom: 15px;
+    }
+
     /* Responsive Adjustments */
     @media (max-width: 768px) {
+
       /* Hide sidebar on small screens */
-      #sidebar { display: none; }
+      #sidebar {
+        display: none;
+      }
+
       /* Show mobile navigation bar */
-      #mobile-nav { display: block; }
+      #mobile-nav {
+        display: block;
+      }
+
       /* Adjust main content */
       #main-content {
         margin: 0;
-        padding: 80px 20px 20px; /* extra top padding for mobile nav */
+        padding: 80px 20px 20px;
+        /* extra top padding for mobile nav */
         width: 100%;
       }
-      .profile-img { width: 80px; height: 80px; }
+
+      .profile-img {
+        width: 80px;
+        height: 80px;
+      }
+
       /* Make all buttons full width for easier tap targets */
-      .btn { width: 100% !important; margin-bottom: 10px; }
+      .btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+      }
     }
+
     @media (max-width: 480px) {
-      .profile-img { width: 60px; height: 60px; }
+      .profile-img {
+        width: 60px;
+        height: 60px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Mobile Navigation -->
@@ -206,7 +253,7 @@
   <!-- Main Content -->
   <div id="main-content">
     <h1 class="page-title"><i class="fas fa-user-cog"></i> User Settings</h1>
-    
+
     <!-- Profile Section -->
     <div class="settings-section" id="profile">
       <h4><i class="fas fa-user-cog"></i> Profile Settings</h4>
@@ -235,7 +282,7 @@
         <i class="fas fa-save"></i> Save
       </button>
     </div>
-    
+
     <!-- Theme Section -->
     <div class="settings-section" id="theme">
       <h4><i class="fas fa-adjust"></i> Theme Settings</h4>
@@ -246,7 +293,7 @@
         <i class="fas fa-sun"></i> Light Mode
       </button>
     </div>
-    
+
     <!-- Security Section -->
     <div class="settings-section" id="security">
       <h4><i class="fas fa-lock"></i> Security Settings</h4>
@@ -254,7 +301,7 @@
         <i class="fas fa-key"></i> Change Password
       </button>
     </div>
-    
+
     <!-- Notifications Section -->
     <div class="settings-section" id="notifications">
       <h4><i class="fas fa-bell"></i> Notification Preferences</h4>
@@ -271,7 +318,7 @@
         </label>
       </div>
     </div>
-    
+
     <!-- Account Management Section -->
     <div class="settings-section" id="account">
       <h4><i class="fas fa-address-card"></i> Account Management</h4>
@@ -288,16 +335,16 @@
         <i class="fas fa-trash"></i> Delete Account
       </button>
     </div>
-    
+
   </div>
 
   <script>
     // Toggle mobile menu when hamburger icon is clicked
-    document.getElementById("menu-toggle").addEventListener("click", function() {
+    document.getElementById("menu-toggle").addEventListener("click", function () {
       let mobileMenu = document.getElementById("mobile-menu");
       mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
     });
-    function toggleMobileMenu(){
+    function toggleMobileMenu() {
       document.getElementById("mobile-menu").style.display = "none";
     }
     function setDarkMode() {
@@ -321,7 +368,7 @@
       const file = fileInput.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           userPhoto.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -329,4 +376,5 @@
     }
   </script>
 </body>
+
 </html>
