@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | Samridh Gov</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+        }
+
+        /* Sidebar for Desktop */
+        .sidebar {
+            width: 250px;
+            background: #1E1E2D;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            display: block;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00A3FF;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+
+        /* Content Area */
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-bar h2 {
+            margin: 0;
+            color: #1E1E2D;
+        }
+
+        .btn-create {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-create i {
+            margin-right: 5px;
+        }
+
+        /* Notification Cards */
+        .notifications-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification {
+            background: #e7f3fe;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .notification i {
+            margin-right: 15px;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            width: 100%;
+            background: #1E1E2D;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar (Desktop) -->
+    <div class="sidebar">
+        <h2><i class="fas fa-cogs"></i> Samridh Gov</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+            <li><a href="#"><i class="fas fa-sync-alt"></i> Updates</a></li>
+            <li><a href="#"><i class="fas fa-folder"></i> Projects</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Mobile Navbar -->
+    <div class="mobile-nav">
+        <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <h2>Samridh Gov</h2>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <div class="top-bar">
+            <h2><i class="fas fa-bell"></i> Notifications</h2>
+            <button class="btn-create"><i class="fas fa-plus"></i> Create Notification</button>
+        </div>
+
+        <div class="notifications-container">
+            <div class="notification">
+                <i class="fas fa-money-check-alt"></i>
+                <strong>Government Grant Update:</strong> New financial aid programs for startups announced.
+            </div>
+            <div class="notification">
+                <i class="fas fa-file-invoice"></i>
+                <strong>Policy Change:</strong> Revised tax policies to benefit small businesses starting April 2025.
+            </div>
+            <div class="notification">
+                <i class="fas fa-graduation-cap"></i>
+                <strong>Training Program:</strong> Free skill development workshops for entrepreneurs in major cities.
+            </div>
+            <div class="notification">
+                <i class="fas fa-users"></i>
+                <strong>Public Meeting:</strong> Town hall event scheduled for citizens to discuss urban development projects.
+            </div>
+            <div class="notification">
+                <i class="fas fa-briefcase"></i>
+                <strong>Job Openings:</strong> Government is hiring in multiple sectors, apply now!
+            </div>
+            <div class="notification">
+                <i class="fas fa-leaf"></i>
+                <strong>Environmental Initiative:</strong> New policies to promote clean energy and sustainable businesses.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            let sidebar = document.querySelector(".sidebar");
+            sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

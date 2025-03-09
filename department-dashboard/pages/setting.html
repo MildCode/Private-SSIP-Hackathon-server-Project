@@ -1,187 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: #121212;
-            color: #ffffff;
-            display: flex;
-        }
-
-        #sidebar {
-            width: 260px;
-            height: 100vh;
-            background: #1e1e1e;
-            padding: 20px;
-            position: fixed;
-            left: 0;
-            top: 0;
-            transition: 0.3s;
-        }
-
-        #sidebar h2 {
-            color: #4db8ff;
-            text-align: center;
-        }
-
-        .sidebar-links {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .sidebar-links li {
-            padding: 15px 10px;
-            border-bottom: 1px solid #333;
-        }
-
-        .sidebar-links a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sidebar-links a:hover {
-            color: #4db8ff;
-        }
-
-        #main-content {
-            margin-left: 280px;
-            padding: 20px;
-            width: calc(100% - 280px);
-        }
-
-        .page-title {
-            text-align: center;
-            color: #4db8ff;
-            margin-bottom: 20px;
-        }
-
-        .settings-section {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.3);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .profile-img {
-            display: block;
-            margin: 0 auto 10px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #4db8ff;
-        }
-
-        .user-name {
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Settings Page with Icons</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Base Styles */
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    a { color: inherit; }
+    
+    /* Desktop Sidebar */
+    #sidebar {
+      width: 260px;
+      height: 100vh;
+      background: #1e1e1e;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      display: block;
+    }
+    #sidebar h2 {
+      color: #4db8ff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .sidebar-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-links li {
+      padding: 15px 10px;
+      border-bottom: 1px solid #333;
+    }
+    .sidebar-links a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .sidebar-links a:hover {
+      color: #4db8ff;
+    }
+    .logout-btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    /* Mobile Navigation (Hamburger Menu) */
+    #mobile-nav {
+      display: none;
+      width: 100%;
+      background: #1e1e1e;
+      padding: 10px 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+    #mobile-nav .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #mobile-nav .top-bar h5 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 18px;
+    }
+    #mobile-nav .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      color: #ffffff;
+    }
+    /* Hidden mobile menu (dropdown) */
+    #mobile-menu {
+      display: none;
+      background: #1e1e1e;
+      padding: 10px 15px;
+      border-top: 1px solid #333;
+    }
+    #mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #mobile-menu li {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+    }
+    #mobile-menu li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      display: block;
+    }
+    
+    /* Main Content */
+    #main-content {
+      margin-left: 280px;
+      padding: 20px;
+      width: calc(100% - 280px);
+    }
+    .page-title {
+      text-align: center;
+      color: #4db8ff;
+      margin-bottom: 20px;
+    }
+    .settings-section {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .settings-section h4 {
+      color: #4db8ff;
+      margin-bottom: 15px;
+    }
+    .profile-img {
+      display: block;
+      margin: 0 auto 10px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4db8ff;
+    }
+    #fileName { color: #4db8ff; }
+    
+    /* Input Groups: Add some consistent spacing */
+    .input-group { margin-bottom: 15px; }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      /* Hide sidebar on small screens */
+      #sidebar { display: none; }
+      /* Show mobile navigation bar */
+      #mobile-nav { display: block; }
+      /* Adjust main content */
+      #main-content {
+        margin: 0;
+        padding: 80px 20px 20px; /* extra top padding for mobile nav */
+        width: 100%;
+      }
+      .profile-img { width: 80px; height: 80px; }
+      /* Make all buttons full width for easier tap targets */
+      .btn { width: 100% !important; margin-bottom: 10px; }
+    }
+    @media (max-width: 480px) {
+      .profile-img { width: 60px; height: 60px; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav id="sidebar">
-        <h2>Settings</h2>
-        <ul class="sidebar-links">
-            <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="#theme"><i class="fas fa-palette"></i> Theme</a></li>
-            <li><a href="#security"><i class="fas fa-lock"></i> Security</a></li>
-            <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
-            <li><a href="#account"><i class="fas fa-id-card"></i> Account</a></li>
-        </ul>
-    </nav>
-
-    <div id="main-content">
-        <h1 class="page-title">User Settings</h1>
-        
-        <div class="settings-section" id="profile">
-            <h4>Profile Settings</h4>
-            <img src="default-avatar.png" id="userPhoto" class="profile-img" alt="User Photo">
-            <input type="file" class="form-control mb-3" id="photoInput">
-            <p class="user-name" id="displayUserName">User Name</p>
-            <input type="text" class="form-control mb-3" id="userName" placeholder="Enter your name">
-            <input type="text" class="form-control mb-3" id="userPhone" placeholder="Enter your phone number">
-            <button class="btn btn-primary" onclick="saveProfile()">Save</button>
-        </div>
-        
-        <div class="settings-section" id="theme">
-            <h4>Theme Settings</h4>
-            <button class="btn btn-dark">Dark Mode</button>
-            <button class="btn btn-light">Light Mode</button>
-        </div>
-
-        <div class="settings-section" id="security">
-            <h4>Security Settings</h4>
-            <button class="btn btn-danger">Change Password</button>
-        </div>
-
-        <div class="settings-section" id="notifications">
-            <h4>Notification Preferences</h4>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="emailNotif" checked>
-                <label class="form-check-label" for="emailNotif">Email Notifications</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="smsNotif">
-                <label class="form-check-label" for="smsNotif">SMS Notifications</label>
-            </div>
-        </div>
-
-        <div class="settings-section" id="account">
-            <h4>Account Management</h4>
-            <button class="btn btn-warning">Link Aadhar</button>
-            <button class="btn btn-warning">Link PAN</button>
-            <button class="btn btn-warning">Link Ration Card</button>
-        </div>
+  <!-- Mobile Navigation -->
+  <nav id="mobile-nav">
+    <div class="top-bar d-flex justify-content-between align-items-center">
+      <h5><i class="fas fa-cog"></i> Settings</h5>
+      <i class="fas fa-bars hamburger" id="menu-toggle"></i>
     </div>
+    <div id="mobile-menu">
+      <ul>
+        <li><a href="#profile" onclick="toggleMobileMenu()"><i class="fas fa-user"></i> Profile</a></li>
+        <li><a href="#theme" onclick="toggleMobileMenu()"><i class="fas fa-adjust"></i> Theme</a></li>
+        <li><a href="#security" onclick="toggleMobileMenu()"><i class="fas fa-lock"></i> Security</a></li>
+        <li><a href="#notifications" onclick="toggleMobileMenu()"><i class="fas fa-bell"></i> Notifications</a></li>
+        <li><a href="#account" onclick="toggleMobileMenu()"><i class="fas fa-address-card"></i> Account</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <script>
-        document.querySelector('.btn-dark').addEventListener('click', function() {
-            document.body.style.background = '#121212';
-            document.body.style.color = '#ffffff';
-        });
+  <!-- Desktop Sidebar Navigation -->
+  <nav id="sidebar">
+    <h2><i class="fas fa-cog"></i> Settings</h2>
+    <ul class="sidebar-links">
+      <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="#theme"><i class="fas fa-adjust"></i> Theme</a></li>
+      <li><a onclick="scrollToSection('security')"><i class="fas fa-lock"></i> Security</a></li>
+      <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+      <li><a href="#account"><i class="fas fa-address-card"></i> Account</a></li>
+    </ul>
+    <button class="btn btn-danger logout-btn">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+  </nav>
 
-        document.querySelector('.btn-light').addEventListener('click', function() {
-            document.body.style.background = '#ffffff';
-            document.body.style.color = '#000000';
-        });
+  <!-- Main Content -->
+  <div id="main-content">
+    <h1 class="page-title"><i class="fas fa-user-cog"></i> User Settings</h1>
+    
+    <!-- Profile Section -->
+    <div class="settings-section" id="profile">
+      <h4><i class="fas fa-user-cog"></i> Profile Settings</h4>
+      <img src="default-avatar.png" id="userPhoto" class="profile-img" alt="User Photo" />
+      <label class="btn btn-info btn-sm">
+        <i class="fas fa-edit"></i> Edit Picture
+        <input type="file" id="photoInput" class="d-none" accept="image/*" onchange="previewImage()" />
+      </label>
+      <span id="fileName" class="text-muted ms-2">No file chosen</span>
+      <p class="user-name" id="displayUserName">
+        <i class="fas fa-user"></i> User Name
+      </p>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+        <input type="text" class="form-control" id="userName" placeholder="Enter your name" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+        <input type="email" class="form-control" id="userEmail" placeholder="Enter your email" />
+      </div>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+        <input type="text" class="form-control" id="userPhone" placeholder="Enter your phone number" />
+      </div>
+      <button class="btn btn-primary" onclick="saveProfile()">
+        <i class="fas fa-save"></i> Save
+      </button>
+    </div>
+    
+    <!-- Theme Section -->
+    <div class="settings-section" id="theme">
+      <h4><i class="fas fa-adjust"></i> Theme Settings</h4>
+      <button class="btn btn-dark" onclick="setDarkMode()">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
+      <button class="btn btn-light" onclick="setLightMode()">
+        <i class="fas fa-sun"></i> Light Mode
+      </button>
+    </div>
+    
+    <!-- Security Section -->
+    <div class="settings-section" id="security">
+      <h4><i class="fas fa-lock"></i> Security Settings</h4>
+      <button class="btn btn-danger">
+        <i class="fas fa-key"></i> Change Password
+      </button>
+    </div>
+    
+    <!-- Notifications Section -->
+    <div class="settings-section" id="notifications">
+      <h4><i class="fas fa-bell"></i> Notification Preferences</h4>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="emailNotif" checked />
+        <label class="form-check-label" for="emailNotif">
+          <i class="fas fa-envelope"></i> Email Notifications
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="smsNotif" />
+        <label class="form-check-label" for="smsNotif">
+          <i class="fas fa-mobile-alt"></i> SMS Notifications
+        </label>
+      </div>
+    </div>
+    
+    <!-- Account Management Section -->
+    <div class="settings-section" id="account">
+      <h4><i class="fas fa-address-card"></i> Account Management</h4>
+      <button class="btn btn-warning">
+        <i class="fas fa-id-card"></i> Link Aadhar
+      </button>
+      <button class="btn btn-warning">
+        <i class="fas fa-id-badge"></i> Link PAN
+      </button>
+      <button class="btn btn-warning">
+        <i class="fas fa-receipt"></i> Link Ration Card
+      </button>
+      <button class="btn btn-danger mt-3">
+        <i class="fas fa-trash"></i> Delete Account
+      </button>
+    </div>
+    
+  </div>
 
-        function saveProfile() {
-            let name = document.getElementById("userName").value;
-            let phone = document.getElementById("userPhone").value;
-            localStorage.setItem("userName", name);
-            localStorage.setItem("userPhone", phone);
-            document.getElementById("displayUserName").textContent = name;
-            alert("Profile updated successfully!");
-        }
-
-        document.getElementById("photoInput").addEventListener("change", function(event) {
-            let reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById("userPhoto").src = reader.result;
-                localStorage.setItem("userPhoto", reader.result);
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        });
-
-        window.onload = function() {
-            document.getElementById("userName").value = localStorage.getItem("userName") || "";
-            document.getElementById("displayUserName").textContent = localStorage.getItem("userName") || "User Name";
-            document.getElementById("userPhoto").src = localStorage.getItem("userPhoto") || "default-avatar.png";
-        }
-    </script>
+  <script>
+    // Toggle mobile menu when hamburger icon is clicked
+    document.getElementById("menu-toggle").addEventListener("click", function() {
+      let mobileMenu = document.getElementById("mobile-menu");
+      mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    });
+    function toggleMobileMenu(){
+      document.getElementById("mobile-menu").style.display = "none";
+    }
+    function setDarkMode() {
+      document.body.style.background = '#121212';
+      document.body.style.color = '#ffffff';
+    }
+    function setLightMode() {
+      document.body.style.background = '#ffffff';
+      document.body.style.color = '#000000';
+    }
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+    function saveProfile() {
+      // Placeholder: Implement saving settings to your backend
+      alert("Profile settings saved!");
+    }
+    function previewImage() {
+      const fileInput = document.getElementById('photoInput');
+      const userPhoto = document.getElementById('userPhoto');
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          userPhoto.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
 </body>
 </html>
