@@ -1,368 +1,661 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        Dashboard
-    </title>
-    <script src="https://cdn.tailwindcss.com">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title data-translate="ministry">Ministry of Education, Government of India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'india-orange': '#FF9933',
+                        'india-green': '#138808',
+                        'india-blue': '#000080'
+                    }
+                }
+            }
+        }
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
     <style>
         body {
             font-family: 'Roboto', sans-serif;
         }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
-
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="bg-purple-700 text-white w-64 p-4 flex flex-col">
-            <div class="flex items-center mb-8">
-                <img alt="Logo" class="w-10 h-10 mr-2" height="40"
-                    src="https://storage.googleapis.com/a1aa/image/IfLpGQpiZPFE78qZns0zWWEgolNVpWMsSlDWfsM7Kes.jpg"
-                    width="40" />
-                <span class="text-2xl font-bold">
-                    Zeo
-                </span>
-            </div>
-            <nav class="flex-1">
-                <ul>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 bg-purple-800 rounded-lg" href="#">
-                            <i class="fas fa-tachometer-alt mr-3">
-                            </i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-tasks mr-3">
-                            </i>
-                            Task
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-file-alt mr-3">
-                            </i>
-                            Report
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-calendar-alt mr-3">
-                            </i>
-                            Team Calendar
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-envelope mr-3">
-                            </i>
-                            Messages
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div>
-                <ul>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-cog mr-3">
-                            </i>
-                            Setting
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a class="flex items-center p-2 hover:bg-purple-600 rounded-lg" href="#">
-                            <i class="fas fa-sign-out-alt mr-3">
-                            </i>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-8">
-                <div class="bg-purple-800 p-4 rounded-lg text-center">
-                    <p class="text-sm">
-                        Ready for next vacation?
-                    </p>
-                    <div class="flex justify-center mt-2">
-                        <div
-                            class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                            8
-                        </div>
-                        <div
-                            class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                            8
-                        </div>
-                        <div
-                            class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                            8
-                        </div>
-                        <div class="bg-white text-purple-700 rounded-full w-8 h-8 flex items-center justify-center">
-                            8
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Main Content -->
-        <div class="flex-1 p-6 overflow-auto">
-            <header class="flex flex-col md:flex-row justify-between items-center mb-6">
-                <div class="mb-4 md:mb-0">
-                    <h1 class="text-2xl font-bold">
-                        Hello Taruk!
-                    </h1>
-                    <p class="text-gray-600">
-                        Welcome back, Have a Good day.
-                    </p>
-                </div>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+    <!-- Government Header -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <input class="p-2 rounded-lg border border-gray-300 mr-4" placeholder="Search" type="text" />
-                    <i class="fas fa-bell text-gray-600 mr-4">
-                    </i>
-                    <img alt="User Avatar" class="w-10 h-10 rounded-full" height="40"
-                        src="https://storage.googleapis.com/a1aa/image/IvR3NBoqNG_Rk-TWHAajj8zaMcg2LAwJnvPUFaWrXBA.jpg"
-                        width="40" />
-                </div>
-            </header>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
-                    <p>
-                        Total Employee
-                    </p>
-                    <h2 class="text-2xl font-bold">
-                        400
-                    </h2>
-                </div>
-                <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
-                    <p>
-                        New Joined Employees
-                    </p>
-                    <h2 class="text-2xl font-bold">
-                        150
-                    </h2>
-                </div>
-                <div class="bg-purple-700 text-white p-4 rounded-lg shadow-lg">
-                    <p>
-                        Resigned Employees
-                    </p>
-                    <h2 class="text-2xl font-bold">
-                        30
-                    </h2>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-bold mb-4">
-                        Job Applied
-                    </h2>
-                    <img alt="Bar chart showing job applications over months" class="w-full" height="200"
-                        src="https://storage.googleapis.com/a1aa/image/nc-41o6_xngCn47Jlj48DreqDJxPYerXbsCyCJFm1dA.jpg"
-                        width="300" />
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-lg col-span-2">
-                    <h2 class="text-lg font-bold mb-4">
-                        Project Overview
-                    </h2>
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <p>
-                                Signed
-                            </p>
-                            <p class="text-2xl font-bold">
-                                14
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                Manager Review
-                            </p>
-                            <p class="text-2xl font-bold">
-                                20
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                Client Review
-                            </p>
-                            <p class="text-2xl font-bold">
-                                18
-                            </p>
-                        </div>
-                    </div>
-                    <img alt="Bar chart showing project overview" class="w-full" height="200"
-                        src="https://storage.googleapis.com/a1aa/image/RM-oUdWSGs9OKqUZxskZxCtkLECgp5fzAApgedNmnpE.jpg"
-                        width="600" />
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-                <div class="bg-white p-4 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-bold mb-4">
-                        Performance Listed
-                    </h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2">
-                                        Employee Name
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Department
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Project
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Salary
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border px-4 py-2">
-                                        Peter
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        Marketing Department
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        28
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        $1,500,000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-4 py-2">
-                                        Anderson
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        Finance Department
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        20
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        $1,200,000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-4 py-2">
-                                        Usiya
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        Sales Department
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        28
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        $1,700,000
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-4 py-2">
-                                        John
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        Finance Department
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        28
-                                    </td>
-                                    <td class="border px-4 py-2">
-                                        $1,700,000
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-bold mb-4">
-                        Employees
-                    </h2>
-                    <img alt="Pie chart showing employee distribution" class="w-full" height="200"
-                        src="https://storage.googleapis.com/a1aa/image/iPi2EDLhOoAywfCXqXxfOZPTzN_aA-IcGs9sPis3q18.jpg"
-                        width="300" />
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-bold mb-4">
-                        Employees on Leave
-                    </h2>
-                    <div class="flex items-center mb-4">
-                        <img alt="Employee 1" class="w-10 h-10 rounded-full mr-4" height="40"
-                            src="https://storage.googleapis.com/a1aa/image/Lovss7Ks_y0_BHn3DiZhItlhoCC0IVEn00ZxiyJHPZ8.jpg"
-                            width="40" />
-                        <div>
-                            <p class="font-bold">
-                                Ahmed
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                Only today
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <img alt="Employee 2" class="w-10 h-10 rounded-full mr-4" height="40"
-                            src="https://storage.googleapis.com/a1aa/image/M5w3VhVNWl3AojE_flecjW_V4D8j0AYSkQB2YGQXeUU.jpg"
-                            width="40" />
-                        <div>
-                            <p class="font-bold">
-                                Jasmin
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                2 days
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-center mb-4">
-                        <img alt="Employee 3" class="w-10 h-10 rounded-full mr-4" height="40"
-                            src="https://storage.googleapis.com/a1aa/image/MVzE7CoN5Xv3OmECnnQZPEFSa9pxPPpmY3M-u7QNyyA.jpg"
-                            width="40" />
-                        <div>
-                            <p class="font-bold">
-                                John
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                5 days
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-lg mt-6">
-                <h2 class="text-lg font-bold mb-4">
-                    Today Events
-                </h2>
-                <div class="flex items-center mb-4">
-                    <img alt="Event 1" class="w-10 h-10 rounded-full mr-4" height="40"
-                        src="https://storage.googleapis.com/a1aa/image/aNWGNm7FPDAB4eUAvZGSUlbu4n4Qbu9KBhhh4MxZg54.jpg"
-                        width="40" />
+                    <img src="/department-dashboard/assets/images/emblem.png" 
+                         alt="Indian Emblem" class="h-12 mr-3"/>
                     <div>
-                        <p class="font-bold">
-                            Anna's Birthday
-                        </p>
+                        <h1 class="text-sm font-bold text-india-blue dark:text-white" data-translate="govt">भारत सरकार / Government of India</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">शिक्षा मंत्रालय / Ministry of Education</h2>
                     </div>
                 </div>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-lg mt-6">
-                <h2 class="text-lg font-bold mb-4">
-                    Performance
-                </h2>
-                <img alt="Line chart showing performance over time" class="w-full" height="200"
-                    src="https://storage.googleapis.com/a1aa/image/RSLdgdPGhIMOGDOSUpbu2ei9wcrBNxclwc7PSq_5CTk.jpg"
-                    width="600" />
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
+                    </button>
+                    <select id="language-selector" class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Main Navigation -->
+    <nav class="bg-purple-700 text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="showTab('dashboard')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="dashboard">
+                        <i class="fas fa-chart-bar mr-2"></i><span data-translate="dashboard">Dashboard</span>
+                    </button>
+                    <button onclick="showTab('initiatives')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="initiatives">
+                        <i class="fas fa-rocket mr-2"></i><span data-translate="initiatives">Initiatives</span>
+                    </button>
+                    <button onclick="showTab('institutions')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="institutions">
+                        <i class="fas fa-university mr-2"></i><span data-translate="institutions">Institutions</span>
+                    </button>
+                    <button onclick="showTab('schemes')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="schemes">
+                        <i class="fas fa-hand-holding-heart mr-2"></i><span data-translate="schemes">Schemes</span>
+                    </button>
+                    <button onclick="showTab('announcements')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i><span data-translate="announcements">Announcements</span>
+                    </button>
+                </div>
+
+                <!-- Right Side Items -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notifications-btn" class="p-2 rounded-lg hover:bg-purple-600">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-2">Notifications</h3>
+                                <div id="notifications-list" class="space-y-2">
+                                    <!-- Notifications will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-purple-600">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto p-6">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-purple-600">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="grossEnrollment">Gross Enrollment Ratio</h3>
+                    <p class="text-3xl font-bold text-purple-600">27.1%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="higherEd">Higher Education</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-orange">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="literacyRate">Literacy Rate</h3>
+                    <p class="text-3xl font-bold text-india-orange">77.7%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="nationalAvg">National Average</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-green">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="genderParity">Gender Parity Index</h3>
+                    <p class="text-3xl font-bold text-india-green">1.01</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="higherEd">Higher Education</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-blue">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="universities">Universities</h3>
+                    <p class="text-3xl font-bold text-india-blue">1,043</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="totalRecognized">Total Recognized</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="enrollmentTrends">Enrollment Trends</h3>
+                    <canvas id="enrollmentChart" height="300"></canvas>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="budgetAllocation">Education Budget Allocation</h3>
+                    <canvas id="budgetChart" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Updates -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-semibold mb-4" data-translate="recentUpdates">Recent Updates</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-purple-100 dark:bg-purple-900 p-2 rounded-lg">
+                            <i class="fas fa-newspaper text-purple-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">National Education Policy 2020 Implementation</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Progress report on NEP 2020 implementation across states</p>
+                            <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-india-orange bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-graduation-cap text-india-orange"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">CUET 2024 Registration Opens</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Common University Entrance Test registration begins</p>
+                            <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initiatives Tab -->
+        <div id="initiatives" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="nationalInitiatives">National Initiatives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- NEP 2020 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-purple-100 dark:bg-purple-900 p-4">
+                        <i class="fas fa-book-reader text-4xl text-purple-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="nepTitle">NEP 2020</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="nepDesc">
+                            National Education Policy 2020 - Transforming India's education system
+                        </p>
+                        <a href="#" class="text-purple-600 hover:text-purple-700 font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SWAYAM -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-india-orange bg-opacity-20 p-4">
+                        <i class="fas fa-laptop text-4xl text-india-orange"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="swayamTitle">SWAYAM</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="swayamDesc">
+                            Study Webs of Active-Learning for Young Aspiring Minds
+                        </p>
+                        <a href="#" class="text-india-orange hover:text-india-orange font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PMSHRI -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-india-green bg-opacity-20 p-4">
+                        <i class="fas fa-school text-4xl text-india-green"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="pmshriTitle">PM SHRI</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="pmshriDesc">
+                            PM Schools for Rising India - Strengthening 14,500 schools
+                        </p>
+                        <a href="#" class="text-india-green hover:text-india-green font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institutions Tab -->
+        <div id="institutions" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="educationalInst">Educational Institutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- IITs Section -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-microscope text-3xl text-purple-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">IITs</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="iitDesc">
+                        Indian Institutes of Technology
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">23</span>
+                        <a href="#" class="text-purple-600 hover:text-purple-700" data-translate="viewAll">View All</a>
+                    </div>
+                </div>
+
+                <!-- NITs Section -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-3xl text-india-orange mr-3"></i>
+                        <h3 class="text-xl font-bold">NITs</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="nitDesc">
+                        National Institutes of Technology
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">31</span>
+                        <a href="#" class="text-india-orange hover:text-india-orange" data-translate="viewAll">View All</a>
+                    </div>
+                </div>
+
+                <!-- Central Universities -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-university text-3xl text-india-green mr-3"></i>
+                        <h3 class="text-xl font-bold" data-translate="centralUniv">Central Universities</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Central Universities across India
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">54</span>
+                        <a href="#" class="text-india-green hover:text-india-green" data-translate="viewAll">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schemes Tab -->
+        <div id="schemes" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Educational Schemes</h2>
+            <div class="space-y-6">
+                <!-- Scholarship Schemes -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Scholarship Schemes</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-award text-purple-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Post Matric Scholarship</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">For SC/ST Students</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-purple-600 hover:text-purple-700">Apply Now</a>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-india-orange text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">National Scholarship Portal</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Central Sector Schemes</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-india-orange hover:text-india-orange">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Schemes -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Educational Support Schemes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">Mid Day Meal Scheme</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                National Programme of Mid Day Meal in Schools
+                            </p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">Samagra Shiksha</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Integrated Scheme for School Education
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Latest Announcements</h2>
+            <div class="space-y-6">
+                <!-- Important Announcements -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h3 class="font-bold text-red-500">Important Notice</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Last date for CUET-UG 2024 registration extended
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 8, 2024</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-bold text-purple-500">Examination Updates</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                JEE Main 2024 Session 2 dates announced
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 7, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Press Releases -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Press Releases</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-newspaper text-2xl text-gray-400"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">Ministry launches Digital Infrastructure for Knowledge Sharing</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    New initiative to enhance digital learning infrastructure
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">March 6, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('bg-purple-800');
+                } else {
+                    btn.classList.remove('bg-purple-800');
+                }
+            });
+        }
+
+        // Initialize Charts
+        const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
+        new Chart(enrollmentCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Higher Education Enrollment (in millions)',
+                    data: [37.4, 38.5, 39.8, 40.9, 41.5],
+                    borderColor: '#7C3AED',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        window.budgetChart = new Chart(budgetCtx, {
+            type: 'pie',
+            data: {
+                labels: ['School Education', 'Higher Education', 'Research', 'Other Schemes'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        '#7C3AED',
+                        '#FF9933',
+                        '#138808',
+                        '#000080'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Notifications
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+        notificationsBtn.addEventListener('click', () => {
+            notificationsDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('#notifications-btn') && !event.target.closest('#notifications-dropdown')) {
+                notificationsDropdown.classList.add('hidden');
+            }
+        });
+
+        // Set initial active tab
+        showTab('dashboard');
+
+        // Language switching functionality
+        const languageSelector = document.getElementById('language-selector');
+
+        // Language content mapping
+        const translations = {
+            en: {
+                // Header translations
+                ministry: 'Ministry of Education',
+                govt: 'Government of Gujarat',
+                // Dashboard translations
+                grossEnrollment: 'Gross Enrollment Ratio',
+                higherEd: 'Higher Education',
+                literacyRate: 'Literacy Rate',
+                nationalAvg: 'National Average',
+                genderParity: 'Gender Parity Index',
+                universities: 'Universities',
+                totalRecognized: 'Total Recognized',
+                // Stats translations
+                enrollmentTrends: 'Enrollment Trends',
+                budgetAllocation: 'Education Budget Allocation',
+                recentUpdates: 'Recent Updates',
+                // Chart labels
+                schoolEd: 'School Education',
+                research: 'Research',
+                otherSchemes: 'Other Schemes',
+                // Initiative translations
+                nationalInitiatives: 'National Initiatives',
+                nepTitle: 'NEP 2020',
+                nepDesc: 'National Education Policy 2020 - Transforming India\'s education system',
+                swayamTitle: 'SWAYAM',
+                swayamDesc: 'Study Webs of Active-Learning for Young Aspiring Minds',
+                pmshriTitle: 'PM SHRI',
+                pmshriDesc: 'PM Schools for Rising India - Strengthening 14,500 schools',
+                learnMore: 'Learn More',
+                // Institution translations
+                educationalInst: 'Educational Institutions',
+                iitDesc: 'Indian Institutes of Technology',
+                nitDesc: 'National Institutes of Technology',
+                centralUniv: 'Central Universities',
+                viewAll: 'View All',
+                dashboard: 'Dashboard',
+                initiatives: 'Initiatives',
+                institutions: 'Institutions',
+                schemes: 'Schemes',
+                announcements: 'Announcements'
+            },
+            hi: {
+                ministry: 'शिक्षा मंत्रालय',
+                govt: 'गुजरात सरकार',
+                grossEnrollment: 'सकल नामांकन अनुपात',
+                higherEd: 'उच्च शिक्षा',
+                literacyRate: 'साक्षरता दर',
+                nationalAvg: 'राष्ट्रीय औसत',
+                genderParity: 'लैंगिक समानता सूचकांक',
+                universities: 'विश्वविद्यालय',
+                totalRecognized: 'कुल मान्यता प्राप्त',
+                enrollmentTrends: 'नामांकन प्रवृत्तियां',
+                budgetAllocation: 'शिक्षा बजट आवंटन',
+                recentUpdates: 'हाल के अपडेट',
+                schoolEd: 'स्कूली शिक्षा',
+                research: 'अनुसंधान',
+                otherSchemes: 'अन्य योजनाएं',
+                nationalInitiatives: 'राष्ट्रीय पहल',
+                nepTitle: 'एनईपी 2020',
+                nepDesc: 'राष्ट्रीय शिक्षा नीति 2020 - भारत की शिक्षा प्रणाली का परिवर्तन',
+                swayamTitle: 'स्वयं',
+                swayamDesc: 'युवा आकांक्षी मन के लिए सक्रिय-शिक्षण की अध्ययन वेब',
+                pmshriTitle: 'पीएम श्री',
+                pmshriDesc: 'पीएम राइजिंग इंडिया स्कूल - 14,500 स्कूलों को मजबूत बनाना',
+                learnMore: 'और जानें',
+                educationalInst: 'शैक्षणिक संस्थान',
+                iitDesc: 'भारतीय प्रौद्योगिकी संस्थान',
+                nitDesc: 'राष्ट्रीय प्रौद्योगिकी संस्थान',
+                centralUniv: 'केंद्रीय विश्वविद्यालय',
+                viewAll: 'सभी देखें',
+                dashboard: 'डैशबोर्ड',
+                initiatives: 'पहल',
+                institutions: 'संस्थान',
+                schemes: 'योजनाएं',
+                announcements: 'घोषणाएं'
+            },
+            gu: {
+                ministry: 'શિક્ષણ મંત્રાલય',
+                govt: 'ગુજરાત સરકાર',
+                grossEnrollment: 'કુલ નોંધણી દર',
+                higherEd: 'ઉચ્ચ શિક્ષણ',
+                literacyRate: 'સાક્ષરતા દર',
+                nationalAvg: 'રાષ્ટ્રીય સરેરાશ',
+                genderParity: 'જાતિ સમાનતા સૂચકાંક',
+                universities: 'યુનિવર્સિટીઓ',
+                totalRecognized: 'કુલ માન્યતા પ્રાપ્ત',
+                enrollmentTrends: 'નોંધણી વલણો',
+                budgetAllocation: 'શિક્ષણ બજેટ ફાળવણી',
+                recentUpdates: 'તાજેતરના અપડેટ્સ',
+                schoolEd: 'શાળા શિક્ષણ',
+                research: 'સંશોધન',
+                otherSchemes: 'અન્ય યોજનાઓ',
+                nationalInitiatives: 'રાષ્ટ્રીય પહેલ',
+                nepTitle: 'એનईપી 2020',
+                nepDesc: 'રાષ્ટ્રીય શિક્ષણ નીતિ 2020 - ભારતની શિક્ષણ પ્રણાલીનું પરિવર્તન',
+                swayamTitle: 'સ્વયં',
+                swayamDesc: 'યુવા મહત્વાકાંક્ષી મન માટે સક્રિય-શિક્ષણની અભ્યાસ વેબ',
+                pmshriTitle: 'પીએમ શ્રી',
+                pmshriDesc: 'પીએમ રાઇઝિંગ ઇન્ડિયા સ્કૂલ - 14500 શાળાઓને મજબૂત બનાવવી',
+                learnMore: 'વધુ જાણો',
+                educationalInst: 'શૈક્ષણિક સંસ્થાઓ',
+                iitDesc: 'ભારતીય ટેકનોલોજી સંસ્થાન',
+                nitDesc: 'રાષ્ટ્રીય ટેકનોલોજી સંસ્થાન',
+                centralUniv: 'કેન્દ્રીય યુનિવર્સિટીઓ',
+                viewAll: 'બધા જુઓ',
+                dashboard: 'ડેશબોર્ડ',
+                initiatives: 'પહેલ',
+                institutions: 'સંસ્થાઓ',
+                schemes: 'યોજનાઓ',
+                announcements: 'જાહેરાતો'
+            }
+        };
+
+        function updateLanguage(lang) {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang][key]) {
+                    // If element has icon, preserve it
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(' ' + translations[lang][key]));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update chart labels
+            updateChartLabels(lang);
+
+            // Save preference
+            localStorage.setItem('selected-language', lang);
+
+            // Update document title
+            document.title = translations[lang].ministry;
+        }
+
+        function updateChartLabels(lang) {
+            if (window.budgetChart) {
+                window.budgetChart.data.labels = [
+                    translations[lang].schoolEd,
+                    translations[lang].higherEd,
+                    translations[lang].research,
+                    translations[lang].otherSchemes
+                ];
+                window.budgetChart.update();
+            }
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selected-language') || 'en';
+            languageSelector.value = savedLanguage;
+            updateLanguage(savedLanguage);
+        });
+
+        // Language selector event listener
+        languageSelector.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+    </script>
+</body>
 </html>
