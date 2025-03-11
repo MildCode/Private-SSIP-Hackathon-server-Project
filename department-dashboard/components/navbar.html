@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Government Dashboard Navbar</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Navbar Styling */
+        .navbar {
+            background-color: #002147 !important; /* Dark Blue */
+            padding: 12px 20px;
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #FFC107 !important; /* Gold */
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            transition: 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FFC107 !important; /* Gold */
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .search-input:focus {
+            width: 250px;
+        }
+
+        .search-btn {
+            background: #FFC107;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 20px;
+            margin-left: 8px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .search-btn:hover {
+            background: white;
+            color: #002147;
+        }
+
+        /* User Dropdown */
+        .user-menu .dropdown-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+            min-width: 180px;
+        }
+
+        .dropdown-menu li a {
+            color: #002147 !important; /* Dark Blue */
+            font-size: 1rem;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #FFC107 !important; /* Gold */
+            color: black !important;
+        }
+
+        /* Fixed Navbar & Content Adjustment */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        body {
+            padding-top: 70px; /* Prevent content overlap */
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991px) {
+            .search-container {
+                margin-top: 10px;
+                width: 100%;
+                text-align: center;
+            }
+            .search-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark w-100 fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#"><i class="fas fa-landmark"></i> Gov Dashboard</a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+
+                <!-- Search Bar -->
+                <form class="d-flex ms-3 search-container">
+                    <input class="form-control search-input" type="search" placeholder="Search...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+
+                <!-- User Menu -->
+                <div class="dropdown ms-3 user-menu">
+                    <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Logout Button Functionality
+        document.getElementById("logout").addEventListener("click", function() {
+            alert("Logged out successfully!");
+            window.location.href = "login.html"; // Redirect to login page
+        });
+    </script>
+
+</body>
+</html>

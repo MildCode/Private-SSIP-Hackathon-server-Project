@@ -38,6 +38,59 @@ body {
     align-items: center;
 }
 
+.department-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Responsive grid */
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    min-height: 250px;
+    /* Ensuring equal height */
+}
+
+.card i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.card p {
+    flex-grow: 1;
+    /* Makes the paragraph take equal space */
+    font-size: 14px;
+    color: #666;
+}
+
+.btn {
+    text-decoration: none;
+    color: white;
+    background: #007bff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+
 /* Department Cards */
 .card {
     background: linear-gradient(145deg, #1c1c1c, #222222);
@@ -118,7 +171,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px;
+    /* Space between icon and text */
     width: 160px;
     padding: 12px;
     background: #4db8ff;
@@ -152,19 +206,22 @@ body {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .department-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns for medium screens */
     }
 }
 
 @media (max-width: 768px) {
     .department-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns for tablets */
     }
 }
 
 @media (max-width: 480px) {
     .department-container {
-        grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
+        grid-template-columns: repeat(1, 1fr);
+        /* 1 column for mobile */
     }
 }
 
@@ -243,6 +300,7 @@ body {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

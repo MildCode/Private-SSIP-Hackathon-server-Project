@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Department of Agriculture, Government of Gujarat</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title data-translate="finance">Finance Department, Government of Gujarat</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
@@ -15,9 +14,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'agri-green': '#1B5E20',
-                        'agri-brown': '#6D4C41',
-                        'agri-yellow': '#F9A825'
+                        'gujarat-blue': '#007BFF',
+                        'gujarat-green': '#28A745',
+                        'gujarat-orange': '#FFC107'
                     }
                 }
             }
@@ -27,27 +26,26 @@
         body {
             font-family: 'Roboto', sans-serif;
         }
-
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             display: block;
         }
+        
     </style>
 </head>
-
 <body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
-    <!-- Government Header -->
+    Government Header
     <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div class="container mx-auto px-4 py-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <img src="/assets/images/emblem.png" alt="Gujarat Emblem" class="h-12 mr-3" />
+                    <img src="/department-dashboard/assets/images/emblem.png" 
+                         alt="Gujarat Emblem" class="h-12 mr-3"/>
                     <div>
-                        <h1 class="text-sm font-bold text-agri-green dark:text-white">ગુજરાત સરકાર / Government of Gujarat</h1>
-                        <h2 class="text-xs text-gray-600 dark:text-gray-400">કૃષિ વિભાગ / Department of Agriculture</h2>
+                        <h1 class="text-sm font-bold text-gujarat-blue dark:text-white" data-translate="govt">ગુજરાત સરકાર / Government of Gujarat</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="finance">વિત્ત મંત્રાલય / Finance Department</h2>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -55,8 +53,655 @@
                         <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
                         <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
                     </button>
-                    <select id="language-selector"
-                        class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <select id="language-selector" class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    Main Navigation
+    <nav class="bg-gujarat-blue text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                Navigation Links
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="showTab('dashboard')" class="tab-btn px-4 py-3 hover:bg-gujarat-green flex items-center text-sm" data-tab="dashboard">
+                        <i class="fas fa-chart-line mr-2"></i><span data-translate="dashboard">Dashboard</span>
+                    </button>
+                    <button onclick="showTab('initiatives')" class="tab-btn px-4 py-3 hover:bg-gujarat-green flex items-center text-sm" data-tab="initiatives">
+                        <i class="fas fa-flag mr-2"></i><span data-translate="initiatives">Initiatives</span>
+                    </button>
+                    <button onclick="showTab('budget')" class="tab-btn px-4 py-3 hover:bg-gujarat-green flex items-center text-sm" data-tab="budget">
+                        <i class="fas fa-money-bill-wave mr-2"></i><span data-translate="budget">Budget</span>
+                    </button>
+                    <button onclick="showTab('schemes')" class="tab-btn px-4 py-3 hover:bg-gujarat-green flex items-center text-sm" data-tab="schemes">
+                        <i class="fas fa-hand-holding-usd mr-2"></i><span data-translate="schemes">Schemes</span>
+                    </button>
+                    <button onclick="showTab('announcements')" class="tab-btn px-4 py-3 hover:bg-gujarat-green flex items-center text-sm" data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i><span data-translate="announcements">Announcements</span>
+                    </button>
+                </div>
+
+                Right Side Items
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notifications-btn" class="p-2 rounded-lg hover:bg-gujarat-green">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-2">Notifications</h3>
+                                <div id="notifications-list" class="space-y-2">
+                                    Notifications will be inserted here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                Mobile Menu Button
+                <button class="md:hidden p-2 rounded-lg hover:bg-gujarat-green">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    Main Content Area
+    <div class="container mx-auto p-6">
+        Dashboard Tab
+        <div id="dashboard" class="tab-content active">
+            Statistics Cards
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-gujarat-green">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="totalRevenue">Total Revenue</h3>
+                    <p class="text-3xl font-bold text-gujarat-green">₹2.5 Trillion</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="annualRevenue">Annual Revenue</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-gujarat-orange">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="totalExpenditure">Total Expenditure</h3>
+                    <p class="text-3xl font-bold text-gujarat-orange">₹2.3 Trillion</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="annualExpenditure">Annual Expenditure</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-gujarat-blue">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="fiscalDeficit">Fiscal Deficit</h3>
+                    <p class="text-3xl font-bold text-gujarat-blue">₹200 Billion</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="fiscalDeficitDesc">Fiscal Deficit</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-gujarat-green">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="debtToGdp">Debt to GDP Ratio</h3>
+                    <p class="text-3xl font-bold text-gujarat-green">30%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="debtToGdpDesc">Debt to GDP</p>
+                </div>
+            </div>
+
+            Charts Section
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="revenueTrends">Revenue Trends</h3>
+                    <canvas id="revenueChart" height="300"></canvas>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4" data-translate="expenditureTrends">Expenditure Trends</h3>
+                    <canvas id="expenditureChart" height="300"></canvas>
+                </div>
+            </div>
+
+            Recent Updates
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-semibold mb-4" data-translate="recentUpdates">Recent Updates</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-gujarat-blue bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-newspaper text-gujarat-blue"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">State Budget 2024-25 Announced</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Key highlights and allocations</p>
+                            <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-gujarat-orange bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-chart-pie text-gujarat-orange"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">GST Collection Surges</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Record GST collection for the month</p>
+                            <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Initiatives Tab
+        <div id="initiatives" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="nationalInitiatives">National Initiatives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                Digital India
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gujarat-blue bg-opacity-20 p-4">
+                        <i class="fas fa-laptop text-4xl text-gujarat-blue"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="digitalIndiaTitle">Digital India</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="digitalIndiaDesc">
+                            Transforming India into a digitally empowered society.
+                        </p>
+                        <a href="#" class="text-gujarat-blue hover:text-gujarat-blue font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                Make in India
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gujarat-green bg-opacity-20 p-4">
+                        <i class="fas fa-industry text-4xl text-gujarat-green"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="makeInIndiaTitle">Make in India</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="makeInIndiaDesc">
+                            Encouraging manufacturing in India.
+                        </p>
+                        <a href="#" class="text-gujarat-green hover:text-gujarat-green font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                Skill India
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gujarat-orange bg-opacity-20 p-4">
+                        <i class="fas fa-user-graduate text-4xl text-gujarat-orange"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="skillIndiaTitle">Skill India</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="skillIndiaDesc">
+                            Empowering youth with skills for a better future.
+                        </p>
+                        <a href="#" class="text-gujarat-orange hover:text-gujarat-orange font-medium" data-translate="learnMore">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Budget Tab
+        <div id="budget" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="budgetOverview">Budget Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                Total Budget
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-wallet text-3xl text-gujarat-blue mr-3"></i>
+                        <h3 class="text-xl font-bold">Total Budget</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="totalBudgetDesc">
+                        Total budget allocation for the year.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">₹2.5 Trillion</span>
+                        <a href="#" class="text-gujarat-blue hover:text-gujarat-blue" data-translate="viewDetails">View Details</a>
+                    </div>
+                </div>
+
+                Revenue Sources
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-bar text-3xl text-gujarat-green mr-3"></i>
+                        <h3 class="text-xl font-bold">Revenue Sources</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="revenueSourcesDesc">
+                        Breakdown of revenue sources.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">₹1.5 Trillion</span>
+                        <a href="#" class="text-gujarat-green hover:text-gujarat-green" data-translate="viewDetails">View Details</a>
+                    </div>
+                </div>
+
+                Expenditure Breakdown
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-money-bill-wave text-3xl text-gujarat-orange mr-3"></i>
+                        <h3 class="text-xl font-bold">Expenditure Breakdown</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="expenditureBreakdownDesc">
+                        Detailed breakdown of expenditures.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">₹2.3 Trillion</span>
+                        <a href="#" class="text-gujarat-orange hover:text-gujarat-orange" data-translate="viewDetails">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Schemes Tab
+        <div id="schemes" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Financial Schemes</h2>
+            <div class="space-y-6">
+                Loan Schemes
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Loan Schemes</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-money-check-alt text-gujarat-blue text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">MUDRA Loan Scheme</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">For small businesses</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-gujarat-blue hover:text-gujarat-blue">Apply Now</a>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-hand-holding-usd text-gujarat-green text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Education Loan Scheme</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">For higher education</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-gujarat-green hover:text-gujarat-green">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                Other Financial Schemes
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Financial Support Schemes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">PM Kisan Samman Nidhi</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Direct income support for farmers
+                            </p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">Atmanirbhar Bharat Abhiyan</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Self-reliant India initiative
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Announcements Tab
+        <div id="announcements" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Latest Announcements</h2>
+            <div class="space-y-6">
+                Important Announcements
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h3 class="font-bold text-red-500">Important Notice</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Last date for loan applications extended
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 8, 2024</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-bold text-purple-500">Budget Updates</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Key highlights from the state budget
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 7, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                Press Releases
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Press Releases</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-newspaper text-2xl text-gray-400"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">Finance Department launches new digital portal</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    New initiative to enhance financial transparency
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">March 6, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('bg-gujarat-green');
+                } else {
+                    btn.classList.remove('bg-gujarat-green');
+                }
+            });
+        }
+
+        // Initialize Charts
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Revenue (in Trillions)',
+                    data: [2.0, 2.1, 2.3, 2.4, 2.5],
+                    borderColor: '#007BFF',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const expenditureCtx = document.getElementById('expenditureChart').getContext('2d');
+        new Chart(expenditureCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Expenditure (in Trillions)',
+                    data: [1.8, 1.9, 2.0, 2.1, 2.3],
+                    backgroundColor: '#28A745'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Notifications
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+        notificationsBtn.addEventListener('click', () => {
+            notificationsDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('#notifications-btn') && !event.target.closest('#notifications-dropdown')) {
+                notificationsDropdown.classList.add('hidden');
+            }
+        });
+
+        // Set initial active tab
+        showTab('dashboard');
+
+        // Language switching functionality
+        const languageSelector = document.getElementById('language-selector');
+
+        // Language content mapping
+        const translations = {
+            en: {
+                // Header translations
+                finance: 'Finance Department',
+                govt: 'Government of Gujarat',
+                // Dashboard translations
+                totalRevenue: 'Total Revenue',
+                annualRevenue: 'Annual Revenue',
+                totalExpenditure: 'Total Expenditure',
+                annualExpenditure: 'Annual Expenditure',
+                fiscalDeficit: 'Fiscal Deficit',
+                fiscalDeficitDesc: 'Fiscal Deficit',
+                debtToGdp: 'Debt to GDP Ratio',
+                debtToGdpDesc: 'Debt to GDP',
+                revenueTrends: 'Revenue Trends',
+                expenditureTrends: 'Expenditure Trends',
+                recentUpdates: 'Recent Updates',
+                // Initiative translations
+                nationalInitiatives: 'National Initiatives',
+                digitalIndiaTitle: 'Digital India',
+                digitalIndiaDesc: 'Transforming India into a digitally empowered society.',
+                makeInIndiaTitle: 'Make in India',
+                makeInIndiaDesc: 'Encouraging manufacturing in India.',
+                skillIndiaTitle: 'Skill India',
+                skillIndiaDesc: 'Empowering youth with skills for a better future.',
+                learnMore: 'Learn More',
+                // Budget translations
+                budgetOverview: 'Budget Overview',
+                totalBudgetDesc: 'Total budget allocation for the year.',
+                revenueSourcesDesc: 'Breakdown of revenue sources.',
+                expenditureBreakdownDesc: 'Detailed breakdown of expenditures.',
+                viewDetails: 'View Details',
+                dashboard: 'Dashboard',
+                initiatives: 'Initiatives',
+                budget: 'Budget',
+                schemes: 'Schemes',
+                announcements: 'Announcements'
+            },
+            hi: {
+                finance: 'वित्त मंत्रालय',
+                govt: 'गुजरात सरकार',
+                totalRevenue: 'कुल राजस्व',
+                annualRevenue: 'वार्षिक राजस्व',
+                totalExpenditure: 'कुल व्यय',
+                annualExpenditure: 'वार्षिक व्यय',
+                fiscalDeficit: 'राजकोषीय घाटा',
+                fiscalDeficitDesc: 'राजकोषीय घाटा',
+                debtToGdp: 'ऋण से जीडीपी अनुपात',
+                debtToGdpDesc: 'ऋण से जीडीपी',
+                revenueTrends: 'राजस्व प्रवृत्तियां',
+                expenditureTrends: 'व्यय प्रवृत्तियां',
+                recentUpdates: 'हाल के अपडेट',
+                nationalInitiatives: 'राष्ट्रीय पहल',
+                digitalIndiaTitle: 'डिजिटल इंडिया',
+                digitalIndiaDesc: 'भारत को डिजिटल रूप से सशक्त समाज में बदलना।',
+                makeInIndiaTitle: 'भारत में बनाएं',
+                makeInIndiaDesc: 'भारत में विनिर्माण को प्रोत्साहित करना।',
+                skillIndiaTitle: 'स्किल इंडिया',
+                skillIndiaDesc: 'युवाओं को बेहतर भविष्य के लिए कौशल प्रदान करना।',
+                learnMore: 'और जानें',
+                budgetOverview: 'बजट अवलोकन',
+                totalBudgetDesc: 'वर्ष के लिए कुल बजट आवंटन।',
+                revenueSourcesDesc: 'राजस्व स्रोतों का विभाजन।',
+                expenditureBreakdownDesc: 'व्यय का विस्तृत विभाजन।',
+                viewDetails: 'विवरण देखें',
+                dashboard: 'डैशबोर्ड',
+                initiatives: 'पहल',
+                budget: 'बजट',
+                schemes: 'योजनाएं',
+                announcements: 'घोषणाएं'
+            },
+            gu: {
+                finance: 'વિત્ત મંત્રાલય',
+                govt: 'ગુજરાત સરકાર',
+                totalRevenue: 'કુલ આવક',
+                annualRevenue: 'વાર્ષિક આવક',
+                totalExpenditure: 'કુલ ખર્ચ',
+                annualExpenditure: 'વાર્ષિક ખર્ચ',
+                fiscalDeficit: 'રાજકોષીય ઘાટો',
+                fiscalDeficitDesc: 'રાજકોષીય ઘાટો',
+                debtToGdp: 'કરજથી જીડીપીનું પ્રમાણ',
+                debtToGdpDesc: 'કરજથી જીડીપી',
+                revenueTrends: 'આવકના વલણ',
+                expenditureTrends: 'ખર્ચના વલણ',
+                recentUpdates: 'તાજેતરના અપડેટ્સ',
+                nationalInitiatives: 'રાષ્ટ્રીય પહેલ',
+                digitalIndiaTitle: 'ડિજિટલ ભારત',
+                digitalIndiaDesc: 'ભારતને ડિજિટલ રીતે સશક્ત સમાજમાં ફેરવવું.',
+                makeInIndiaTitle: 'ભારતમાં બનાવો',
+                makeInIndiaDesc: 'ભારતમાં ઉત્પાદનને પ્રોત્સાહન આપવું.',
+                skillIndiaTitle: 'સ્કિલ ઇન્ડિયા',
+                skillIndiaDesc: 'યુવાનોને વધુ સારી ભવિષ્ય માટે કૌશલ્ય આપવું.',
+                learnMore: 'વધુ જાણો',
+                budgetOverview: 'બજેટ સમીક્ષા',
+                totalBudgetDesc: 'વર્ષ માટે કુલ બજેટ ફાળવણી.',
+                revenueSourcesDesc: 'આવકના સ્ત્રોતોનું વિભાજન.',
+                expenditureBreakdownDesc: 'ખર્ચનું વિગતવાર વિભાજન.',
+                viewDetails: 'વિગતો જુઓ',
+                dashboard: 'ડેશબોર્ડ',
+                initiatives: 'પહેલ',
+                budget: 'બજેટ',
+                schemes: 'યોજનાઓ',
+                announcements: 'જાહેરાતો'
+            }
+        };
+
+        function updateLanguage(lang) {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang][key]) {
+                    // If element has icon, preserve it
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(' ' + translations[lang][key]));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update chart labels
+            updateChartLabels(lang);
+
+            // Save preference
+            localStorage.setItem('selected-language', lang);
+
+            // Update document title
+            document.title = translations[lang].finance;
+        }
+
+        function updateChartLabels(lang) {
+            if (window.revenueChart) {
+                window.revenueChart.data.labels = [
+                    translations[lang].revenueTrends,
+                    translations[lang].expenditureTrends
+                ];
+                window.revenueChart.update();
+            }
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selected-language') || 'en';
+            languageSelector.value = savedLanguage;
+            updateLanguage(savedLanguage);
+        });
+
+        // Language selector event listener
+        languageSelector.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title data-translate="ministry">Ministry of Education, Government of India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'india-orange': '#FF9933',
+                        'india-green': '#138808',
+                        'india-blue': '#000080'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+    <!-- Government Header -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="/department-dashboard/assets/images/emblem.png" 
+                         alt="Indian Emblem" class="h-12 mr-3"/>
+                    <div>
+                        <h1 class="text-sm font-bold text-india-blue dark:text-white" data-translate="govt">भारत सरकार / Government of India</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">शिक्षा मंत्रालय / Ministry of Education</h2>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
+                    </button>
+                    <select id="language-selector" class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                         <option value="en">English</option>
                         <option value="hi">हिंदी</option>
                         <option value="gu">ગુજરાતી</option>
@@ -67,32 +712,50 @@
     </div>
 
     <!-- Main Navigation -->
-    <nav class="bg-agri-green text-white shadow-lg">
+    <nav class="bg-purple-700 text-white shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
+                <!-- Navigation Links -->
                 <div class="hidden md:flex space-x-1">
-                    <button onclick="showTab('dashboard')"
-                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="dashboard">
-                        <i class="fas fa-chart-bar mr-2"></i><span>Dashboard</span>
+                    <button onclick="showTab('dashboard')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="dashboard">
+                        <i class="fas fa-chart-bar mr-2"></i><span data-translate="dashboard">Dashboard</span>
                     </button>
-                    <button onclick="showTab('schemes')"
-                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="schemes">
-                        <i class="fas fa-tractor mr-2"></i><span>Govt Schemes</span>
+                    <button onclick="showTab('initiatives')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="initiatives">
+                        <i class="fas fa-rocket mr-2"></i><span data-translate="initiatives">Initiatives</span>
                     </button>
-                    <button onclick="showTab('resources')"
-                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm" data-tab="resources">
-                        <i class="fas fa-seedling mr-2"></i><span>Farm Resources</span>
+                    <button onclick="showTab('institutions')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="institutions">
+                        <i class="fas fa-university mr-2"></i><span data-translate="institutions">Institutions</span>
                     </button>
-                    <button onclick="showTab('announcements')"
-                        class="tab-btn px-4 py-3 hover:bg-agri-yellow flex items-center text-sm"
-                        data-tab="announcements">
-                        <i class="fas fa-bullhorn mr-2"></i><span>Announcements</span>
+                    <button onclick="showTab('schemes')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="schemes">
+                        <i class="fas fa-hand-holding-heart mr-2"></i><span data-translate="schemes">Schemes</span>
+                    </button>
+                    <button onclick="showTab('announcements')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i><span data-translate="announcements">Announcements</span>
                     </button>
                 </div>
 
+                <!-- Right Side Items -->
                 <div class="flex items-center space-x-4">
-                    <!-- Notification system remains similar -->
+                    <div class="relative">
+                        <button id="notifications-btn" class="p-2 rounded-lg hover:bg-purple-600">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-2">Notifications</h3>
+                                <div id="notifications-list" class="space-y-2">
+                                    <!-- Notifications will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-purple-600">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -101,198 +764,552 @@
     <div class="container mx-auto p-6">
         <!-- Dashboard Tab -->
         <div id="dashboard" class="tab-content active">
-            <!-- Task Assignment Section -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
-                <h2 class="text-xl font-bold mb-4">Department Tasks</h2>
-                <div class="space-y-4" id="task-container">
-                    <!-- Dynamic tasks will be inserted here -->
-                </div>
-                <button onclick="openTaskModal()"
-                    class="mt-4 text-sm bg-agri-green text-white px-4 py-2 rounded-lg hover:bg-agri-brown">
-                    <i class="fas fa-plus mr-2"></i>Add New Task
-                </button>
-            </div>
-
-            <!-- Agriculture Statistics Cards -->
+            <!-- Statistics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-agri-green">
-                    <h3 class="text-lg font-semibold mb-2">Total Production</h3>
-                    <p class="text-3xl font-bold text-agri-green" id="total-production">Loading...</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">Current Season</p>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-purple-600">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="grossEnrollment">Gross Enrollment Ratio</h3>
+                    <p class="text-3xl font-bold text-purple-600">27.1%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="higherEd">Higher Education</p>
                 </div>
-                <!-- Add similar cards for other stats -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-orange">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="literacyRate">Literacy Rate</h3>
+                    <p class="text-3xl font-bold text-india-orange">77.7%</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="nationalAvg">National Average</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-green">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="genderParity">Gender Parity Index</h3>
+                    <p class="text-3xl font-bold text-india-green">1.01</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="higherEd">Higher Education</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-blue">
+                    <h3 class="text-lg font-semibold mb-2" data-translate="universities">Universities</h3>
+                    <p class="text-3xl font-bold text-india-blue">1,043</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="totalRecognized">Total Recognized</p>
+                </div>
             </div>
 
-            <!-- Agriculture Charts -->
+            <!-- Charts Section -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-lg font-semibold mb-4">Crop Production Trends</h3>
-                    <canvas id="cropProductionChart" height="150"></canvas>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="enrollmentTrends">Enrollment Trends</h3>
+                    <canvas id="enrollmentChart" height="300"></canvas>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-lg font-semibold mb-4">Land Usage Distribution</h3>
-                    <canvas id="landUsageChart" height="150"></canvas>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="budgetAllocation">Education Budget Allocation</h3>
+                    <canvas id="budgetChart" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Updates -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-lg font-semibold mb-4" data-translate="recentUpdates">Recent Updates</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-purple-100 dark:bg-purple-900 p-2 rounded-lg">
+                            <i class="fas fa-newspaper text-purple-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">National Education Policy 2020 Implementation</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Progress report on NEP 2020 implementation across states</p>
+                            <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-india-orange bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-graduation-cap text-india-orange"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">CUET 2024 Registration Opens</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Common University Entrance Test registration begins</p>
+                            <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initiatives Tab -->
+        <div id="initiatives" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="nationalInitiatives">National Initiatives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- NEP 2020 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-purple-100 dark:bg-purple-900 p-4">
+                        <i class="fas fa-book-reader text-4xl text-purple-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="nepTitle">NEP 2020</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="nepDesc">
+                            National Education Policy 2020 - Transforming India's education system
+                        </p>
+                        <a href="#" class="text-purple-600 hover:text-purple-700 font-medium" data-translate="learnMore" onclick="showDetails('NEP 2020')">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SWAYAM -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-india-orange bg-opacity-20 p-4">
+                        <i class="fas fa-laptop text-4xl text-india-orange"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="swayamTitle">SWAYAM</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="swayamDesc">
+                            Study Webs of Active-Learning for Young Aspiring Minds
+                        </p>
+                        <a href="#" class="text-india-orange hover:text-india-orange font-medium" data-translate="learnMore" onclick="showDetails('SWAYAM')">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PMSHRI -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-india-green bg-opacity-20 p-4">
+                        <i class="fas fa-school text-4xl text-india-green"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="pmshriTitle">PM SHRI</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="pmshriDesc">
+                            PM Schools for Rising India - Strengthening 14,500 schools
+                        </p>
+                        <a href="#" class="text-india-green hover:text-india-green font-medium" data-translate="learnMore" onclick="showDetails('PM SHRI')">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institutions Tab -->
+        <div id="institutions" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="educationalInst">Educational Institutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- IITs Section -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-microscope text-3xl text-purple-600 mr-3"></i>
+                        <h3 class="text-xl font-bold">IITs</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="iitDesc">
+                        Indian Institutes of Technology
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">23</span>
+                        <a href="#" class="text-purple-600 hover:text-purple-700" data-translate="viewAll" onclick="showDetails('IITs')">View All</a>
+                    </div>
+                </div>
+
+                <!-- NITs Section -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-3xl text-india-orange mr-3"></i>
+                        <h3 class="text-xl font-bold">NITs</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="nitDesc">
+                        National Institutes of Technology
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">31</span>
+                        <a href="#" class="text-india-orange hover:text-india-orange" data-translate="viewAll" onclick="showDetails('NITs')">View All</a>
+                    </div>
+                </div>
+
+                <!-- Central Universities -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-university text-3xl text-india-green mr-3"></i>
+                        <h3 class="text-xl font-bold" data-translate="centralUniv">Central Universities</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Central Universities across India
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold">54</span>
+                        <a href="#" class="text-india-green hover:text-india-green" data-translate="viewAll" onclick="showDetails('Central Universities')">View All</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Schemes Tab -->
         <div id="schemes" class="tab-content">
-            <h2 class="text-2xl font-bold mb-6">Government Schemes</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="schemes-container">
-                <!-- Dynamic schemes will be inserted here -->
-            </div>
-        </div>
+            <h2 class="text-2xl font-bold mb-6">Educational Schemes</h2>
+            <div class="space-y-6">
+                <!-- Scholarship Schemes -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Scholarship Schemes</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-award text-purple-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Post Matric Scholarship</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">For SC/ST Students</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-purple-600 hover:text-purple-700" onclick="showDetails('Post Matric Scholarship')">Apply Now</a>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-india-orange text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">National Scholarship Portal</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Central Sector Schemes</p>
+                                </div>
+                            </div>
+                            <a href="#" class="text-india-orange hover:text-india-orange" onclick="showDetails('National Scholarship Portal')">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Resources Tab -->
-        <div id="resources" class="tab-content">
-            <h2 class="text-2xl font-bold mb-6">Farm Resources</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="resources-container">
-                <!-- Dynamic resources will be inserted here -->
+                <!-- Other Schemes -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Educational Support Schemes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">Mid Day Meal Scheme</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                National Programme of Mid Day Meal in Schools
+                            </p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-semibold mb-2">Samagra Shiksha</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Integrated Scheme for School Education
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Announcements Tab -->
         <div id="announcements" class="tab-content">
-            <h2 class="text-2xl font-bold mb-6">Announcements</h2>
-            <div class="space-y-6" id="announcements-container">
-                <!-- Dynamic announcements will be inserted here -->
+            <h2 class="text-2xl font-bold mb-6">Latest Announcements</h2>
+            <div class="space-y-6">
+                <!-- Important Announcements -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h3 class="font-bold text-red-500">Important Notice</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                Last date for CUET-UG 2024 registration extended
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 8, 2024</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-bold text-purple-500">Examination Updates</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                JEE Main 2024 Session 2 dates announced
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">Posted: March 7, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Press Releases -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Press Releases</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-newspaper text-2xl text-gray-400"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">Ministry launches Digital Infrastructure for Knowledge Sharing</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    New initiative to enhance digital learning infrastructure
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">March 6, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Data Input Modals -->
-    <div id="task-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
-        <div class="modal-content bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20">
-            <h3 class="text-xl font-bold mb-4">Create New Task</h3>
-            <form id="task-form" onsubmit="handleTaskSubmit(event)">
-                <input type="text" id="task-title" placeholder="Task title" required
-                    class="w-full mb-4 p-2 border rounded">
-                <textarea id="task-description" placeholder="Task description"
-                    class="w-full mb-4 p-2 border rounded"></textarea>
-                <button type="submit" class="bg-agri-green text-white px-4 py-2 rounded-lg">Create Task</button>
-                <button type="button" onclick="closeTaskModal()" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded-lg">
-                    Cancel
-                </button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // Agriculture Data Configuration
-        const agricultureData = {
-            currentSeason: "Kharif 2024",
-            crops: ["Wheat", "Rice", "Cotton", "Vegetables"],
-            productionData: [120000, 95000, 75000, 60000], // in tons
-            landUsage: [40, 30, 20, 10], // percentages
-            schemes: [
-                {
-                    title: "PM Kisan Samman Nidhi",
-                    description: "Direct income support to farmers",
-                    image: "/assets/images/pm-kisan.jpg"
-                },
-                // Add more schemes
-            ],
-            resources: [
-                {
-                    title: "Seed Distribution",
-                    description: "Quality seeds for various crops",
-                    image: "/assets/images/seeds.jpg"
-                },
-                // Add more resources
-            ]
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('bg-purple-800');
+                } else {
+                    btn.classList.remove('bg-purple-800');
+                }
+            });
+        }
+
+        // Show Details Function (Placeholder for Learn More and View All)
+        function showDetails(item) {
+            alert(`You clicked on: ${item}`);
+        }
+
+        // Initialize Charts
+        const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
+        new Chart(enrollmentCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Higher Education Enrollment (in millions)',
+                    data: [37.4, 38.5, 39.8, 40.9, 41.5],
+                    borderColor: '#7C3AED',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        window.budgetChart = new Chart(budgetCtx, {
+            type: 'pie',
+            data: {
+                labels: ['School Education', 'Higher Education', 'Research', 'Other Schemes'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        '#7C3AED',
+                        '#FF9933',
+                        '#138808',
+                        '#000080'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Notifications
+        const notificationsBtn = document.getElementById('notifications-btn');
+        const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+        notificationsBtn.addEventListener('click', () => {
+            notificationsDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('#notifications-btn') && !event.target.closest('#notifications-dropdown')) {
+                notificationsDropdown.classList.add('hidden');
+            }
+        });
+
+        // Set initial active tab
+        showTab('dashboard');
+
+        // Language switching functionality
+        const languageSelector = document.getElementById('language-selector');
+
+        // Language content mapping
+        const translations = {
+            en: {
+                // Header translations
+                ministry: 'Ministry of Education',
+                govt: 'Government of Gujarat',
+                // Dashboard translations
+                grossEnrollment: 'Gross Enrollment Ratio',
+                higherEd: 'Higher Education',
+                literacyRate: 'Literacy Rate',
+                nationalAvg: 'National Average',
+                genderParity: 'Gender Parity Index',
+                universities: 'Universities',
+                totalRecognized: 'Total Recognized',
+                // Stats translations
+                enrollmentTrends: 'Enrollment Trends',
+                budgetAllocation: 'Education Budget Allocation',
+                recentUpdates: 'Recent Updates',
+                // Chart labels
+                schoolEd: 'School Education',
+                research: 'Research',
+                otherSchemes: 'Other Schemes',
+                // Initiative translations
+                nationalInitiatives: 'National Initiatives',
+                nepTitle: 'NEP 2020',
+                nepDesc: 'National Education Policy 2020 - Transforming India\'s education system',
+                swayamTitle: 'SWAYAM',
+                swayamDesc: 'Study Webs of Active-Learning for Young Aspiring Minds',
+                pmshriTitle: 'PM SHRI',
+                pmshriDesc: 'PM Schools for Rising India - Strengthening 14,500 schools',
+                learnMore: 'Learn More',
+                // Institution translations
+                educationalInst: 'Educational Institutions',
+                iitDesc: 'Indian Institutes of Technology',
+                nitDesc: 'National Institutes of Technology',
+                centralUniv: 'Central Universities',
+                viewAll: 'View All',
+                dashboard: 'Dashboard',
+                initiatives: 'Initiatives',
+                institutions: 'Institutions',
+                schemes: 'Schemes',
+                announcements: 'Announcements'
+            },
+            hi: {
+                ministry: 'शिक्षा मंत्रालय',
+                govt: 'गुजरात सरकार',
+                grossEnrollment: 'सकल नामांकन अनुपात',
+                higherEd: 'उच्च शिक्षा',
+                literacyRate: 'साक्षरता दर',
+                nationalAvg: 'राष्ट्रीय औसत',
+                genderParity: 'लैंगिक समानता सूचकांक',
+                universities: 'विश्वविद्यालय',
+                totalRecognized: 'कुल मान्यता प्राप्त',
+                enrollmentTrends: 'नामांकन प्रवृत्तियां',
+                budgetAllocation: 'शिक्षा बजट आवंटन',
+                recentUpdates: 'हाल के अपडेट',
+                schoolEd: 'स्कूली शिक्षा',
+                research: 'अनुसंधान',
+                otherSchemes: 'अन्य योजनाएं',
+                nationalInitiatives: 'राष्ट्रीय पहल',
+                nepTitle: 'एनईपी 2020',
+                nepDesc: 'राष्ट्रीय शिक्षा नीति 2020 - भारत की शिक्षा प्रणाली का परिवर्तन',
+                swayamTitle: 'स्वयं',
+                swayamDesc: 'युवा आकांक्षी मन के लिए सक्रिय-शिक्षण की अध्ययन वेब',
+                pmshriTitle: 'पीएम श्री',
+                pmshriDesc: 'पीएम राइजिंग इंडिया स्कूल - 14,500 स्कूलों को मजबूत बनाना',
+                learnMore: 'और जानें',
+                educationalInst: 'शैक्षणिक संस्थान',
+                iitDesc: 'भारतीय प्रौद्योगिकी संस्थान',
+                nitDesc: 'राष्ट्रीय प्रौद्योगिकी संस्थान',
+                centralUniv: 'केंद्रीय विश्वविद्यालय',
+                viewAll: 'सभी देखें',
+                dashboard: 'डैशबोर्ड',
+                initiatives: 'पहल',
+                institutions: 'संस्थान',
+                schemes: 'योजनाएं',
+                announcements: 'घोषणाएं'
+            },
+            gu: {
+                ministry: 'શિક્ષણ મંત્રાલય',
+                govt: 'ગુજરાત સરકાર',
+                grossEnrollment: 'કુલ નોંધણી દર',
+                higherEd: 'ઉચ્ચ શિક્ષણ',
+                literacyRate: 'સાક્ષરતા દર',
+                nationalAvg: 'રાષ્ટ્રીય સરેરાશ',
+                genderParity: 'જાતિ સમાનતા સૂચકાંક',
+                universities: 'યુનિવર્સિટીઓ',
+                totalRecognized: 'કુલ માન્યતા પ્રાપ્ત',
+                enrollmentTrends: 'નોંધણી વલણો',
+                budgetAllocation: 'શિક્ષણ બજેટ ફાળવણી',
+                recentUpdates: 'તાજેતરના અપડેટ્સ',
+                schoolEd: 'શાળા શિક્ષણ',
+                research: 'સંશોધન',
+                otherSchemes: 'અન્ય યોજનાઓ',
+                nationalInitiatives: 'રાષ્ટ્રીય પહેલ',
+                nepTitle: 'એનईપી 2020',
+                nepDesc: 'રાષ્ટ્રીય શિક્ષણ નીતિ 2020 - ભારતની શિક્ષણ પ્રણાલીનું પરિવર્તન',
+                swayamTitle: 'સ્વયં',
+                swayamDesc: 'યુવા મહત્વાકાંક્ષી મન માટે સક્રિય-શિક્ષણની અભ્યાસ વેબ',
+                pmshriTitle: 'પીએમ શ્રી',
+                pmshriDesc: 'પીએમ રાઇઝિંગ ઇન્ડિયા સ્કૂલ - 14500 શાળાઓને મજબૂત બનાવવી',
+                learnMore: 'વધુ જાણો',
+                educationalInst: 'શૈક્ષણિક સંસ્થાઓ',
+                iitDesc: 'ભારતીય ટેકનોલોજી સંસ્થાન',
+                nitDesc: 'રાષ્ટ્રીય ટેકનોલોજી સંસ્થાન',
+                centralUniv: 'કેન્દ્રીય યુનિવર્સિટીઓ',
+                viewAll: 'બધા જુઓ',
+                dashboard: 'ડેશબોર્ડ',
+                initiatives: 'પહેલ',
+                institutions: 'સંસ્થાઓ',
+                schemes: 'યોજનાઓ',
+                announcements: 'જાહેરાતો'
+            }
         };
 
-        // Initialize Agriculture Charts
-        const cropCtx = document.getElementById('cropProductionChart').getContext('2d');
-        new Chart(cropCtx, {
-            type: 'bar',
-            data: {
-                labels: agricultureData.crops,
-                datasets: [{
-                    label: 'Production (tons)',
-                    data: agricultureData.productionData,
-                    backgroundColor: '#1B5E20'
-                }]
-            },
-            options: { responsive: true }
-        });
+        function updateLanguage(lang) {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang][key]) {
+                    // If element has icon, preserve it
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(' ' + translations[lang][key]));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
 
-        const landCtx = document.getElementById('landUsageChart').getContext('2d');
-        new Chart(landCtx, {
-            type: 'doughnut',
-            data: {
-                labels: agricultureData.crops,
-                datasets: [{
-                    data: agricultureData.landUsage,
-                    backgroundColor: ['#1B5E20', '#6D4C41', '#F9A825', '#4CAF50']
-                }]
-            },
-            options: { responsive: true }
-        });
+            // Update chart labels
+            updateChartLabels(lang);
 
-        // Task Management System
-        let tasks = [
-            {
-                title: "Review Monsoon Preparedness Plan",
-                description: "Verify contingency plans for drought regions",
-                completed: false
+            // Save preference
+            localStorage.setItem('selected-language', lang);
+
+            // Update document title
+            document.title = translations[lang].ministry;
+        }
+
+        function updateChartLabels(lang) {
+            if (window.budgetChart) {
+                window.budgetChart.data.labels = [
+                    translations[lang].schoolEd,
+                    translations[lang].higherEd,
+                    translations[lang].research,
+                    translations[lang].otherSchemes
+                ];
+                window.budgetChart.update();
             }
-        ];
-
-        function renderTasks() {
-            const container = document.getElementById('task-container');
-            container.innerHTML = tasks.map((task, index) => `
-                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <div class="flex items-center">
-                        <i class="fas fa-tractor text-2xl ${task.completed ? 'text-gray-400' : 'text-agri-green'} mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold">${task.title}</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">${task.description}</p>
-                        </div>
-                    </div>
-                    <button onclick="toggleTask(${index})"
-                        class="text-sm ${task.completed ? 'bg-gray-400' : 'bg-agri-green'} text-white px-4 py-2 rounded-lg">
-                        ${task.completed ? 'Completed' : 'Mark Complete'}
-                    </button>
-                </div>
-            `).join('');
         }
 
-        function toggleTask(index) {
-            tasks[index].completed = !tasks[index].completed;
-            renderTasks();
-        }
-
-        function openTaskModal() {
-            document.getElementById('task-modal').classList.remove('hidden');
-        }
-
-        function closeTaskModal() {
-            document.getElementById('task-modal').classList.add('hidden');
-        }
-
-        function handleTaskSubmit(e) {
-            e.preventDefault();
-            const newTask = {
-                title: document.getElementById('task-title').value,
-                description: document.getElementById('task-description').value,
-                completed: false
-            };
-            tasks.push(newTask);
-            renderTasks();
-            closeTaskModal();
-        }
-
-        // Initialize dashboard
+        // Initialize language on page load
         document.addEventListener('DOMContentLoaded', () => {
-            renderTasks();
-            document.getElementById('total-production').textContent = 
-                `${agricultureData.productionData.reduce((a,b) => a+b).toLocaleString()} Tons`;
+            const savedLanguage = localStorage.getItem('selected-language') || 'en';
+            languageSelector.value = savedLanguage;
+            updateLanguage(savedLanguage);
         });
 
-        // Maintain existing theme and language functionality
-        // Add similar dynamic rendering for schemes and resources
+        // Language selector event listener
+        languageSelector.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
     </script>
 </body>
 </html>
