@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,20 +34,35 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo {
-            width: 120px; /* Increased size */
+            width: 120px;
+            /* Increased size */
             height: auto;
             margin-bottom: 15px;
             animation: bounceIn 1s ease-in-out;
         }
 
         @keyframes bounceIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .login-container h2 {
@@ -60,7 +76,8 @@
             margin-bottom: 20px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 12px;
             padding-left: 45px;
@@ -71,7 +88,8 @@
             transition: 0.3s ease-in-out;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             background: #3e3e3e;
             transform: scale(1.05);
@@ -114,7 +132,8 @@
 
 <body>
     <div class="login-container">
-        <img src="/department-dashboard/assets/images/logo.png" alt="Samridhh Gov Logo" class="logo"> <!-- Replace with actual logo file -->
+        <img src="/department-dashboard/assets/images/logo.png" alt="Samridhh Gov Logo" class="logo">
+        <!-- Replace with actual logo file -->
         <h2>Samridhh Gov Login Portal</h2>
         <form id="loginForm">
             <div class="form-group">
@@ -140,6 +159,7 @@
                 <i class="fa fa-user-tag"></i>
                 <select id="role" required>
                     <option value="" disabled selected>Select Role</option>
+                    <option value="admin">Admin</option>
                     <option value="hod">HOD</option>
                     <option value="employee">Employee</option>
                 </select>
@@ -173,4 +193,5 @@
         });
     </script>
 </body>
+
 </html>

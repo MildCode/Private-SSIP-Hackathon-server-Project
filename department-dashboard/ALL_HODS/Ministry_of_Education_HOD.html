@@ -1,11 +1,563 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Head of Department - Education Department</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dark-theme {
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+        }
+
+        .dark-theme .bg-white {
+            background-color: #2c2c2c !important;
+        }
+
+        .dark-theme .bg-light {
+            background-color: #1c1c1c !important;
+        }
+
+        .dark-theme .bg-primary {
+            background-color: #0056b3 !important;
+        }
+
+        .dark-theme .text-muted {
+            color: #b0b0b0 !important;
+        }
+
+        .dark-theme .card {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+        }
+
+        .dark-theme .btn-outline-secondary {
+            color: #e0e0e0;
+            border-color: #e0e0e0;
+        }
+
+        .dark-theme .btn-outline-secondary:hover {
+            background-color: #e0e0e0;
+            color: #1c1c1c;
+        }
+    </style>
 </head>
-<body>
-    <h1>welcome to ministry of eduction hod</h1>
+
+<body class="bg-light">
+    <!-- Header -->
+    <div class="bg-white border-bottom">
+        <div class="container py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="/department-dashboard/assets/images/emblem.png" alt="Indian Emblem" class="mr-3" style="height: 50px;" />
+                    <div>
+                        <h1 class="h5 mb-0">Government of India</h1>
+                        <h2 class="h6 text-muted">Ministry of Education</h2>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button id="theme-toggle" class="btn btn-outline-secondary mr-2">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun d-none"></i>
+                    </button>
+                    <select id="language-selector" class="form-control">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('dashboard')">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('initiatives')">Initiatives</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('institutions')">Institutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('schemes')">Schemes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('announcements')">Announcements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('tasks')">Tasks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Gross Enrollment Ratio</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">27.1%</div>
+                            <div class="text-xs text-muted">Higher Education</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Literacy Rate</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">77.7%</div>
+                            <div class="text-xs text-muted">National Average</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gender Parity Index</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">1.01</div>
+                            <div class="text-xs text-muted">Higher Education</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Universities</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">1,043</div>
+                            <div class="text-xs text-muted">Total Recognized</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Enrollment Trends</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="enrollmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Education Budget Allocation</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Initiatives Tab -->
+        <div id="initiatives" class="tab-content">
+            <h2 class="h4 mb-4">National Initiatives</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">NEP 2020</h5>
+                            <p class="card-text">National Education Policy 2020 - Transforming India's education system</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('nepDetails')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">SWAYAM</h5>
+                            <p class="card-text">Study Webs of Active-Learning for Young Aspiring Minds</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('swayamDetails')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">PM SHRI</h5>
+                            <p class="card-text">PM Schools for Rising India - Strengthening 14,500 schools</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('pmshriDetails')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institutions Tab -->
+        <div id="institutions" class="tab-content">
+            <h2 class="h4 mb-4">Educational Institutions</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">IITs</h5>
+                            <p class="card-text">Indian Institutes of Technology</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('iitDetails')">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">NITs</h5>
+                            <p class="card-text">National Institutes of Technology</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('nitDetails')">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Central Universities</h5>
+                            <p class="card-text">Central Universities across India</p>
+                            <a href="#" class="btn btn-primary" onclick="showDetails('centralUnivDetails')">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schemes Tab -->
+        <div id="schemes" class="tab-content">
+            <h2 class="h4 mb-4">Educational Schemes</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Scholarship Schemes</h5>
+                            <p class="card-text">Various scholarship schemes for students</p>
+                            <a href="#" class="btn btn-primary" onclick="showForm('postMatricForm')">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Educational Support Schemes</h5>
+                            <p class="card-text">Support schemes for educational development</p>
+                            <a href="#" class="btn btn-primary" onclick="showForm('nationalScholarshipForm')">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <h2 class="h4 mb-4">Latest Announcements</h2>
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Important Notice</h5>
+                    <p class="card-text">Last date for CUET-UG 2024 registration extended</p>
+                    <p class="text-muted">Posted: March 8, 2024</p>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Examination Updates</h5>
+                    <p class="card-text">JEE Main 2024 Session 2 dates announced</p>
+                    <p class="text-muted">Posted: March 7, 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Tab -->
+        <div id="tasks" class="tab-content">
+            <h2 class="h4 mb-4">Assigned Tasks</h2>
+            <div id="taskList">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Task 1</h5>
+                        <p class="card-text">Description of task 1</p>
+                        <p class="text-muted">Assigned to: Employee 1</p>
+                        <p class="text-muted">Due Date: March 15, 2024</p>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Task 2</h5>
+                        <p class="card-text">Description of task 2</p>
+                        <p class="text-muted">Assigned to: Employee 2</p>
+                        <p class="text-muted">Due Date: March 20, 2024</p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="h4 mb-4">Add New Task</h2>
+            <form id="taskForm" onsubmit="addTask(event)">
+                <div class="form-group">
+                    <label>Task Title</label>
+                    <input type="text" id="taskTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Task Description</label>
+                    <textarea id="taskDescription" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Assign To</label>
+                    <input type="text" id="taskAssignee" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" id="taskDueDate" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+
+        <!-- Details Tab (Hidden by default) -->
+        <div id="detailsTab" class="tab-content">
+            <h2 class="h4 mb-4">Details</h2>
+            <div id="detailsContent" class="card shadow p-4">
+                <!-- Details will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Form Tab (Hidden by default) -->
+        <div id="formTab" class="tab-content">
+            <h2 class="h4 mb-4">Application Form</h2>
+            <div id="formContent" class="card shadow p-4">
+                <!-- Form will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Theme Toggle Function
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            document.getElementById('theme-toggle-dark-icon').classList.toggle('d-none');
+            document.getElementById('theme-toggle-light-icon').classList.toggle('d-none');
+        });
+
+        // Show Details Function
+        function showDetails(detailId) {
+            const details = {
+                nepDetails: `
+                    <h3 class="h5 mb-4">NEP 2020 Details</h3>
+                    <p>The National Education Policy 2020 aims to transform India's education system by 2040. It focuses on holistic, flexible, and multidisciplinary education.</p>
+                `,
+                swayamDetails: `
+                    <h3 class="h5 mb-4">SWAYAM Details</h3>
+                    <p>SWAYAM is a program initiated by the Government of India to provide free online courses to students and professionals.</p>
+                `,
+                pmshriDetails: `
+                    <h3 class="h5 mb-4">PM SHRI Details</h3>
+                    <p>PM SHRI aims to strengthen 14,500 schools across India by providing modern infrastructure and quality education.</p>
+                `,
+                iitDetails: `
+                    <h3 class="h5 mb-4">IITs Details</h3>
+                    <p>The Indian Institutes of Technology (IITs) are autonomous public technical and research universities located across India.</p>
+                `,
+                nitDetails: `
+                    <h3 class="h5 mb-4">NITs Details</h3>
+                    <p>The National Institutes of Technology (NITs) are premier engineering institutions in India.</p>
+                `,
+                centralUnivDetails: `
+                    <h3 class="h5 mb-4">Central Universities Details</h3>
+                    <p>Central Universities are established by an Act of Parliament and are funded by the Government of India.</p>
+                `
+            };
+            document.getElementById('detailsContent').innerHTML = details[detailId];
+            showTab('detailsTab');
+        }
+
+        // Show Form Function
+        function showForm(formId) {
+            const forms = {
+                postMatricForm: `
+                    <form id="postMatricForm" onsubmit="submitForm(event, 'postMatricForm')">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                `,
+                nationalScholarshipForm: `
+                    <form id="nationalScholarshipForm" onsubmit="submitForm(event, 'nationalScholarshipForm')">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                `
+            };
+            document.getElementById('formContent').innerHTML = forms[formId];
+            showTab('formTab');
+        }
+
+        // Submit Form Function
+        function submitForm(event, formId) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            // Save to Firebase (dummy function for demonstration)
+            console.log('Form submitted:', data);
+            alert('Form submitted successfully!');
+            showTab('dashboard'); // Redirect to dashboard
+        }
+
+        // Add Task Function
+        function addTask(event) {
+            event.preventDefault();
+            const taskTitle = document.getElementById('taskTitle').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskAssignee = document.getElementById('taskAssignee').value;
+            const taskDueDate = document.getElementById('taskDueDate').value;
+
+            const task = {
+                title: taskTitle,
+                description: taskDescription,
+                assignee: taskAssignee,
+                dueDate: taskDueDate
+            };
+
+            // Save to Firebase (dummy function for demonstration)
+            console.log('Task added:', task);
+            alert('Task added successfully!');
+
+            // Clear form
+            document.getElementById('taskForm').reset();
+
+            // Display task on both HOD and employee pages
+            displayTask(task);
+        }
+
+        // Display Task Function
+        function displayTask(task) {
+            const taskHtml = `
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">${task.title}</h5>
+                        <p class="card-text">${task.description}</p>
+                        <p class="text-muted">Assigned to: ${task.assignee}</p>
+                        <p class="text-muted">Due Date: ${task.dueDate}</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('taskList').insertAdjacentHTML('beforeend', taskHtml);
+
+            // Assuming the employee page has an element with id 'employeeTasks'
+            const employeeTasks = document.getElementById('employeeTasks');
+            if (employeeTasks) {
+                employeeTasks.insertAdjacentHTML('beforeend', taskHtml);
+            }
+        }
+        // Initialize Charts
+        const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
+        new Chart(enrollmentCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Higher Education Enrollment (in millions)',
+                    data: [37.4, 38.5, 39.8, 40.9, 41.5],
+                    borderColor: '#007bff',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'pie',
+            data: {
+                labels: ['School Education', 'Higher Education', 'Research', 'Other Schemes'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: [
+                        '#007bff',
+                        '#28a745',
+                        '#ffc107',
+                        '#dc3545'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>
