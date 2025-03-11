@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title data-translate="ministry">Ministry of Education, Government of India</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase Integration -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+    </script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -26,25 +45,29 @@
         body {
             font-family: 'Roboto', sans-serif;
         }
+
         .tab-content {
             display: none;
         }
+
         .tab-content.active {
             display: block;
         }
     </style>
 </head>
+
 <body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
     <!-- Government Header -->
     <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div class="container mx-auto px-4 py-2">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <img src="/department-dashboard/assets/images/emblem.png" 
-                         alt="Indian Emblem" class="h-12 mr-3"/>
+                    <img src="/department-dashboard/assets/images/emblem.png" alt="Indian Emblem" class="h-12 mr-3" />
                     <div>
-                        <h1 class="text-sm font-bold text-india-blue dark:text-white" data-translate="govt">भारत सरकार / Government of India</h1>
-                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">शिक्षा मंत्रालय / Ministry of Education</h2>
+                        <h1 class="text-sm font-bold text-india-blue dark:text-white" data-translate="govt">भारत सरकार /
+                            Government of India</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">शिक्षा मंत्रालय /
+                            Ministry of Education</h2>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -52,7 +75,8 @@
                         <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
                         <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
                     </button>
-                    <select id="language-selector" class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <select id="language-selector"
+                        class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                         <option value="en">English</option>
                         <option value="hi">हिंदी</option>
                         <option value="gu">ગુજરાતી</option>
@@ -68,19 +92,25 @@
             <div class="flex items-center justify-between">
                 <!-- Navigation Links -->
                 <div class="hidden md:flex space-x-1">
-                    <button onclick="showTab('dashboard')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="dashboard">
+                    <button onclick="showTab('dashboard')"
+                        class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="dashboard">
                         <i class="fas fa-chart-bar mr-2"></i><span data-translate="dashboard">Dashboard</span>
                     </button>
-                    <button onclick="showTab('initiatives')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="initiatives">
+                    <button onclick="showTab('initiatives')"
+                        class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="initiatives">
                         <i class="fas fa-rocket mr-2"></i><span data-translate="initiatives">Initiatives</span>
                     </button>
-                    <button onclick="showTab('institutions')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="institutions">
+                    <button onclick="showTab('institutions')"
+                        class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="institutions">
                         <i class="fas fa-university mr-2"></i><span data-translate="institutions">Institutions</span>
                     </button>
-                    <button onclick="showTab('schemes')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="schemes">
+                    <button onclick="showTab('schemes')"
+                        class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="schemes">
                         <i class="fas fa-hand-holding-heart mr-2"></i><span data-translate="schemes">Schemes</span>
                     </button>
-                    <button onclick="showTab('announcements')" class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm" data-tab="announcements">
+                    <button onclick="showTab('announcements')"
+                        class="tab-btn px-4 py-3 hover:bg-purple-600 flex items-center text-sm"
+                        data-tab="announcements">
                         <i class="fas fa-bullhorn mr-2"></i><span data-translate="announcements">Announcements</span>
                     </button>
                 </div>
@@ -90,9 +120,11 @@
                     <div class="relative">
                         <button id="notifications-btn" class="p-2 rounded-lg hover:bg-purple-600">
                             <i class="fas fa-bell"></i>
-                            <span id="notification-badge" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                            <span id="notification-badge"
+                                class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                         </button>
-                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                        <div id="notifications-dropdown"
+                            class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
                             <div class="p-4">
                                 <h3 class="text-lg font-bold mb-2">Notifications</h3>
                                 <div id="notifications-list" class="space-y-2">
@@ -125,7 +157,8 @@
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-orange">
                     <h3 class="text-lg font-semibold mb-2" data-translate="literacyRate">Literacy Rate</h3>
                     <p class="text-3xl font-bold text-india-orange">77.7%</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="nationalAvg">National Average</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="nationalAvg">National Average
+                    </p>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-green">
                     <h3 class="text-lg font-semibold mb-2" data-translate="genderParity">Gender Parity Index</h3>
@@ -135,7 +168,8 @@
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-india-blue">
                     <h3 class="text-lg font-semibold mb-2" data-translate="universities">Universities</h3>
                     <p class="text-3xl font-bold text-india-blue">1,043</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="totalRecognized">Total Recognized</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" data-translate="totalRecognized">Total
+                        Recognized</p>
                 </div>
             </div>
 
@@ -146,7 +180,8 @@
                     <canvas id="enrollmentChart" height="300"></canvas>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-lg font-semibold mb-4" data-translate="budgetAllocation">Education Budget Allocation</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="budgetAllocation">Education Budget Allocation
+                    </h3>
                     <canvas id="budgetChart" height="300"></canvas>
                 </div>
             </div>
@@ -161,7 +196,8 @@
                         </div>
                         <div class="ml-4">
                             <p class="font-semibold">National Education Policy 2020 Implementation</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Progress report on NEP 2020 implementation across states</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Progress report on NEP 2020
+                                implementation across states</p>
                             <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
                         </div>
                     </div>
@@ -171,7 +207,8 @@
                         </div>
                         <div class="ml-4">
                             <p class="font-semibold">CUET 2024 Registration Opens</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Common University Entrance Test registration begins</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Common University Entrance Test
+                                registration begins</p>
                             <p class="text-xs text-gray-500 mt-1">1 day ago</p>
                         </div>
                     </div>
@@ -193,7 +230,8 @@
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="nepDesc">
                             National Education Policy 2020 - Transforming India's education system
                         </p>
-                        <a href="#" class="text-purple-600 hover:text-purple-700 font-medium" data-translate="learnMore">
+                        <a href="#" class="text-purple-600 hover:text-purple-700 font-medium" data-translate="learnMore"
+                            onclick="showDetails('nepDetails')">
                             Learn More <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -209,7 +247,8 @@
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="swayamDesc">
                             Study Webs of Active-Learning for Young Aspiring Minds
                         </p>
-                        <a href="#" class="text-india-orange hover:text-india-orange font-medium" data-translate="learnMore">
+                        <a href="#" class="text-india-orange hover:text-india-orange font-medium"
+                            data-translate="learnMore" onclick="showDetails('swayamDetails')">
                             Learn More <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -225,7 +264,8 @@
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="pmshriDesc">
                             PM Schools for Rising India - Strengthening 14,500 schools
                         </p>
-                        <a href="#" class="text-india-green hover:text-india-green font-medium" data-translate="learnMore">
+                        <a href="#" class="text-india-green hover:text-india-green font-medium"
+                            data-translate="learnMore" onclick="showDetails('pmshriDetails')">
                             Learn More <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -248,7 +288,8 @@
                     </p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold">23</span>
-                        <a href="#" class="text-purple-600 hover:text-purple-700" data-translate="viewAll">View All</a>
+                        <a href="#" class="text-purple-600 hover:text-purple-700" data-translate="viewAll"
+                            onclick="showDetails('iitDetails')">View All</a>
                     </div>
                 </div>
 
@@ -263,7 +304,8 @@
                     </p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold">31</span>
-                        <a href="#" class="text-india-orange hover:text-india-orange" data-translate="viewAll">View All</a>
+                        <a href="#" class="text-india-orange hover:text-india-orange" data-translate="viewAll"
+                            onclick="showDetails('nitDetails')">View All</a>
                     </div>
                 </div>
 
@@ -278,7 +320,8 @@
                     </p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold">54</span>
-                        <a href="#" class="text-india-green hover:text-india-green" data-translate="viewAll">View All</a>
+                        <a href="#" class="text-india-green hover:text-india-green" data-translate="viewAll"
+                            onclick="showDetails('centralUnivDetails')">View All</a>
                     </div>
                 </div>
             </div>
@@ -300,7 +343,8 @@
                                     <p class="text-sm text-gray-600 dark:text-gray-400">For SC/ST Students</p>
                                 </div>
                             </div>
-                            <a href="#" class="text-purple-600 hover:text-purple-700">Apply Now</a>
+                            <a href="#" class="text-purple-600 hover:text-purple-700"
+                                onclick="showForm('postMatricForm')">Apply Now</a>
                         </div>
                         <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center">
@@ -310,7 +354,8 @@
                                     <p class="text-sm text-gray-600 dark:text-gray-400">Central Sector Schemes</p>
                                 </div>
                             </div>
-                            <a href="#" class="text-india-orange hover:text-india-orange">Apply Now</a>
+                            <a href="#" class="text-india-orange hover:text-india-orange"
+                                onclick="showForm('nationalScholarshipForm')">Apply Now</a>
                         </div>
                     </div>
                 </div>
@@ -369,7 +414,8 @@
                                 <i class="fas fa-newspaper text-2xl text-gray-400"></i>
                             </div>
                             <div class="ml-4">
-                                <h4 class="font-semibold">Ministry launches Digital Infrastructure for Knowledge Sharing</h4>
+                                <h4 class="font-semibold">Ministry launches Digital Infrastructure for Knowledge Sharing
+                                </h4>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">
                                     New initiative to enhance digital learning infrastructure
                                 </p>
@@ -378,6 +424,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Details Tab (Hidden by default) -->
+        <div id="detailsTab" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Details</h2>
+            <div id="detailsContent" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <!-- Details will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Form Tab (Hidden by default) -->
+        <div id="formTab" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6">Application Form</h2>
+            <div id="formContent" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <!-- Form will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -396,6 +458,111 @@
                     btn.classList.remove('bg-purple-800');
                 }
             });
+        }
+
+        // Show Details Function
+        function showDetails(detailId) {
+            const details = {
+                nepDetails: `
+                    <h3 class="text-xl font-bold mb-4">NEP 2020 Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The National Education Policy 2020 aims to transform India's education system by 2040. It focuses on holistic, flexible, and multidisciplinary education.
+                    </p>
+                `,
+                swayamDetails: `
+                    <h3 class="text-xl font-bold mb-4">SWAYAM Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        SWAYAM is a program initiated by the Government of India to provide free online courses to students and professionals.
+                    </p>
+                `,
+                pmshriDetails: `
+                    <h3 class="text-xl font-bold mb-4">PM SHRI Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        PM SHRI aims to strengthen 14,500 schools across India by providing modern infrastructure and quality education.
+                    </p>
+                `,
+                iitDetails: `
+                    <h3 class="text-xl font-bold mb-4">IITs Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The Indian Institutes of Technology (IITs) are autonomous public technical and research universities located across India.
+                    </p>
+                `,
+                nitDetails: `
+                    <h3 class="text-xl font-bold mb-4">NITs Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        The National Institutes of Technology (NITs) are premier engineering institutions in India.
+                    </p>
+                `,
+                centralUnivDetails: `
+                    <h3 class="text-xl font-bold mb-4">Central Universities Details</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Central Universities are established by an Act of Parliament and are funded by the Government of India.
+                    </p>
+                `
+            };
+            document.getElementById('detailsContent').innerHTML = details[detailId];
+            showTab('detailsTab');
+        }
+
+        // Show Form Function
+        function showForm(formId) {
+            const forms = {
+                postMatricForm: `
+                    <form id="postMatricForm" onsubmit="submitForm(event, 'postMatricForm')">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Name</label>
+                            <input type="text" name="name" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" name="email" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Phone</label>
+                            <input type="tel" name="phone" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded-lg">Submit</button>
+                    </form>
+                `,
+                nationalScholarshipForm: `
+                    <form id="nationalScholarshipForm" onsubmit="submitForm(event, 'nationalScholarshipForm')">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Name</label>
+                            <input type="text" name="name" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" name="email" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 dark:text-gray-300">Phone</label>
+                            <input type="tel" name="phone" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <button type="submit" class="bg-india-orange text-white px-4 py-2 rounded-lg">Submit</button>
+                    </form>
+                `
+            };
+            document.getElementById('formContent').innerHTML = forms[formId];
+            showTab('formTab');
+        }
+
+        // Submit Form Function
+        function submitForm(event, formId) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            // Save to Firebase
+            database.ref(formId).push(data)
+                .then(() => {
+                    alert('Form submitted successfully!');
+                    showTab('dashboard'); // Redirect to dashboard
+                })
+                .catch((error) => {
+                    alert('Error submitting form: ' + error.message);
+                });
         }
 
         // Initialize Charts
@@ -451,7 +618,7 @@
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        if (localStorage.getItem('color-theme') === 'dark' || 
+        if (localStorage.getItem('color-theme') === 'dark' ||
             (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             themeToggleDarkIcon.classList.remove('hidden');
@@ -658,4 +825,5 @@
         });
     </script>
 </body>
+
 </html>
