@@ -8,64 +8,136 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest"></script>
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
-
+    
         .tab-content {
             display: none;
         }
-
+    
         .tab-content.active {
             display: block;
         }
-
+    
+        /* Light Mode */
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+    
+        .bg-white {
+            background-color: #ffffff !important;
+        }
+    
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+    
+        .bg-primary {
+            background-color: #007bff !important;
+        }
+    
+        .text-muted {
+            color: #6c757d !important;
+        }
+    
+        .card {
+            background-color: #ffffff;
+            color: #212529;
+        }
+    
+        .btn-outline-secondary {
+            color: #212529;
+            border-color: #6c757d;
+        }
+    
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #ffffff;
+        }
+    
+        /* Dark Mode */
         .dark-theme {
-            background-color: #1c1c1c;
+            background-color: #121212;
             color: #e0e0e0;
         }
-
+    
         .dark-theme .bg-white {
+            background-color: #1e1e1e !important;
+        }
+    
+        .dark-theme .bg-light {
             background-color: #2c2c2c !important;
         }
-
-        .dark-theme .bg-light {
-            background-color: #1c1c1c !important;
-        }
-
+    
         .dark-theme .bg-primary {
             background-color: #0056b3 !important;
         }
-
+    
         .dark-theme .text-muted {
             color: #b0b0b0 !important;
         }
-
+    
         .dark-theme .card {
-            background-color: #2c2c2c;
+            background-color: #1e1e1e;
             color: #e0e0e0;
         }
-
+    
         .dark-theme .btn-outline-secondary {
             color: #e0e0e0;
             border-color: #e0e0e0;
         }
-
+    
         .dark-theme .btn-outline-secondary:hover {
             background-color: #e0e0e0;
-            color: #1c1c1c;
+            color: #121212;
+        }
+    
+        /* Button Styling */
+        .btn {
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #ffffff;
+        }
+    
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    
+        .btn-outline-secondary {
+            background-color: transparent;
+            border-color: #6c757d;
+            color: #6c757d;
+        }
+    
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #ffffff;
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
     <!-- Header -->
     <div class="bg-white border-bottom">
         <div class="container py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="/department-dashboard/assets/images/emblem.png" alt="Indian Emblem" class="mr-3" style="height: 50px;" />
+                    <img src="/department-dashboard/assets/images/white-logo.png" alt="Indian Emblem" class="mr-3" style="height: 50px;" />
                     <div>
                         <h1 class="h5 mb-0">Government of India</h1>
                         <h2 class="h6 text-muted">Ministry of Education</h2>
@@ -112,6 +184,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showTab('tasks')">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showTab('employees')">Employees</a>
                     </li>
                 </ul>
             </div>
@@ -171,7 +246,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <!-- <div class="col-lg-6 mb-4">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Education Budget Allocation</h6>
@@ -180,6 +255,9 @@
                             <canvas id="budgetChart"></canvas>
                         </div>
                     </div>
+                </div> -->
+                <div class="flex justify-center">
+                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 500px; height: 400px;padding-left: 100px;" loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
@@ -356,9 +434,47 @@
         </div>
     </div>
 
+    <!-- Employees Tab -->
+<div id="employees" class="tab-content">
+    <h2 class="h4 mb-4">Employees</h2>
+    <div class="row"  id="employeeList">
+      
+    </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fetch employees from the API
+        fetch('https://hod-api-2.vercel.app/api/hods/HOD_C/employees')
+            .then(response => response.json())
+            .then(data => {
+                const employeeList = document.getElementById('employeeList');
+                data.forEach(employee => {
+                    const employeeCard = `
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">${employee.name}</h5>
+                                    <p class="card-text">Department: ${employee.department}</p>
+                                    <p class="card-text">Tasks Assigned: ${employee.tasksAssigned}</p>
+                                    <p class="card-text">Performance Score: ${employee.performanceScore}%</p>
+                                    <button class="btn btn-primary" onclick="viewEmployeeDetails('${employee.id}')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    employeeList.insertAdjacentHTML('beforeend', employeeCard);
+                });
+            })
+            .catch(error => console.error('Error fetching employees:', error));
+    
+        // Function to view employee details
+        function viewEmployeeDetails(employeeId) {
+            // Fetch and display employee details (implementation depends on your requirements)
+            alert('View details for employee ID: ' + employeeId);
+        }
+    </script>
     <script>
         // Tab Switching Function
         function showTab(tabId) {
