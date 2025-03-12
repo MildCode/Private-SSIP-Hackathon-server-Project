@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-translate="hodPage">HOD Dashboard - Agriculture Department</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'agriculture-green': '#138808',
+                        'agriculture-orange': '#FF9933',
+                        'agriculture-blue': '#000080'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+    <!-- Government Header -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="/assets/images/emblem.png" alt="Gujarat Emblem" class="h-12 mr-3" />
+                    <div>
+                        <h1 class="text-sm font-bold text-agriculture-blue dark:text-white" data-translate="govt">ગુજરાત
+                            સરકાર / Government of Gujarat</h1>
+                        <h2 class="text-xs text-gray-600 dark:text-gray-400" data-translate="ministry">કૃષિ મંત્રાલય /
+                            Ministry of Agriculture</h2>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun"></i>
+                    </button>
+                    <select id="language-selector"
+                        class="text-sm p-1 border rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="gu">ગુજરાતી</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="bg-agriculture-green text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="showTab('dashboard')"
+                        class="tab-btn px-4 py-3 hover:bg-agriculture-blue flex items-center text-sm"
+                        data-tab="dashboard">
+                        <i class="fas fa-chart-bar mr-2"></i><span data-translate="dashboard">Dashboard</span>
+                    </button>
+                    <button onclick="showTab('tasks')"
+                        class="tab-btn px-4 py-3 hover:bg-agriculture-blue flex items-center text-sm" data-tab="tasks">
+                        <i class="fas fa-tasks mr-2"></i><span data-translate="tasks">Tasks</span>
+                    </button>
+                    <button onclick="showTab('reports')"
+                        class="tab-btn px-4 py-3 hover:bg-agriculture-blue flex items-center text-sm" data-tab="reports">
+                        <i class="fas fa-file-alt mr-2"></i><span data-translate="reports">Reports</span>
+                    </button>
+                    <button onclick="showTab('team')"
+                        class="tab-btn px-4 py-3 hover:bg-agriculture-blue flex items-center text-sm" data-tab="team">
+                        <i class="fas fa-users mr-2"></i><span data-translate="team">Team</span>
+                    </button>
+                </div>
+
+                <!-- Right Side Items -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notifications-btn" class="p-2 rounded-lg hover:bg-agriculture-blue">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge"
+                                class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                        </button>
+                        <div id="notifications-dropdown"
+                            class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-2">Notifications</h3>
+                                <div id="notifications-list" class="space-y-2">
+                                    <!-- Notifications will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-agriculture-blue">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto p-6">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Department Overview -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6">
+                <h2 class="text-xl font-bold mb-4" data-translate="overview">Department Overview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold" data-translate="totalSchemes">Total Schemes</h3>
+                        <p class="text-3xl font-bold text-agriculture-green">24</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold" data-translate="pendingTasks">Pending Tasks</h3>
+                        <p class="text-3xl font-bold text-agriculture-orange">12</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold" data-translate="teamMembers">Team Members</h3>
+                        <p class="text-3xl font-bold text-agriculture-blue">45</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-4" data-translate="recentActivity">Recent Activity</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-agriculture-green bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-tasks text-agriculture-green"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">Task Completed: PM Kisan Report Review</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Completed by: John Doe</p>
+                            <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-agriculture-orange bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-file-alt text-agriculture-orange"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-semibold">New Report Submitted: Irrigation Coverage</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Submitted by: Jane Smith</p>
+                            <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Tab -->
+        <div id="tasks" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="tasks">Tasks</h2>
+            <div class="space-y-6">
+                <!-- Task Assignment Section -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4" data-translate="assignTask">Assign New Task</h3>
+                    <form id="assign-task-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1" data-translate="taskTitle">Task Title</label>
+                            <input type="text" class="w-full p-2 border rounded-lg" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1" data-translate="assignTo">Assign To</label>
+                            <select class="w-full p-2 border rounded-lg">
+                                <option>John Doe</option>
+                                <option>Jane Smith</option>
+                                <option>Team A</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1" data-translate="dueDate">Due Date</label>
+                            <input type="date" class="w-full p-2 border rounded-lg" required />
+                        </div>
+                        <button type="submit"
+                            class="bg-agriculture-green text-white px-4 py-2 rounded-lg hover:bg-agriculture-blue"
+                            data-translate="assignTaskButton">
+                            Assign Task
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Task List -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4" data-translate="taskList">Task List</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-tasks text-2xl text-agriculture-green mr-4"></i>
+                                <div>
+                                    <h3 class="font-semibold">Review PM Kisan Scheme Progress</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Assigned to: John Doe</p>
+                                    <p class="text-xs text-gray-500">Due: March 15, 2024</p>
+                                </div>
+                            </div>
+                            <button onclick="markTaskComplete(this)"
+                                class="text-sm bg-agriculture-green text-white px-4 py-2 rounded-lg hover:bg-agriculture-blue">
+                                Mark as Complete
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-tasks text-2xl text-agriculture-orange mr-4"></i>
+                                <div>
+                                    <h3 class="font-semibold">Prepare Report on Irrigation Coverage</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Assigned to: Jane Smith</p>
+                                    <p class="text-xs text-gray-500">Due: March 20, 2024</p>
+                                </div>
+                            </div>
+                            <button onclick="markTaskComplete(this)"
+                                class="text-sm bg-agriculture-green text-white px-4 py-2 rounded-lg hover:bg-agriculture-blue">
+                                Mark as Complete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reports" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="reports">Reports</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Report 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-agriculture-green bg-opacity-20 p-4">
+                        <img src="/assets/images/report1.jpg" alt="Report 1" class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="annualReport">Annual Report 2023</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="annualReportDesc">
+                            Comprehensive report on department activities and achievements.
+                        </p>
+                        <button onclick="downloadReport('annualReport')"
+                            class="text-agriculture-green hover:text-agriculture-green font-medium"
+                            data-translate="download">
+                            Download <i class="fas fa-download ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Report 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-agriculture-orange bg-opacity-20 p-4">
+                        <img src="/assets/images/report2.jpg" alt="Report 2" class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2" data-translate="schemeReport">Scheme Implementation Report
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-translate="schemeReportDesc">
+                            Detailed analysis of scheme implementation and impact.
+                        </p>
+                        <button onclick="downloadReport('schemeReport')"
+                            class="text-agriculture-orange hover:text-agriculture-orange font-medium"
+                            data-translate="download">
+                            Download <i class="fas fa-download ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Tab -->
+        <div id="team" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6" data-translate="team">Team</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Team Member 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-agriculture-green bg-opacity-20 p-4">
+                        <img src="/assets/images/team1.jpg" alt="Team Member 1"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">John Doe</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Senior Agriculture Officer</p>
+                        <button onclick="viewProfile('johnDoe')"
+                            class="text-agriculture-green hover:text-agriculture-green font-medium"
+                            data-translate="viewProfile">
+                            View Profile <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-agriculture-orange bg-opacity-20 p-4">
+                        <img src="/assets/images/team2.jpg" alt="Team Member 2"
+                            class="w-full h-32 object-cover rounded-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Jane Smith</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Agriculture Research Officer</p>
+                        <button onclick="viewProfile('janeSmith')"
+                            class="text-agriculture-orange hover:text-agriculture-orange font-medium"
+                            data-translate="viewProfile">
+                            View Profile <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Function
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('bg-agriculture-blue');
+                } else {
+                    btn.classList.remove('bg-agriculture-blue');
+                }
+            });
+        }
+
+        // Mark Task as Complete
+        function markTaskComplete(button) {
+            const taskDiv = button.closest('div');
+            taskDiv.classList.add('opacity-50');
+            button.disabled = true;
+            button.textContent = 'Completed';
+            button.classList.remove('bg-agriculture-green');
+            button.classList.add('bg-gray-400');
+        }
+
+        // Download Report
+        function downloadReport(reportId) {
+            alert(`Downloading report: ${reportId}`);
+        }
+
+        // View Profile
+        function viewProfile(memberId) {
+            alert(`Viewing profile: ${memberId}`);
+        }
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' ||
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Language switching functionality
+        const languageSelector = document.getElementById('language-selector');
+
+        // Language content mapping
+        const translations = {
+            en: {
+                hodPage: 'HOD Dashboard - Agriculture Department',
+                overview: 'Department Overview',
+                totalSchemes: 'Total Schemes',
+                pendingTasks: 'Pending Tasks',
+                teamMembers: 'Team Members',
+                recentActivity: 'Recent Activity',
+                tasks: 'Tasks',
+                assignTask: 'Assign New Task',
+                taskTitle: 'Task Title',
+                assignTo: 'Assign To',
+                dueDate: 'Due Date',
+                assignTaskButton: 'Assign Task',
+                taskList: 'Task List',
+                reports: 'Reports',
+                annualReport: 'Annual Report 2023',
+                annualReportDesc: 'Comprehensive report on department activities and achievements.',
+                schemeReport: 'Scheme Implementation Report',
+                schemeReportDesc: 'Detailed analysis of scheme implementation and impact.',
+                download: 'Download',
+                team: 'Team',
+                viewProfile: 'View Profile'
+            },
+            hi: {
+                hodPage: 'एचओडी डैशबोर्ड - कृषि विभाग',
+                overview: 'विभाग अवलोकन',
+                totalSchemes: 'कुल योजनाएं',
+                pendingTasks: 'लंबित कार्य',
+                teamMembers: 'टीम के सदस्य',
+                recentActivity: 'हाल की गतिविधि',
+                tasks: 'कार्य',
+                assignTask: 'नया कार्य सौंपें',
+                taskTitle: 'कार्य शीर्षक',
+                assignTo: 'सौंपें',
+                dueDate: 'नियत तारीख',
+                assignTaskButton: 'कार्य सौंपें',
+                taskList: 'कार्य सूची',
+                reports: 'रिपोर्ट्स',
+                annualReport: 'वार्षिक रिपोर्ट 2023',
+                annualReportDesc: 'विभाग की गतिविधियों और उपलब्धियों पर व्यापक रिपोर्ट।',
+                schemeReport: 'योजना कार्यान्वयन रिपोर्ट',
+                schemeReportDesc: 'योजना कार्यान्वयन और प्रभाव का विस्तृत विश्लेषण।',
+                download: 'डाउनलोड',
+                team: 'टीम',
+                viewProfile: 'प्रोफाइल देखें'
+            },
+            gu: {
+                hodPage: 'એચઓડી ડેશબોર્ડ - કૃષિ વિભાગ',
+                overview: 'વિભાગ અવલોકન',
+                totalSchemes: 'કુલ યોજનાઓ',
+                pendingTasks: 'બાકી કાર્યો',
+                teamMembers: 'ટીમના સભ્યો',
+                recentActivity: 'તાજેતરની પ્રવૃત્તિ',
+                tasks: 'કાર્યો',
+                assignTask: 'નવું કાર્ય સોંપો',
+                taskTitle: 'કાર્ય શીર્ષક',
+                assignTo: 'સોંપો',
+                dueDate: 'નિયત તારીખ',
+                assignTaskButton: 'કાર્ય સોંપો',
+                taskList: 'કાર્ય સૂચિ',
+                reports: 'રિપોર્ટ્સ',
+                annualReport: 'વાર્ષિક રિપોર્ટ 2023',
+                annualReportDesc: 'વિભાગની પ્રવૃત્તિઓ અને સિદ્ધિઓ પર વ્યાપક રિપોર્ટ.',
+                schemeReport: 'યોજના અમલીકરણ રિપોર્ટ',
+                schemeReportDesc: 'યોજના અમલીકરણ અને પ્રભાવનું વિગતવાર વિશ્લેષણ.',
+                download: 'ડાઉનલોડ',
+                team: 'ટીમ',
+                viewProfile: 'પ્રોફાઇલ જુઓ'
+            }
+        };
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang][key]) {
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(' ' + translations[lang][key]));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            localStorage.setItem('selected-language', lang);
+            document.title = translations[lang].hodPage;
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selected-language') || 'en';
+            languageSelector.value = savedLanguage;
+            updateLanguage(savedLanguage);
+        });
+
+        // Language selector event listener
+        languageSelector.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+    </script>
+</body>
+
+</html>
