@@ -328,7 +328,11 @@
             const button = this;
             button.disabled = true;
             alert('You have clicked the button once. Please wait 5 seconds.');
-
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const department = document.getElementById('department').value;
+            console.log(username, password, role, department);
             setTimeout(function () {
                 button.disabled = false;
             }, 5000);
@@ -344,7 +348,7 @@
                 // Show main container and enable it
                 document.getElementById("main-container").style.visibility = "visible";
                 document.getElementById("main-container").style.pointerEvents = "auto";
-            }, 5000);  // 5 seconds timeout
+            }, 1000);  // 5 seconds timeout
         });
 
         document.getElementById('login-form').addEventListener('submit', function (event) {
