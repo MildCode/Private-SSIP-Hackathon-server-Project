@@ -5,7 +5,6 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
     const department = document.getElementById('department').value;
     const role = document.getElementById('role').value;
     console.log(username, password, department, role);
-
     if (role === 'hod') {
         fetch('https://hod-api-2.vercel.app/api/hods')
             .then(response => response.json())

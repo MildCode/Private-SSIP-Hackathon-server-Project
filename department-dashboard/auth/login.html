@@ -135,7 +135,7 @@
         <img src="/department-dashboard/assets/images/logo.png" alt="Samridhh Gov Logo" class="logo">
         <!-- Replace with actual logo file -->
         <h2>Samridhh Gov Login Portal</h2>
-        <form id="loginForm">
+        <form id="login-form" class="login-form">
             <div class="form-group">
                 <i class="fa fa-user"></i>
                 <input type="text" id="username" placeholder="Username" required>
@@ -148,28 +148,35 @@
                 <i class="fa fa-building"></i>
                 <select id="department" required>
                     <option value="" disabled selected>Select Department</option>
-                    <option value="health">Health Department</option>
-                    <option value="education">Education Department</option>
-                    <option value="transport">Transport Department</option>
-                    <option value="finance">Finance Department</option>
-                    <option value="agriculture">Agriculture Department</option>
+                    <option value="Ministry_of_Home_and_Affriars">Ministry of Home and Affriars</option>
+                    <option value="Ministry_of_finance">Ministry of finance</option>
+                    <option value="Ministry_of_education">ministry of education</option>
+                    <option value="Ministry_of_labour">ministry of labour</option>
+                    <option value="Ministry_of_it_&_electronics">ministry of it & electronics</option>
+                    <option value="Ministry_of_transport">ministry of transport</option>
+                    <option value="Ministry_of_rural_development">ministry of rural development</option>
+                    <option value="Ministry_of_defence">ministry OF defence </option>
+                    <option value="Ministry_of_health">ministry of health</option>
+                    <option value="Ministry_of_agriculture">ministry of agriculture</option>
+                    <option value="admin">admin</option>
                 </select>
             </div>
             <div class="form-group">
                 <i class="fa fa-user-tag"></i>
                 <select id="role" required>
                     <option value="" disabled selected>Select Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="hod">HOD</option>
-                    <option value="employee">Employee</option>
+                    <option value="labour">Labour</option>
+                        <option value="employee">Employee</option>
+                        <option value="hod">HOD</option>
+                        <option value="admin">Admin</option>
                 </select>
             </div>
-            <button type="submit" class="btn-login">Login</button>
+            <button type="button" class="btn-login" id="btn-submit">Login</button>
         </form>
         <p class="footer-text">© 2025 Samridhh Gov | One Nation, One Portal, One Vision</p>
     </div>
-
-    <script>
+    <script src="../assets/js/All_links.js"></script>
+    <!-- <script>
         // Dummy credentials (WARNING: NOT SECURE)
         const users = {
             "admin": { password: "h1234", department: "health" },
@@ -191,7 +198,7 @@
                 alert("Invalid Username or Password!");
             }
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
