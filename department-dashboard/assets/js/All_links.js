@@ -195,7 +195,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                 .then(data => {
                     const worker = data.find(worker => worker.name === username && worker.password === password);
                     if (worker) {
-                        document.location.assign('labour.html');
+                        document.location.assign('/department-dashboard/All_employees//labour.html');
                     } else {
                         alert('Worker not found or credentials do not match');
                     }
