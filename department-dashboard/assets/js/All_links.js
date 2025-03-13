@@ -193,6 +193,7 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
             fetch('https://hod-api-2.vercel.app/api/hods/HOD_A/employees')
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
                     let workerFound = false;
                     data.forEach(employee => {
                         const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
