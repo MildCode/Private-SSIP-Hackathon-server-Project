@@ -187,16 +187,21 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                 })
                 .catch(error => alert(error));
         }
-    }else if(role === 'labour'){
+     }else if(role === 'labour'){
         // alert('labour');
         if(department === 'Ministry_of_Home_and_Affriars'){
-            fetch('https://hod-api-2.vercel.app/api/hods/HOD_A/employees/EMP_A20/workers')
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_A/employees')
                 .then(response => response.json())
                 .then(data => {
-                    const worker = data.find(worker => worker.name === username && worker.password === password);
-                    if (worker) {
-                        document.location.assign('/department-dashboard/ALL_HODS//labour.html');
-                    } else {
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
                         alert('Worker not found or credentials do not match');
                     }
                 })
