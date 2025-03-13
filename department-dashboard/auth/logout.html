@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Samriddh Gov</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: "Arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0d1117;
+            color: #ffffff;
+        }
+
+        /* Logout Card */
+        .logout-container {
+            text-align: center;
+            padding: 30px;
+            background: #161b22;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out, slideUp 1s ease-in-out;
+        }
+
+        /* Bigger Logo Styling */
+        .logo {
+            width: 100px; /* Increased from 80px */
+            margin-bottom: 15px;
+            animation: fadeText 1.5s ease-in-out;
+        }
+
+        /* Text Styling */
+        h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #58a6ff;
+        }
+
+        p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Button */
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background: #238636;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 0px 10px rgba(35, 134, 54, 0.8);
+            outline: none;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px rgba(35, 134, 54, 1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes fadeText {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <img src="/department-dashboard/assets/images/logo.png" alt="Samriddh Gov Logo" class="logo"> <!-- Replace with your actual logo -->
+        <h2>You have been logged out</h2>
+        <p>Thank you for using the portal. Click below to login again.</p>
+        <button onclick="redirectToLogin()">Login Again</button>
+    </div>
+
+    <script>
+        function redirectToLogin() {
+            window.location.href = "login.html"; // Redirect to your login page
+        }
+    </script>
+</body>
+</html>
