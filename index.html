@@ -4,372 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="/department-dashboard/assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="/department-dashboard/assets/images/favicons/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180"
-        href="/department-dashboard/assets/images/favicons/apple-touch-icon.png">
-    <link rel="manifest" href="/department-dashboard/assets/images/favicons/site.webmanifest">
-
-    <title>Samagra Gujarat</title>
+    <title>Samridhh Gov Login Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        body,
-        html {
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
-
-        .main-container {
-            position: relative;
-            height: 100vh;
+        body {
+            background: #121212;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
             overflow: hidden;
-            visibility: hidden;
-            /* Initially hidden */
-            pointer-events: none;
-            /* Disable interaction initially */
-            background-image: url('department-dashboard/assets/images/pokemon-umbreon-moewalls-com\ \(1\).gif');
-            /* Use the GIF as background */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* Dark and Robotic Background Video */
-        .background-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.7;
         }
 
         .login-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transform-style: preserve-3d;
-            animation: slideIn 1.5s ease-out;
-            width: 400px;
-        }
-
-        .login-container h1 {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
             text-align: center;
-            color: #fff;
-            font-size: 2.5em;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            animation: fadeInUp 1.5s ease-in-out;
-        }
-
-        label {
-            color: #fff;
-            font-size: 1.2em;
-        }
-
-        input,
-        select {
             width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            transition: transform 0.3s ease;
+            max-width: 420px;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        input:focus,
-        select:focus {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
-            outline: none;
-        }
-
-        button {
-            background-color: #28a745;
-            color: #fff;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.3s ease;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            animation: bounce 1s infinite;
-        }
-
-        select {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            transition: transform 0.3s ease;
-        }
-
-        select:focus {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
-            outline: none;
-        }
-
-        select option {
-            background: rgba(255, 255, 255, 0.2);
-            color: #000000;
-            transition: transform 0.3s ease;
-        }
-
-        .loader {
-            width: 64px;
-            aspect-ratio: 1;
-            display: grid;
-            margin: 0 auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            background:
-                radial-gradient(farthest-side at bottom right, #F10C49 90%, #0000),
-                radial-gradient(farthest-side at bottom left, #F10C49 90%, #0000),
-                radial-gradient(farthest-side at top right, #F10C49 90%, #0000),
-                radial-gradient(farthest-side at top left, #F10C49 90%, #0000),
-                radial-gradient(farthest-side at bottom right, #f4dd51 90%, #0000),
-                radial-gradient(farthest-side at bottom left, #f4dd51 90%, #0000),
-                radial-gradient(farthest-side at top right, #f4dd51 90%, #0000),
-                radial-gradient(farthest-side at top left, #f4dd51 90%, #0000),
-                radial-gradient(farthest-side at bottom right, #e3aad6 90%, #0000),
-                radial-gradient(farthest-side at bottom left, #e3aad6 90%, #0000),
-                radial-gradient(farthest-side at top right, #e3aad6 90%, #0000),
-                radial-gradient(farthest-side at top left, #e3aad6 90%, #0000);
-            background-size: 25% 25%;
-            background-repeat: no-repeat;
-            animation: l16 2s infinite;
-        }
-
-        @keyframes l16 {
-            0% {
-                background-position:
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
-            }
-
-            16.67% {
-                background-position:
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
-            }
-
-            33.33% {
-                background-position:
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
-            }
-
-            50% {
-                background-position:
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
-            }
-
-            66.67% {
-                background-position:
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
-            }
-
-            83.33% {
-                background-position:
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
-            }
-
-            100% {
-                background-position:
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
-                    calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
-            }
-        }
-
-        @keyframes l12 {
-            100% {
-                transform: rotate(.5turn);
-            }
-        }
-
-        /* Animation Effects */
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-20px);
             }
 
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes bounce {
+        .logo {
+            width: 120px;
+            /* Increased size */
+            height: auto;
+            margin-bottom: 15px;
+            animation: bounceIn 1s ease-in-out;
+        }
 
-            0%,
-            100% {
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
                 transform: scale(1);
+                opacity: 1;
             }
+        }
 
-            50% {
-                transform: scale(1.2);
-            }
+        .login-container h2 {
+            color: #4db8ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            padding-left: 45px;
+            border-radius: 5px;
+            border: none;
+            background: #2e2e2e;
+            color: #ffffff;
+            transition: 0.3s ease-in-out;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: #3e3e3e;
+            transform: scale(1.05);
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4db8ff;
+            font-size: 16px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #4db8ff;
+            color: #121212;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-login:hover {
+            background: #0088cc;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .footer-text {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
-    <div class="loader" id="loader"></div>
-    <div class="main-container" id="main-container">
-        <!-- Login Form -->
-        <div class="login-container">
-            <h1>Login</h1>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="role">Select Role</label>
-                    <select id="role" name="role">
-                        <option value="labour">Labour</option>
+    <div class="login-container">
+        <img src="/department-dashboard/assets/images/logo.png" alt="Samridhh Gov Logo" class="logo">
+        <!-- Replace with actual logo file -->
+        <h2>Samridhh Gov Login Portal</h2>
+        <form id="login-form" class="login-form">
+            <div class="form-group">
+                <i class="fa fa-user"></i>
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-lock"></i>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <i class="fa fa-building"></i>
+                <select id="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="Ministry_of_Home_and_Affriars">Ministry of Home and Affriars</option>
+                    <option value="Ministry_of_finance">Ministry of finance</option>
+                    <option value="Ministry_of_education">ministry of education</option>
+                    <option value="Ministry_of_labour">ministry of labour</option>
+                    <option value="Ministry_of_it_&_electronics">ministry of it & electronics</option>
+                    <option value="Ministry_of_transport">ministry of transport</option>
+                    <option value="Ministry_of_rural_development">ministry of rural development</option>
+                    <option value="Ministry_of_defence">ministry OF defence </option>
+                    <option value="Ministry_of_health">ministry of health</option>
+                    <option value="Ministry_of_agriculture">ministry of agriculture</option>
+                    <option value="admin">admin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-user-tag"></i>
+                <select id="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="labour">Labour</option>
                         <option value="employee">Employee</option>
                         <option value="hod">HOD</option>
                         <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="department">Select Department</label>
-                    <select id="department" name="department">
-                        <option value="Ministry_of_Home_and_Affriars">Ministry of Home and Affriars</option>
-                        <option value="Ministry_of_finance">Ministry of finance</option>
-                        <option value="Ministry_of_education">ministry of education</option>
-                        <option value="Ministry_of_labour">ministry of labour</option>
-                        <option value="Ministry_of_it_&_electronics">ministry of it & electronics</option>
-                        <option value="Ministry_of_transport">ministry of transport</option>
-                        <option value="Ministry_of_rural_development">ministry of rural development</option>
-                        <option value="Ministry_of_defence">ministry OF defence </option>
-                        <option value="Ministry_of_health">ministry of health</option>
-                        <option value="Ministry_of_agriculture">ministry of agriculture</option>
-                        <option value="admin">admin</option>
-                    </select>
-                </div>
-                <!-- </div> -->
-
-                <button type="button" id="btn-submit">Login</button>
-            </form>
-        </div>
+                </select>
+            </div>
+            <button type="button" class="btn-login" id="btn-submit">Login</button>
+        </form>
+        <p class="footer-text">© 2025 Samridhh Gov | One Nation, One Portal, One Vision</p>
     </div>
     <script src="department-dashboard/assets/js/All_links.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Show loader for 2 seconds
-            setTimeout(function () {
-                // Hide loader after 2 seconds
-                document.querySelector(".loader").style.display = "none";
+    <!-- <script>
+        // Dummy credentials (WARNING: NOT SECURE)
+        const users = {
+            "admin": { password: "h1234", department: "health" },
+            "user1": { password: "u1234", department: "education" }
+        };
 
-                // Show main container and enable it
-                document.getElementById("main-container").style.visibility = "visible";
-                document.getElementById("main-container").style.pointerEvents = "auto";
-            }, 5000);  // 5 seconds timeout
-        });
-
-        document.getElementById('btn-submit').addEventListener('click', function (e) {
-            e.preventDefault();
-            const button = this;
-            button.disabled = true;
-            alert('You have clicked the button once. Please wait 5 seconds.');
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
-            const department = document.getElementById('department').value;
-            console.log(username, password, role, department);
-            setTimeout(function () {
-                button.disabled = false;
-            }, 5000);
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Show loader for 2 seconds
-            setTimeout(function () {
-                // Hide loader after 2 seconds
-                document.querySelector(".loader").style.display = "none";
-
-                // Show main container and enable it
-                document.getElementById("main-container").style.visibility = "visible";
-                document.getElementById("main-container").style.pointerEvents = "auto";
-            }, 1000);  // 5 seconds timeout
-        });
-
-        document.getElementById('login-form').addEventListener('submit', function (event) {
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // Simulate form submission and hide loader after 2 seconds
-            setTimeout(function () {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const role = document.getElementById('role').value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let department = document.getElementById("department").value;
 
-                if (username && password && role) {
-                    alert('Form submitted successfully!');
-                    // Here, you would send the form data to your server or handle the login logic.
-                } else {
-                    alert('Please fill all fields.');
-                }
-            }, 2000);
+            if (users[username] && users[username].password === password) {
+                localStorage.setItem("loggedInUser", username);
+                localStorage.setItem("department", department);
+                window.location.href = `../${department}/department.html`;
+            } else {
+                alert("Invalid Username or Password!");
+            }
         });
-    </script>
-
+    </script> -->
 </body>
 
 </html>

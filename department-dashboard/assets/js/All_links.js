@@ -5,7 +5,6 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
     const department = document.getElementById('department').value;
     const role = document.getElementById('role').value;
     console.log(username, password, department, role);
-
     if (role === 'hod') {
         fetch('https://hod-api-2.vercel.app/api/hods')
             .then(response => response.json())
@@ -188,4 +187,25 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                 })
                 .catch(error => alert(error));
         }
-}});
+    }else if(role === 'labour'){
+        // alert('labour');
+        if(department === 'Ministry_of_Home_and_Affriars'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_A/employees/EMP_A20/workers')
+                .then(response => response.json())
+                .then(data => {
+                    const worker = data.find(worker => worker.name === username && worker.password === password);
+                    if (worker) {
+                        document.location.assign('/department-dashboard/ALL_HODS//labour.html');
+                    } else {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+        }
+    }
+
+
+
+
+
+});
