@@ -207,7 +207,170 @@ document.getElementById('btn-submit').addEventListener('click', function (e) {
                     }
                 })
                 .catch(error => alert(error));
-        }
+        }else if(department === 'Ministry_of_finance'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_B/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_education'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_C/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_labour'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_D/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_it_&_electronics'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_E/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if (department === 'Ministry_of_transport') {
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_F/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_rural_development'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_G/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_defence'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_H/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_health'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_I/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }else if(department === 'Ministry_of_agriculture'){
+            fetch('https://hod-api-2.vercel.app/api/hods/HOD_J/employees')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let workerFound = false;
+                    data.forEach(employee => {
+                        const worker = employee.workers.find(worker => worker.name === username && worker.password === password);
+                        if (worker) {
+                            workerFound = true;
+                            document.location.assign('/department-dashboard/ALL_HODS/labour.html');
+                        }
+                    });
+                    if (!workerFound) {
+                        alert('Worker not found or credentials do not match');
+                    }
+                })
+                .catch(error => alert(error));
+            }
+            
     }
 
 
